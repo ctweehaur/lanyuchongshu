@@ -56,7 +56,7 @@ const shortQData = [
     {
         id: "Q4",
         qZh: "结合大马中学生平常在学校面对的各种“小组报告”，这篇故事给你带来了什么学习警示？",
-        qPy: "jié hé dà mǎ zhōng xué shēng píng cháng zài xué xiào miàn duì de gè zhǒng xiǎo zǔ bào gào gù shì gěi nǐ dài lái le shén me xué xí jǐng shì",
+        qPy: "jié hé dà mǎ zhōng xué shēng píng cháng zài xué xiào miàn duì de gè zhǒng xiǎo zǔ bào zhè piān gào gù shì gěi nǐ dài lái le shén me xué xí jǐng shì",
         qEn: "Connecting to group projects in Malaysian schools, what warning does this story give about studying and teamwork?",
         sZh: [
             "1. 反思组员分工：在学校做小组报告时，千万不能学南郭先生，寄生在别人的劳动成果上混分数（Free Rider）。",
