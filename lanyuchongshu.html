@@ -191,6 +191,15 @@
         box.querySelector('#close-code-btn').onclick = function() { document.body.removeChild(mask); renderTranslation(); };
     }
 
+    // 🎯【补回：选项随机乱序基础工具函数】
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
     window.onload = function() {
         if (typeof quizQuestions !== 'undefined') { originalQuizQuestions = JSON.parse(JSON.stringify(quizQuestions)); }
         renderPoem(); renderTranslation(); renderAnalysis(); renderShortQ(); renderQuizCards(); initInteractions(); renderDebugGrid();
@@ -234,15 +243,12 @@
         container.innerHTML = html;
     }
 
-    // 🎯【简答题引擎终极双模重构】：完美支持纯文本长句或新型字音格子化数组（sZhStructure / aZhStructure）
     function renderShortQ() {
         const container = document.getElementById('shortq-content');
         if (!container) return;
         let html = '';
         shortQData.forEach(item => {
             let strategyZhHtml = '';
-            
-            // 智能化重构答题思路区域：支持对象格子数组，或向后兼容普通文本
             if (Array.isArray(item.sZhStructure)) {
                 item.sZhStructure.forEach((stepArray, lineIdx) => {
                     if(lineIdx > 0) strategyZhHtml += '<br>';
@@ -256,7 +262,6 @@
                 });
             }
 
-            // 智能化重构参考答案区域：同样支持单字格子数组
             let answerZhContent = Array.isArray(item.aZhStructure) ? renderGridData(item.aZhStructure) : alignText(item.aZh, item.aPy);
 
             html += `
@@ -286,7 +291,6 @@
         container.innerHTML = html;
     }
     
-    // 🎯【客观选择题引擎终极双模重构】：题干、选项、解析100%全域兼容格子数组
     function renderQuizCards() {
         const container = document.getElementById('quiz-dynamic-container');
         if (!container || originalQuizQuestions.length === 0) return;
@@ -301,7 +305,6 @@
             
             q.options.forEach((opt, idx) => {
                 const optLetter = letters[idx];
-                // 选项文字智能识别
                 let optZhContent = Array.isArray(opt.textStructure) ? renderGridData(opt.textStructure) : alignText(opt.text, opt.py);
                 
                 optionsHtml += `
@@ -322,7 +325,7 @@
                 btn.addEventListener('click', function(e) {
                     if (this.disabled) return;
                     const optId = parseInt(this.getAttribute('data-opt-id'));
-                    const optData = q.options[optId]; // 拿回乱序后的真实指针
+                    const optData = q.options[optId]; 
                     const isCorrect = this.getAttribute('data-correct') === 'true';
                     const correctBtn = Array.from(btns).find(b => b.getAttribute('data-correct') === 'true');
                     const correctOptId = parseInt(correctBtn.getAttribute('data-opt-id'));
@@ -330,10 +333,8 @@
                     
                     btns.forEach(b => b.disabled = true);
                     
-                    // 智能渲染底部解析卡片（支持格子数组，防止错位）
                     let wrongExpHtml = Array.isArray(optData.explanationStructure) ? renderGridData(optData.explanationStructure) : alignText(optData.explanation, optData.explanationPy);
                     let correctExpHtml = Array.isArray(correctOptData.explanationStructure) ? renderGridData(correctOptData.explanationStructure) : alignText(correctOptData.explanation, correctOptData.explanationPy);
-                    let correctTextHtml = Array.isArray(correctOptData.textStructure) ? renderGridData(correctOptData.textStructure) : alignText(correctOptData.text, correctOptData.py);
 
                     if (isCorrect) {
                         this.classList.add('correct');
