@@ -26,7 +26,7 @@ const poemData = [
     { text: "，", punc: true },
     { text: "湣王", py: "mǐn wáng", zh: "齐湣（mǐn）王，齐宣王的儿子，喜欢听独奏。", en: "King Min" },
     { text: "立", py: "lì", zh: "动词，继承王位，登基。", en: "became the new king." },
-    { text: "处理", punc: true },
+    { text: "，", punc: true },
     { text: "好", py: "hào", zh: "动词，喜欢，喜好。", en: "He liked", exam: true },
     { text: "一一", py: "yī yī", zh: "副词，一个接一个地，单独地。", en: "to listen to them one by one," },
     { text: "听", py: "tīng", zh: "听。", en: "listening to" },
