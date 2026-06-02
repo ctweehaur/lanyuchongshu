@@ -66,7 +66,7 @@
 <script>
     let originalQuizQuestions = [];
 
-    // 🎯【高阶词组块死绑定引擎】：100% 优雅解析词组结构，遇到字符串标点完美包裹，自动为英文留空
+    // 🎯【高阶词组块死绑定引擎】：100% 优雅解析词组结构
     function renderGridData(dataArray) {
         if (!dataArray || !Array.isArray(dataArray)) return '';
         let html = '';
@@ -84,9 +84,9 @@
         return html;
     }
 
-    // 经典文本长串兜底拆解引擎（兼容古文原文和传统课文）
+    // 经典文本长串兜底拆解引擎（带核心安全熔断）
     function alignText(zh, py) {
-        if (!zh) return '';
+        if (!zh || typeof zh !== 'string') return '';
         const tokens = zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→0-9\.…\/]|[\s\u3000]/g) || [];
         const pys = py ? py.trim().split(/\s+/) : [];
         let pIdx = 0;
@@ -104,7 +104,7 @@
     }
 
     function alignTextWithPrefix(prefix, zh, py) {
-        if (!zh) return '';
+        if (!zh || typeof zh !== 'string') return '';
         const tokens = zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→0-9\.…\/]|[\s\u3000]/g) || [];
         const pys = py ? py.trim().split(/\s+/) : [];
         let html = '';
@@ -124,6 +124,7 @@
 
     // 🎯 基础洗牌算法工具函数
     function shuffleArray(arr) {
+        if (!arr || !Array.isArray(arr)) return [];
         for (let i = arr.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -131,7 +132,7 @@
         return arr;
     }
 
-// 🛠️ 老师后台白话编辑工作台 (已升级：完美支持词组块显示)
+    // 🛠️ 老师后台白话编辑工作台
     function renderDebugGrid() {
         const container = document.getElementById('debug-grid-container');
         if (!container || typeof translationData === 'undefined') return;
@@ -141,21 +142,22 @@
             html += `<div style="margin: 15px 0 8px 0; font-weight: bold; color: #475569; font-size: 14px;">📋 翻译段落 ${docIdx + 1} 实时词组排查区：</div>`;
             html += `<div style="display: flex; flex-wrap: wrap; gap: 8px; background: #ffffff; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">`;
             
-            // 循环渲染词组或标点
-            item.zhStructure.forEach((part, partIdx) => {
-                if (typeof part === 'object' && part.w) {
-                    html += `
-                        <div style="display: inline-flex; flex-direction: column; align-items: center; border: 1px solid #cbd5e1; background: #f1f5f9; padding: 4px 8px; border-radius: 4px;">
-                            <span style="font-size: 10px; color: #2563eb; font-weight: bold; margin-bottom: 2px;">${part.p}</span>
-                            <span style="font-size: 15px; font-weight: bold; color: #1e293b;">${part.w}</span>
-                        </div>`;
-                } else {
-                    html += `
-                        <div style="display: inline-flex; align-items: center; padding: 4px; border: 1px dashed #cbd5e1; background: #f8fafc; border-radius: 4px; color: #94a3b8; font-size: 14px;">
-                            ${part === ' ' ? '␣' : part}
-                        </div>`;
-                }
-            });
+            if (Array.isArray(item.zhStructure)) {
+                item.zhStructure.forEach((part) => {
+                    if (typeof part === 'object' && part.w) {
+                        html += `
+                            <div style="display: inline-flex; flex-direction: column; align-items: center; border: 1px solid #cbd5e1; background: #f1f5f9; padding: 4px 8px; border-radius: 4px;">
+                                <span style="font-size: 10px; color: #2563eb; font-weight: bold; margin-bottom: 2px;">${part.p}</span>
+                                <span style="font-size: 15px; font-weight: bold; color: #1e293b;">${part.w}</span>
+                            </div>`;
+                    } else {
+                        html += `
+                            <div style="display: inline-flex; align-items: center; padding: 4px; border: 1px dashed #cbd5e1; background: #f8fafc; border-radius: 4px; color: #94a3b8; font-size: 14px;">
+                                ${part === ' ' ? '␣' : part}
+                            </div>`;
+                    }
+                });
+            }
             html += `</div>`;
         });
         container.innerHTML = html;
@@ -163,6 +165,7 @@
 
     function renderTranslation() {
         const container = document.getElementById('translationContent');
+        if (!container || typeof translationData === 'undefined') return;
         let html = '';
         translationData.forEach((item, index) => {
             if(index > 0) html += '<div class="trans-divider"></div>';
@@ -174,6 +177,7 @@
 
     function renderAnalysis() {
         const container = document.getElementById('analysis-content');
+        if (!container || typeof analysisData === 'undefined') return;
         let html = '';
         analysisData.forEach(item => {
             html += `<div class="analysis-card"><div class="ana-title-group"><h4 class="ana-header">${alignText(item.header, item.headerPy)}</h4><div class="ana-en">${item.en}</div></div><div class="ana-text-group"><p class="ana-zh">${alignText(item.textZh, item.textPy)}</p><div class="ana-en">${item.textEn}</div></div></div>`;
@@ -183,7 +187,7 @@
 
     function renderShortQ() {
         const container = document.getElementById('shortq-content');
-        if (!container) return;
+        if (!container || typeof shortQData === 'undefined') return;
         let html = '';
         shortQData.forEach(item => {
             let strategyZhHtml = '';
@@ -192,7 +196,7 @@
                     if(lineIdx > 0) strategyZhHtml += '<br>';
                     strategyZhHtml += `<span class="strategy-step-line">${renderGridData(stepArray)}</span>`;
                 });
-            } else {
+            } else if (Array.isArray(item.sZh)) {
                 item.sZh.forEach((lineText, lineIdx) => {
                     if(lineIdx > 0) strategyZhHtml += '<br>';
                     const linePy = item.sPy && item.sPy[lineIdx] ? item.sPy[lineIdx] : '';
@@ -241,21 +245,23 @@
             card.className = 'quiz-card'; card.setAttribute('data-qid', q.id);
             let optionsHtml = ''; const letters = ['A.', 'B.', 'C.', 'D.'];
             
-            q.options.forEach((opt, idx) => {
-                const optLetter = letters[idx];
-                let optZhContent = Array.isArray(opt.textStructure) ? renderGridData(opt.textStructure) : alignText(opt.text, opt.py);
-                
-                optionsHtml += `
-                    <button class="option-btn" data-correct="${opt.correct}" data-opt-id="${idx}">
-                        <div class="opt-zh">
-                            <span class="char-box" style="margin-right: 8px !important;"><span class="py-text">&nbsp;</span><span class="zh-text" style="font-weight: bold; color: #1e293b;">${optLetter}</span></span>${optZhContent}
-                        </div>
-                        <div class="quiz-option-en">${opt.en}</div>
-                    </button>`;
-            });
+            if (Array.isArray(q.options)) {
+                q.options.forEach((opt, idx) => {
+                    const optLetter = letters[idx];
+                    let optZhContent = Array.isArray(opt.textStructure) ? renderGridData(opt.textStructure) : alignText(opt.text, opt.py);
+                    
+                    optionsHtml += `
+                        <button class="option-btn" data-correct="${opt.correct}" data-opt-id="${idx}">
+                            <div class="opt-zh">
+                                <span class="char-box" style="margin-right: 8px !important;"><span class="py-text">&nbsp;</span><span class="zh-text" style="font-weight: bold; color: #1e293b;">${optLetter}</span></span>${optZhContent}
+                            </div>
+                            <div class="quiz-option-en">${opt.en || ''}</div>
+                        </button>`;
+                });
+            }
             
             let qTitleContent = Array.isArray(q.textStructure) ? renderGridData(q.textStructure) : alignText(q.text, q.py);
-            card.innerHTML = `<div class="question-header"><div class="q-zh-wrapper"><span class="char-box" style="margin-right: 8px !important;"><span class="py-text">&nbsp;</span><span class="zh-text" style="font-weight: bold; color: #1e293b;">${q.id}.</span></span>${qTitleContent}</div><div class="q-en">${q.en}</div></div><div class="options-area">${optionsHtml}</div><div class="feedback"></div>`;
+            card.innerHTML = `<div class="question-header"><div class="q-zh-wrapper"><span class="char-box" style="margin-right: 8px !important;"><span class="py-text">&nbsp;</span><span class="zh-text" style="font-weight: bold; color: #1e293b;">${q.id}.</span></span>${qTitleContent}</div><div class="q-en">${q.en || ''}</div></div><div class="options-area">${optionsHtml}</div><div class="feedback"></div>`;
             container.appendChild(card);
             
             const optsDiv = card.querySelector('.options-area'); const btns = optsDiv.querySelectorAll('.option-btn'); const fbDiv = card.querySelector('.feedback');
@@ -271,36 +277,52 @@
                     
                     btns.forEach(b => b.disabled = true);
                     
-                    let wrongExpHtml = Array.isArray(optData.explanationStructure) ? renderGridData(optData.explanationStructure) : alignText(optData.explanation, optData.explanationPy);
-                    let correctExpHtml = Array.isArray(correctOptData.explanationStructure) ? renderGridData(correctOptData.explanationStructure) : alignText(correctOptData.explanation, correctOptData.explanationPy);
+                    let wrongExpHtml = optData && Array.isArray(optData.explanationStructure) ? renderGridData(optData.explanationStructure) : alignText(optData ? optData.explanation : '', optData ? optData.explanationPy : '');
+                    let correctExpHtml = correctOptData && Array.isArray(correctOptData.explanationStructure) ? renderGridData(correctOptData.explanationStructure) : alignText(correctOptData ? correctOptData.explanation : '', correctOptData ? correctOptData.explanationPy : '');
 
                     if (isCorrect) {
                         this.classList.add('correct');
                         fbDiv.className = 'feedback success';
-                        fbDiv.innerHTML = `<div class="fb-line"><span class="fb-label success-txt">✅ 回答正确！</span></div><div class="fb-line"><span class="fb-label">📖 正确解析：</span><span class="fb-content">${correctExpHtml}</span></div><div class="fb-en">💬 Correct Explanation: ${optData.explanationEn}</div>`;
+                        fbDiv.innerHTML = `<div class="fb-line"><span class="fb-label success-txt">✅ 回答正确！</span></div><div class="fb-line"><span class="fb-label">📖 正确解析：</span><span class="fb-content">${correctExpHtml}</span></div><div class="fb-en">💬 Correct Explanation: ${optData ? optData.explanationEn : ''}</div>`;
                     } else {
                         this.classList.add('wrong');
                         fbDiv.className = 'feedback error';
                         fbDiv.innerHTML = `
-                            <div class="fb-line"><span class="fb-label error-txt">❌ 回答错误。正确答案是：</span><span class="fb-content-main" style="display:inline-flex; align-items:center;">${letters[correctOptId]} ${correctOptData.text || ''}</span></div>
-                            <div class="fb-en">💬 Correct Answer: ${correctOptData.en}</div>
+                            <div class="fb-line"><span class="fb-label error-txt">❌ 回答错误。正确答案是：</span><span class="fb-content-main" style="display:inline-flex; align-items:center;">${letters[correctOptId]} ${correctOptData ? (correctOptData.text || '') : ''}</span></div>
+                            <div class="fb-en">💬 Correct Answer: ${correctOptData ? correctOptData.en : ''}</div>
                             <div class="fb-line" style="margin-top: 8px;"><span class="fb-label">📖 你选择的选项解析：</span><span class="fb-content">${wrongExpHtml}</span></div>
-                            <div class="fb-en">💬 Your Choice Analysis: ${optData.explanationEn}</div>
+                            <div class="fb-en">💬 Your Choice Analysis: ${optData ? optData.explanationEn : ''}</div>
                             <div class="fb-line" style="margin-top: 8px;"><span class="fb-label">📖 正确选项解析：</span><span class="fb-content">${correctExpHtml}</span></div>
-                            <div class="fb-en">💬 Correct Option Analysis: ${correctOptData.explanationEn}</div>`;
+                            <div class="fb-en">💬 Correct Option Analysis: ${correctOptData ? correctOptData.explanationEn : ''}</div>`;
                     }
                 });
             });
         });
     }
 
+    function renderPoem() {
+        const container = document.getElementById('dynamic-poem-container');
+        if (!container || typeof poemData === 'undefined') return;
+        let html = '<div class="poem-paragraph">&emsp;&emsp;'; 
+        poemData.forEach(w => {
+            if(w.punc) { html += `<span class="punctuation">${w.text.trim()}</span>`; } else {
+                let examClass = w.exam ? ' word exam-focus' : ' word'; let examAttr = w.exam ? ' data-exam="true"' : '';
+                html += `<span class="${examClass}" data-text="${w.text.trim()}" data-pinyin="${w.py}" data-zh="${w.zh}" data-en="${w.en}"${examAttr}>${alignText(w.text, w.py)}</span>`;
+            }
+        });
+        html += '</div>'; container.innerHTML = html;
+    }
+
     function initInteractions() {
         const translationHeader = document.getElementById('translationHeader'); const translationContent = document.getElementById('translationContent'); const toggleIcon = document.getElementById('toggleIcon');
-        translationHeader.addEventListener('click', function() { if (translationContent.classList.contains('show')) { translationContent.classList.remove('show'); toggleIcon.textContent = '▶'; } else { translationContent.classList.add('show'); toggleIcon.textContent = '▼'; } });
+        if (translationHeader) {
+            translationHeader.addEventListener('click', function() { if (translationContent.classList.contains('show')) { translationContent.classList.remove('show'); toggleIcon.textContent = '▶'; } else { translationContent.classList.add('show'); toggleIcon.textContent = '▼'; } });
+        }
         const pinyinToggle = document.getElementById('pinyin-toggle'); const enToggle = document.getElementById('en-toggle');
         document.body.classList.add('hide-pinyin', 'hide-english');
-        pinyinToggle.addEventListener('change', function() { if (this.checked) document.body.classList.remove('hide-pinyin'); else document.body.classList.add('hide-pinyin'); });
-        enToggle.addEventListener('change', function() { if (this.checked) document.body.classList.remove('hide-english'); else document.body.classList.add('hide-english'); });
+        if (pinyinToggle) pinyinToggle.addEventListener('change', function() { if (this.checked) document.body.classList.remove('hide-pinyin'); else document.body.classList.add('hide-pinyin'); });
+        if (enToggle) enToggle.addEventListener('change', function() { if (this.checked) document.body.classList.remove('hide-english'); else document.body.classList.add('hide-english'); });
+        
         const words = document.querySelectorAll('.word'); const tooltip = document.getElementById('tooltip'); const dispWord = document.getElementById('disp-word'); const dispPinyin = document.getElementById('disp-pinyin'); const dispZh = document.getElementById('disp-zh'); const dispEn = document.getElementById('disp-en'); const examTag = document.getElementById('exam-tag');
         words.forEach(word => {
             word.addEventListener('click', function(e) {
@@ -309,7 +331,8 @@
                 tooltip.style.display = 'block'; const rect = this.getBoundingClientRect(); tooltip.style.top = `${rect.top + window.scrollY - tooltip.offsetHeight - 20}px`; tooltip.style.left = `${rect.left + window.scrollX + rect.width/2}px`; setTimeout(() => tooltip.classList.add('show'), 10);
             });
         });
-        document.addEventListener('click', function(e) { if (!tooltip.contains(e.target) && !e.target.closest('.word')) { tooltip.classList.remove('show'); words.forEach(w => w.classList.remove('active')); setTimeout(() => { if (!tooltip.classList.contains('show')) tooltip.style.display = 'none'; }, 300); } });
+        document.addEventListener('click', function(e) { if (tooltip && !tooltip.contains(e.target) && !e.target.closest('.word')) { tooltip.classList.remove('show'); words.forEach(w => w.classList.remove('active')); setTimeout(() => { if (!tooltip.classList.contains('show')) tooltip.style.display = 'none'; }, 300); } });
+        
         const panels = [
             { btnId: 'toggle-analysis-btn', contentId: 'analysis-content', defaultHTML: '<span class="btn-icon">📜</span> 展开全诗赏析', defaultBg: 'linear-gradient(135deg, #10b981, #059669)' },
             { btnId: 'toggle-quiz-btn', contentId: 'quiz-content', defaultHTML: '<span class="btn-icon">🎯</span> 客观题自测', defaultBg: 'linear-gradient(135deg, #3b82f6, #2563eb)' },
@@ -317,15 +340,38 @@
         ];
         panels.forEach(panel => {
             const btn = document.getElementById(panel.btnId);
-            btn.addEventListener('click', function() {
-                const content = document.getElementById(panel.contentId); const isOpen = content.style.display === 'block';
-                panels.forEach(p => { document.getElementById(p.contentId).style.display = 'none'; const pb = document.getElementById(p.btnId); pb.innerHTML = p.defaultHTML; pb.style.background = p.defaultBg; });
-                if (!isOpen) { content.style.display = 'block'; btn.innerHTML = '<span class="btn-icon">⬆️</span> 收起当前面板并重置题目'; btn.style.background = '#64748b'; if (panel.btnId === 'toggle-quiz-btn') { renderQuizCards(); } } else { if (panel.btnId === 'toggle-quiz-btn') { renderQuizCards(); } }
-            });
+            if (btn) {
+                btn.addEventListener('click', function() {
+                    const content = document.getElementById(panel.contentId); const isOpen = content.style.display === 'block';
+                    panels.forEach(p => { document.getElementById(p.contentId).style.display = 'none'; const pb = document.getElementById(p.btnId); pb.innerHTML = p.defaultHTML; pb.style.background = p.defaultBg; });
+                    if (!isOpen) { content.style.display = 'block'; btn.innerHTML = '<span class="btn-icon">⬆️</span> 收起当前面板并重置题目'; btn.style.background = '#64748b'; if (panel.btnId === 'toggle-quiz-btn') { renderQuizCards(); } } else { if (panel.btnId === 'toggle-quiz-btn') { renderQuizCards(); } }
+                });
+            }
         });
     }
 
-    function toggleAnswer(btn) { const answerBox = btn.nextElementSibling; if (answerBox.style.display === 'block') { answerBox.style.display = 'none'; btn.innerHTML = '📖 点击查看标准答案'; } else { answerBox.style.display = 'block'; btn.innerHTML = '📖 收起答案'; } }
+    // 🎯 核心生命周期：率先激活交互，再安全防务渲染
+    window.onload = function() {
+        // 第一顺位：立刻赋予页面按钮生命力，绝对防点不动
+        initInteractions(); 
+        
+        if (typeof quizQuestions !== 'undefined') { originalQuizQuestions = JSON.parse(JSON.stringify(quizQuestions)); }
+        
+        // 第二顺位：安全防务渲染数据
+        renderPoem(); 
+        renderTranslation(); 
+        renderAnalysis(); 
+        renderShortQ(); 
+        renderQuizCards(); 
+        renderDebugGrid();
+
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 'm' || e.key === 'M')) {
+                e.preventDefault(); const panel = document.getElementById('debug-checker-panel');
+                if (panel.style.display === 'none') { panel.style.display = 'block'; panel.scrollIntoView({ behavior: 'smooth' }); } else { panel.style.display = 'none'; }
+            }
+        });
+    };
 </script>
 </body>
 </html>
