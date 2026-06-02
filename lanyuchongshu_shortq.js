@@ -81,7 +81,7 @@ const shortQData = [
         qZhStructure: [
             {w: "齐宣王", p: "qí xuān wáng"}, {w: "对", p: "duì"}, {w: "乐队", p: "yuè duì"},
             {w: "的", p: "de"}, {w: "管理", p: "guǎn lǐ"}, {w: "存在", p: "cún zài"},
-            {w: "什么", p: "shén me"}, {w: "漏洞", p: "lòu dòng"}, "机制，",
+            {w: "什么", p: "shén me"}, {w: "漏洞", p: "lòu dòng"}, "，",
             {w: "才", p: "cái"}, {w: "让", p: "ràng"}, {w: "南郭先生", p: "nán guō xiān sheng"},
             {w: "有机可乘", p: "yǒu jī kě chéng"}, "？"
         ],
