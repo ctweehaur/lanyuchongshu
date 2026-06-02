@@ -54,25 +54,28 @@
     <div class="exp-zh" id="disp-zh"></div>
     <div class="exp-en" id="disp-en"></div>
 </div>
+
+<!-- 🎯【隐藏式格子对照面板】：默认 display: none 彻底隐藏，学生在网页上什么都看不到 -->
+<div id="debug-checker-panel" style="display: none; max-width: 800px; margin: 50px auto 20px auto; padding: 20px; background: #fffbeb; border: 2px dashed #f59e0b; border-radius: 12px; font-family: system-ui, sans-serif;">
+    <h3 style="color: #b45309; margin-top: 0; display: flex; align-items: center; gap: 8px;">🔍 5大工具包 1:1 独立格子全盘排查面板 (老师隐藏模式)</h3>
+    <p style="font-size: 13px; color: #78350f; margin-bottom: 15px;">当前为隐藏调试模式。只要各版块汉字与拼音块上下对齐，无红色“缺音”或“多余音”警报，即可安全发布给全马学生使用！</p>
+    <div id="debug-grid-container"></div>
+</div>
  
 <script>
     let originalQuizQuestions = [];
 
-    // 【终极重构注音引擎】：加入连续英文字母单词整体打包合并与空格精准切分逻辑，防止拆散错位
     function alignText(zh, py) {
         if (!zh) return '';
-        // 核心升级：将正则中加入对连续英文/拼音以及各类空格的统一切分捕获
-        const tokens = zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→0-9\.…\/]|[\s\u3000]/g) || [];
+        const tokens = zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”喧’（）《》、\-\:；—\(\)→0-9\.…\/]|[\s\u3000]/g) || [];
         const pys = py ? py.trim().split(/\s+/) : [];
         let pIdx = 0;
         let html = '';
         
         for (let t of tokens) {
-            // 如果是标点符号、纯英文连续单词或格空间空字符，直接原样输出，头顶不吃拼音
             if (/[，。？！：“”‘’（）《》、\-\:；—\(\)→\s0-9\.…\/a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ\u3000]/.test(t)) {
                 html += `<span class="punctuation">${t}</span>`;
             } else {
-                // 如果是汉字，才正常匹配拼音
                 const p = pys[pIdx] || '';
                 html += `<span class="char-box"><span class="py-text">${p}</span><span class="zh-text">${t}</span></span>`;
                 pIdx++;
@@ -81,7 +84,6 @@
         return html;
     }
 
-    // 同步升级带有前缀的选项渲染函数，保证题号、英文、空格整体不被切碎
     function alignTextWithPrefix(prefix, zh, py) {
         if (!zh) return '';
         const tokens = zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→0-9\.…\/]|[\s\u3000]/g) || [];
@@ -102,6 +104,102 @@
         return html;
     }
 
+    function renderDebugGrid() {
+        const container = document.getElementById('debug-grid-container');
+        if (!container) return;
+        
+        let html = '';
+
+        function makeGridHtml(title, zhText, pyText) {
+            let res = `<div style="margin: 15px 0 6px 0; font-weight: bold; color: #334155; font-size: 13px;">📌 ${title}：</div>`;
+            res += `<div style="display: flex; flex-wrap: wrap; gap: 5px; background: #ffffff; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; line-height: 1 !important;">`;
+            
+            const tokens = zhText.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→0-9\.…\/]|[\s\u3000]/g) || [];
+            const pys = pyText ? pyText.trim().split(/\s+/) : [];
+            
+            let pIdx = 0;
+            for (let i = 0; i < tokens.length || pIdx < pys.length; i++) {
+                if (i >= tokens.length && pIdx >= pys.length) break;
+                const t = tokens[i] || '';
+                const isPunc = t ? /[，。？！：“”‘’（）《》、\-\:；—\(\)→\s0-9\.…\/a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ\u3000]/.test(t) : false;
+                
+                if (t && isPunc) {
+                    let visualText = t === ' ' ? '空格' : (t.trim() === '' ? '全角空' : t);
+                    res += `<div style="display: inline-flex; flex-direction: column; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px dashed #e2e8f0; background: #f8fafc; border-radius: 4px;"><span style="font-size: 8px; color: #cbd5e1;">留空</span><span style="font-size:13px; font-weight:bold; color:#64748b;">${visualText}</span></div>`;
+                } else if (t) {
+                    const p = pys[pIdx] || '<span style="color:#ef4444; font-weight:bold;">缺音</span>';
+                    res += `<div style="display: inline-flex; flex-direction: column; align-items: center; justify-content: space-between; width: 52px; height: 48px; border: 1px solid #cbd5e1; background: #f1f5f9; padding: 4px 2px; border-radius: 4px; box-sizing: border-box;"><span style="font-size: 9px; color: #2563eb; width:100%; text-align:center; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${p}</span><span style="font-size: 14px; font-weight: bold; color: #1e293b;">${t}</span></div>`;
+                    pIdx++;
+                } else {
+                    const p = pys[pIdx] || '';
+                    if (p) {
+                        res += `<div style="display: inline-flex; flex-direction: column; align-items: center; justify-content: space-between; width: 52px; height: 48px; border: 1px solid #ef4444; background: #fef2f2; padding: 4px 2px; border-radius: 4px; box-sizing: border-box;"><span style="font-size: 9px; color: #dc2626; font-weight: bold;">${p}</span><span style="font-size: 10px; color: #dc2626; font-weight: bold;">多余音</span></div>`;
+                        pIdx++;
+                    }
+                }
+            }
+            res += `</div>`;
+            return res;
+        }
+
+        if (typeof poemData !== 'undefined') {
+            html += `<div style="padding: 10px; background: #eff6ff; border-radius: 8px; margin-bottom: 20px;"><strong style="color:#1e40af; font-size:15px;">📖 数据包一：古文原文段落排查 (poemData)</strong>`;
+            let fullText = ""; let fullPy = "";
+            poemData.forEach(w => {
+                if(w.punc) { fullText += w.text; } 
+                else { fullText += w.text; fullPy += (w.py || '') + " "; }
+            });
+            html += makeGridHtml("全文连缀核对", fullText, fullPy) + `</div>`;
+        }
+
+        if (typeof translationData !== 'undefined') {
+            html += `<div style="padding: 10px; background: #f0fdf4; border-radius: 8px; margin-bottom: 20px;"><strong style="color:#166534; font-size:15px;">📖 数据包二：白话翻译段落排查 (translationData)</strong>`;
+            translationData.forEach((item, idx) => {
+                html += makeGridHtml(`第 ${idx + 1} 段译文`, item.zh, item.py);
+            });
+            html += `</div>`;
+        }
+
+        if (typeof analysisData !== 'undefined') {
+            html += `<div style="padding: 10px; background: #faf5ff; border-radius: 8px; margin-bottom: 20px;"><strong style="color:#6b21a8; font-size:15px;">📖 数据包三：全诗赏析段落排查 (analysisData)</strong>`;
+            analysisData.forEach((item, idx) => {
+                html += makeGridHtml(`卡片 ${idx + 1} 标题区域`, item.header, item.headerPy);
+                html += makeGridHtml(`卡片 ${idx + 1} 正文区域`, item.textZh, item.textPy);
+            });
+            html += `</div>`;
+        }
+
+        if (typeof quizQuestions !== 'undefined') {
+            html += `<div style="padding: 10px; background: #fff1f2; border-radius: 8px; margin-bottom: 20px;"><strong style="color:#9f1239; font-size:15px;">📖 数据包四：客观选择题排查 (quizQuestions)</strong>`;
+            quizQuestions.forEach((q, qIdx) => {
+                html += makeGridHtml(`题号 ${q.id} 题干主干`, q.text, q.py);
+                q.options.forEach((opt, oIdx) => {
+                    const letters = ['A', 'B', 'C', 'D'];
+                    html += makeGridHtml(`题目 ${q.id} - 选项 ${letters[oIdx]} 内容`, opt.text, opt.py);
+                    if(opt.explanation) {
+                        html += makeGridHtml(`题目 ${q.id} - 选项 ${letters[oIdx]} 底部解析`, opt.explanation, opt.explanationPy);
+                    }
+                });
+            });
+            html += `</div>`;
+        }
+
+        if (typeof shortQData !== 'undefined') {
+            html += `<div style="padding: 10px; background: #fff7ed; border-radius: 8px; margin-bottom: 20px;"><strong style="color:#9a3412; font-size:15px;">📖 数据包五：简答题特训排查 (shortQData)</strong>`;
+            shortQData.forEach((item, idx) => {
+                html += makeGridHtml(`简答题 ${item.id} 题干主干`, item.qZh, item.qPy);
+                item.sZh.forEach((line, lIdx) => {
+                    const linePy = item.sPy && item.sPy[lIdx] ? item.sPy[lIdx] : '';
+                    html += makeGridHtml(`简答题 ${item.id} - 思路步骤 ${lIdx + 1}`, line, linePy);
+                });
+                html += makeGridHtml(`简答题 ${item.id} - 官方标准答案`, item.aZh, item.aPy);
+            });
+            html += `</div>`;
+        }
+
+        container.innerHTML = html;
+    }
+
     window.onload = function() {
         if (typeof quizQuestions !== 'undefined') {
             originalQuizQuestions = JSON.parse(JSON.stringify(quizQuestions));
@@ -112,6 +210,23 @@
         renderShortQ();
         renderQuizCards(); 
         initInteractions();
+        
+        // 生成数据，但由于容器 display:none，页面上不会显示
+        renderDebugGrid();
+
+        // 🎯【核心接头暗号逻辑】：在键盘上同时按下 Ctrl + M 键，隐藏的格子面板就会弹出来！再按一次就收起！
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 'm' || e.key === 'M')) {
+                e.preventDefault();
+                const panel = document.getElementById('debug-checker-panel');
+                if (panel.style.display === 'none') {
+                    panel.style.display = 'block';
+                    panel.scrollIntoView({ behavior: 'smooth' }); // 平滑滚动到格子区
+                } else {
+                    panel.style.display = 'none';
+                }
+            }
+        });
     };
 
     function renderPoem() {
