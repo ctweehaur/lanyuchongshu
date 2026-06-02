@@ -40,7 +40,7 @@ const quizQuestions = [
     },
     {
         id: 2,
-        textStructure: [{w: "文中", p: "wén zhōng"}, {w: "“", p: ""}, {w: "宣王", p: "xuān wáng"}, {w: "说之", p: "yuè zhī"}, "”", {w: "中", p: "zhōng"}, "的", "“", {w: "说", p: "shuō"}, "”", {w: "读音", p: "dú yīn"}, {w: "与", p: "yǔ"}, {w: "含义", p: "hán yì"}, "？"],
+        textStructure: [{w: "文中", p: "wén zhōng"}, {w: "“", p: ""}, {w: "宣王", p: "xuān wáng"}, {w: "说之", p: "yuè zhī"}, "”", {w: "中", p: "zhōng"}, {w: "的", p: "de"}, "“", {w: "说", p: "shuō"}, "”", {w: "读音", p: "dú yīn"}, {w: "与", p: "yǔ"}, {w: "含义", p: "hán yì"}, "？"],
         en: "What is the correct pronunciation and meaning of 'shuō'?",
         options: [
             { 
