@@ -2,66 +2,65 @@ const quizQuestions = [
     {
         id: 1,
         textStructure: [
-            {w:"下",p:"xià"},{w:"列",p:"liè"},{w:"句",p:"jù"},{w:"子",p:"zǐ"},{w:"中",p:"zhōng"},"，",
-            {w:"加",p:"jiā"},{w:"点",p:"diǎn"},{w:"字",p:"zì"},"“",{w:"使",p:"shǐ"},"”",
-            {w:"的",p:"de"},{w:"正",p:"zhèng"},{w:"确",p:"què"},{w:"含",p:"hán"},{w:"义",p:"yì"},{w:"是",p:"shì"},"？"
+            {w: "下列", p: "xià liè"}, {w: "句子", p: "jù zi"}, {w: "中", p: "zhōng"}, "，",
+            {w: "加点字", p: "jiā diǎn zì"}, "“", {w: "使", p: "shǐ"}, "”",
+            {w: "的", p: "de"}, {w: "正确", p: "zhèng què"}, {w: "含义", p: "hán yì"}, {w: "是", p: "shì"}, "？"
         ],
         en: "What is the correct meaning of the word 'shǐ' in the text?",
         options: [
             {
-                textStructure: [{w:"使",p:"shǐ"},{w:"用",p:"yòng"},{w:"、",p:""},{w:"利",p:"lì"},{w:"用",p:"yòng"},{w:"工",p:"gōng"},{w:"具",p:"jù"}],
+                textStructure: [{w: "使用", p: "shǐ yòng"}, "、", {w: "利用", p: "lì yòng"}, {w: "工具", p: "gōng jù"}],
                 en: "To use a tool.",
                 correct: false,
                 explanationStructure: [
-                    {w:"错",p:"cuò"},{w:"误",p:"wù"},{w:"。",p:""},{w:"这",p:"zhè"},{w:"是",p:"shì"},
-                    {w:"现",p:"xiàn"},{w:"代",p:"dài"},{w:"生",p:"shēng"},{w:"活",p:"huó"},{w:"里",p:"lǐ"},
-                    {w:"的",p:"de"},{w:"常",p:"cháng"},{w:"见",p:"jiàn"},{w:"用",p:"yòng"},{w:"法",p:"fǎ"},{w:"，",p:""},
-                    {w:"不",p:"bù"},{w:"符",p:"fú"},{w:"合",p:"hé"},{w:"这",p:"zhè"},{w:"里",p:"lǐ"},
-                    {w:"君",p:"jūn"},{w:"王",p:"wáng"},{w:"下",p:"xià"},{w:"达",p:"dá"},{w:"命",p:"mìng"},
-                    {w:"令",p:"lìng"},{w:"的",p:"de"},{w:"语",p:"yǔ"},{w:"境",p:"jìng"},{w:"。",p:""}
+                    {w: "错误", p: "cuò wù"}, "。", {w: "这是", p: "zhè shì"},
+                    {w: "现代", p: "xiàn dài"}, {w: "生活", p: "shēng huó"}, {w: "里", p: "lǐ"},
+                    {w: "的", p: "de"}, {w: "常见", p: "cháng jiàn"}, {w: "用法", p: "yòng fǎ"}, "，",
+                    {w: "不符合", p: "bù fú hé"}, {w: "这里", p: "zhè lǐ"},
+                    {w: "君王", p: "jūn wáng"}, {w: "下达", p: "xià dá"}, {w: "命令", p: "mìng lìng"},
+                    {w: "的", p: "de"}, {w: "语境", p: "yǔ jìng"}, "。"
                 ],
                 explanationEn: "Incorrect. This is the modern meaning of using tools. It does not fit the king's order here."
             },
             {
-                textStructure: [{w:"命",p:"mìng"},{w:"令",p:"lìng"},{w:"、",p:""},{w:"让",p:"ràng"},{w:"、",p:""},{w:"派",p:"pài"},{w:"遣",p:"qiǎn"}],
+                textStructure: [{w: "命令", p: "mìng lìng"}, "、", {w: "让", p: "ràng"}, "、", {w: "派遣", p: "pài qiǎn"}],
                 en: "To order, command, or ask someone to do something.",
                 correct: true,
                 explanationStructure: [
-                    "“",{w:"齐",p:"qí"},{w:"宣",p:"xuān"},{w:"王",p:"wáng"},{w:"使",p:"shǐ"},{w:"人",p:"rén"},
-                    {w:"吹",p:"chuī"},{w:"竽",p:"yú"},"”",{w:"指",p:"zhǐ"},{w:"的",p:"de"},
-                    {w:"是",p:"shì"},{w:"齐",p:"qí"},{w:"宣",p:"xuān"},{w:"王",p:"wáng"},{w:"命",p:"mìng"},
-                    {w:"令",p:"lìng"},{w:"、",p:""},{w:"让",p:"ràng"},{w:"乐",p:"yuè"},{w:"师",p:"shī"},
-                    {w:"们",p:"mén"},{w:"为",p:"wèi"},{w:"他",p:"tā"},{w:"吹",p:"chuī"},{w:"奏",p:"zòu"},
-                    {w:"乐",p:"yuè"},{w:"器",p:"qì"},{w:"。",p:""}
+                    "“", {w: "齐宣王", p: "qí xuān wáng"}, {w: "使人", p: "shǐ rén"},
+                    {w: "吹竽", p: "chuī yú"}, "”", {w: "指", p: "zhǐ"}, {w: "的", p: "de"},
+                    {w: "是", p: "shì"}, {w: "齐宣王", p: "qí xuān wáng"}, {w: "命令", p: "mìng lìng"},
+                    "、", {w: "让", p: "ràng"}, {w: "乐师", p: "yuè shī"},
+                    {w: "们", p: "mén"}, {w: "为", p: "wèi"}, {w: "他", p: "tā"}, {w: "吹奏", p: "chuī zòu"},
+                    {w: "乐器", p: "yuè qì"}, "。"
                 ],
                 explanationEn: "King Xuan ordered the musicians to play the instrument for him."
             },
             {
-                textStructure: [{w:"使",p:"shǐ"},{w:"者",p:"zhě"},{w:"、",p:""},{w:"外",p:"wài"},{w:"交",p:"jiāo"},{w:"人",p:"rén"},{w:"员",p:"yuán"}],
+                textStructure: [{w: "使者", p: "shǐ zhě"}, "、", {w: "外交", p: "wài jiāo"}, {w: "人员", p: "rén yuán"}],
                 en: "A messenger or diplomat.",
                 correct: false,
                 explanationStructure: [
-                    {w:"错",p:"cuò"},{w:"误",p:"wù"},{w:"。",p:""},{w:"这",p:"zhè"},{w:"里",p:"lǐ"},
-                    {w:"是",p:"shì"},{w:"动",p:"dòng"},{w:"作",p:"zuò"},"（",{w:"动",p:"dòng"},
-                    {w:"词",p:"cí"},"），",{w:"用",p:"yòng"},{w:"来",p:"lái"},{w:"表",p:"biǎo"},
-                    {w:"示",p:"shì"},{w:"君",p:"jūn"},{w:"王",p:"wáng"},{w:"的",p:"de"},{w:"命",p:"mìng"},
-                    {w:"令",p:"lìng"},{w:"，",p:""},{w:"不",p:"bù"},{w:"是",p:"shì"},{w:"指",p:"zhǐ"},
-                    {w:"特",p:"tè"},{w:"定",p:"dìng"},{w:"身",p:"shēn"},{w:"份",p:"fèn"},{w:"络",p:"de"},
-                    {w:"名",p:"míng"},{w:"词",p:"cí"},{w:"。",p:""}
+                    {w: "错误", p: "cuò wù"}, "。", {w: "这里", p: "zhè lǐ"},
+                    {w: "是", p: "shì"}, {w: "动作", p: "dòng zuò"}, "（", {w: "动词", p: "dòng cí"},
+                    "），", {w: "用来", p: "yòng lái"}, {w: "表示", p: "biǎo shì"},
+                    {w: "君王", p: "jūn wáng"}, {w: "的", p: "de"}, {w: "命令", p: "mìng lìng"}, "，",
+                    {w: "不是", p: "bú shì"}, {w: "指", p: "zhǐ"}, {w: "特定", p: "tè dìng"},
+                    {w: "身份", p: "shēn fèn"}, {w: "的", p: "de"}, {w: "名词", p: "míng cí"}, "。"
                 ],
                 explanationEn: "Incorrect. It is used as an action verb here for the king's order, not a noun for a person."
             },
             {
-                textStructure: [{w:"假",p:"jiǎ"},{w:"使",p:"shǐ"},{w:"、",p:""},{w:"如",p:"rú"},{w:"果",p:"guǒ"}],
+                textStructure: [{w: "假使", p: "jiǎ shǐ"}, "、", {w: "如果", p: "rú guǒ"}],
                 en: "If / in case.",
                 correct: false,
                 explanationStructure: [
-                    {w:"错",p:"cuò"},{w:"误",p:"wù"},{w:"。",p:""},{w:"这",p:"zhè"},{w:"是",p:"shì"},
-                    {w:"表",p:"biǎo"},{w:"假",p:"jiǎ"},{w:"设",p:"shè"},{w:"的",p:"de"},{w:"连",p:"lián"},
-                    {w:"词",p:"cí"},{w:"用",p:"yòng"},{w:"法",p:"fǎ"},{w:"，",p:""},{w:"带",p:"dài"},
-                    {w:"入",p:"rù"},{w:"句",p:"jù"},{w:"中",p:"zhōng"},{w:"会",p:"huì"},{w:"导",p:"dǎo"},
-                    {w:"致",p:"zhì"},{w:"前",p:"qián"},{w:"后",p:"hòu"},{w:"文",p:"wén"},{w:"理",p:"lǐ"},
-                    {w:"不",p:"bù"},{w:"通",p:"tōng"},{w:"。",p:""}
+                    {w: "错误", p: "cuò wù"}, "。", {w: "这是", p: "zhè shì"},
+                    {w: "表", p: "biǎo"}, {w: "假设", p: "jiǎ shè"}, {w: "的", p: "de"},
+                    {w: "连词", p: "lián cí"}, {w: "用法", p: "yòng fǎ"}, "，",
+                    {w: "带入", p: "dài rù"}, {w: "句中", p: "jù zhōng"}, {w: "会", p: "huì"},
+                    {w: "导致", p: "dǎo zhì"}, {w: "前后", p: "qián hòu"}, {w: "文理", p: "wén lǐ"},
+                    {w: "不通", p: "bù tōng"}, "。"
                 ],
                 explanationEn: "Incorrect. This is a conjunction meaning 'if', which breaks the grammar of the sentence completely."
             }
@@ -70,74 +69,71 @@ const quizQuestions = [
     {
         id: 2,
         textStructure: [
-            {w:"文",p:"wén"},{w:"中",p:"zhōng"},{w:"句",p:"jù"},{w:"子",p:"zǐ"},"“",
-            {w:"宣",p:"xuān"},{w:"王",p:"wáng"},{w:"说",p:"yuè"},{w:"之",p:"zhī"},"”",
-            {w:"中",p:"zhōng"},{w:"的",p:"de"},"“",{w:"说",p:"shuō"},"”",{w:"字",p:"zì"},"，",
-            {w:"在",p:"zài"},{w:"这",p:"zhè"},{w:"里",p:"lǐ"},{w:"的",p:"de"},
-            {w:"正",p:"zhèng"},{w:"确",p:"què"},{w:"读",p:"dú"},{w:"音",p:"yīn"},{w:"和",p:"hé"},
-            {w:"意",p:"yì"},{w:"思",p:"si"},{w:"是",p:"shì"},{w:"什",p:"shén"},{w:"么",p:"me"},{w:"？"
+            {w: "文中", p: "wén zhōng"}, {w: "句子", p: "jù zi"}, "“",
+            {w: "宣王", p: "xuān wáng"}, {w: "说之", p: "yuè zhī"}, "”",
+            {w: "中的", p: "zhōng de"}, "“", {w: "说", p: "shuō"}, "”", {w: "字", p: "zì"}, "，",
+            {w: "在这里", p: "zài zhè lǐ"}, {w: "的", p: "de"},
+            {w: "正确", p: "zhèng què"}, {w: "读音", p: "dú yīn"}, {w: "和", p: "hé"},
+            {w: "意思", p: "yì si"}, {w: "是", p: "shì"}, {w: "什么", p: "shén me"}, "？"
         ],
         en: "What is the correct pronunciation and meaning of 'shuō' in 'xuān wáng yuè zhī'?",
         options: [
             {
-                textStructure: [{w:"读",p:"dú"},{w:"作",p:"zuò"}," shuō，",{w:"指",p:"zhǐ"},{w:"听",p:"tīng"},{w:"了",p:"le"},{w:"南",p:"nán"},{w:"郭",p:"guō"},{w:"先",p:"xiān"},{w:"生",p:"shēng"},{w:"说",p:"shuō"},{w:"话",p:"huà"},{w:"很",p:"hěn"},{w:"有",p:"yǒu"},{w:"道",p:"dào"},{w:"理",p:"lǐ"}],
+                textStructure: [{w: "读作", p: "dú zuò"}, " shuō，", {w: "指", p: "zhǐ"}, {w: "听了", p: "tīng le"}, {w: "南郭先生", p: "nán guō xiān sheng"}, {w: "说话", p: "shuō huà"}, {w: "很有", p: "hěn yǒu"}, {w: "道理", p: "dào lǐ"}],
                 en: "Pronounced 'shuō', meaning the king agreed with his words.",
                 correct: false,
                 explanationStructure: [
-                    {w:"错",p:"cuò"},{w:"误",p:"wù"},{w:"。",p:""},{w:"南",p:"nán"},{w:"郭",p:"guō"},
-                    {w:"先",p:"xiān"},{w:"生",p:"shēng"},{w:"只",p:"zhǐ"},{w:"是",p:"shì"},{w:"申",p:"shēn"},
-                    {w:"请",p:"qǐng"},{w:"加",p:"jiā"},{w:"入",p:"rù"},{w:"乐",p:"yuè"},{w:"队",p:"duì"},"，",
-                    {w:"并",p:"bìng"},{w:"没",p:"méi"},{w:"有",p:"yǒu"},{w:"发",p:"fā"},{w:"表",p:"biǎo"},
-                    {w:"长",p:"cháng"},{w:"篇",p:"piān"},{w:"大",p:"dà"},{w:"论",p:"lùn"},"，",
-                    {w:"这",p:"zhè"},{w:"里",p:"lǐ"},{w:"的",p:"de"},{w:"字",p:"zì"},{w:"意",p:"yì"},
-                    {w:"完",p:"wán"},{w:"全",p:"quán"},{w:"不",p:"bù"},{w:"对",p:"duì"},{w:"。",p:""}
+                    {w: "错误", p: "cuò wù"}, "。", {w: "南郭先生", p: "nán guō xiān sheng"},
+                    {w: "只是", p: "zhǐ shì"}, {w: "申请", p: "shēn qǐng"}, {w: "加入", p: "jiā rù"},
+                    {w: "乐队", p: "yuè duì"}, "，", {w: "并且", p: "bìng qiě"},
+                    {w: "没有", p: "méi yǒu"}, {w: "发表", p: "fā biǎo"}, {w: "长篇大论", p: "cháng piān dà lùn"}, "，",
+                    {w: "这里", p: "zhè lǐ"}, {w: "的", p: "de"}, {w: "字意", p: "zì yì"},
+                    {w: "完全", p: "wán quán"}, {w: "不对", p: "bú duì"}, "。"
                 ],
                 explanationEn: "Incorrect. Mr. Nanguo only asked to join the band, he did not say much. This meaning is wrong."
             },
             {
-                textStructure: [{w:"读",p:"dú"},{w:"作",p:"zuò"}," yuè，",{w:"通",p:"tōng"},{w:"假",p:"jiǎ"},{w:"字",p:"zì"},"，",{w:"同",p:"tóng"},"“",{w:"悦",p:"yuè"},"”，",{w:"意",p:"yì"},{w:"思",p:"si"},{w:"是",p:"shì"},{w:"喜",p:"xǐ"},{w:"欢",p:"huān"},{w:"、",p:""},{w:"高",p:"gāo"},{w:"兴",p:"xìng"}],
+                textStructure: [{w: "读作", p: "dú zuò"}, " yuè，", {w: "通假字", p: "tōng jiǎ zì"}, "，", {w: "同", p: "tóng"}, "“", {w: "悦", p: "yuè"}, "”，", {w: "意思是", p: "yì si shì"}, {w: "喜欢", p: "xǐ huan"}, "、", {w: "高兴", p: "gāo xìng"}],
                 en: "Pronounced 'yuè', same as '悦', meaning happy or pleased.",
                 correct: true,
                 explanationStructure: [
-                    {w:"在",p:"zài"},{w:"古",p:"gǔ"},{w:"汉",p:"hàn"},{w:"语",p:"yǔ"},{w:"中",p:"zhōng"},"，",
-                    "“",{w:"说",p:"shuō"},"”",{w:"常",p:"cháng"},{w:"常",p:"cháng"},{w:"通",p:"tōng"},
-                    {w:"假",p:"jiǎ"},{w:"为",p:"wéi"},"“",{w:"悦",p:"yuè"},"”。",
-                    {w:"意",p:"yì"},{w:"思",p:"si"},{w:"是",p:"shì"},{w:"齐",p:"qí"},{w:"宣",p:"xuān"},
-                    {w:"王",p:"wáng"},{w:"对",p:"duì"},{w:"他",p:"tā"},{w:"的",p:"de"},{w:"加",p:"jiā"},
-                    {w:"入",p:"rù"},{w:"感",p:"gǎn"},{w:"到",p:"dào"},{w:"很",p:"hěn"},{w:"高",p:"gāo"},
-                    {w:"兴",p:"xìng"},{w:"、",p:""},{w:"很",p:"hěn"},{w:"喜",p:"xǐ"},{w:"欢",p:"huān"},
-                    {w:"他",p:"tā"},{w:"。",p:""}
+                    {w: "在", p: "zài"}, {w: "古汉语", p: "gǔ hàn yǔ"}, {w: "中", p: "zhōng"}, "，",
+                    "“", {w: "说", p: "shuō"}, "”", {w: "常常", p: "cháng cháng"}, {w: "通假", p: "tōng jiǎ"},
+                    {w: "为", p: "wéi"}, "“", {w: "悦", p: "yuè"}, "”。",
+                    {w: "意思是", p: "yì si shì"}, {w: "齐宣王", p: "qí xuān wáng"}, {w: "对", p: "duì"},
+                    {w: "他", p: "tā"}, {w: "的", p: "de"}, {w: "加入", p: "jiā rù"},
+                    {w: "感到", p: "gǎn dào"}, {w: "很高兴", p: "hěn gāo xìng"}, "、", {w: "很", p: "hěn"},
+                    {w: "喜欢", p: "xǐ huan"}, {w: "他", p: "tā"}, "。"
                 ],
                 explanationEn: "In ancient Chinese, this character often means happy or pleased. The king was happy with him."
             },
             {
-                textStructure: [{w:"读",p:"dú"},{w:"作",p:"zuò"}," shuì，",{w:"意",p:"yì"},{w:"思",p:"si"},{w:"是",p:"shì"},{w:"去",p:"qù"},{w:"劝",p:"quàn"},{w:"说",p:"shuō"},{w:"、",p:""},{w:"说",p:"shuō"},{w:"服",p:"fú"},{w:"国",p:"guó"},{w:"王",p:"wáng"}],
+                textStructure: [{w: "读作", p: "dú zuò"}, " shuì，", {w: "意思是", p: "yì si shì"}, {w: "去", p: "qù"}, {w: "劝说", p: "quàn shuō"}, "、", {w: "说服", p: "shuō fú"}, {w: "国王", p: "guó wáng"}],
                 en: "Pronounced 'shuì', meaning to persuade the king.",
                 correct: false,
                 explanationStructure: [
-                    {w:"错",p:"cuò"},{w:"误",p:"wù"},{w:"。",p:""},{w:"虽",p:"suī"},{w:"然",p:"rán"},
-                    {w:"有",p:"yǒu"},{w:"这",p:"zhè"},{w:"个",p:"gè"},{w:"读",p:"dú"},{w:"音",p:"yīn"},规格，
-                    {w:"但",p:"dàn"},{w:"在",p:"zài"},{w:"句",p:"jù"},{w:"中",p:"zhōng"},{w:"它",p:"tā"},
-                    {w:"是",p:"zhǔ"},{w:"语",p:"yǔ"},"“",{w:"宣",p:"xuān"},{w:"王",p:"wáng"},"”",
-                    {w:"之",p:"zhī"},{w:"后",p:"hòu"},{w:"校",p:"de"},{w:"感",p:"gǎn"},{w:"受",p:"shòu"},"，",
-                    {w:"不",p:"bù"},{w:"可",p:"kě"},{w:"能",p:"néng"},{w:"变",p:"biàn"},{w:"成",p:"chéng"},
-                    {w:"南",p:"nán"},{w:"郭",p:"guō"},{w:"先",p:"xiān"},{w:"生",p:"shēng"},{w:"去",p:"qù"},
-                    {w:"说",p:"shuō"},{w:"服",p:"fú"},{w:"国",p:"guó"},{w:"王",p:"wáng"},{w:"。",p:""}
+                    {w: "错误", p: "cuò wù"}, "。", {w: "虽然", p: "suī rán"},
+                    {w: "有", p: "yǒu"}, {w: "这个", p: "zhè gè"}, {w: "读音", p: "dú yīn"}, "，",
+                    {w: "但在", p: "dàn zài"}, {w: "句中", p: "jù zhōng"}, {w: "它是", p: "tā shì"},
+                    {w: "主语", p: "zhǔ yǔ"}, "“", {w: "宣王", p: "xuān wáng"}, "”", {w: "之后", p: "zhī hòu"},
+                    {w: "的", p: "de"}, {w: "感受", p: "gǎn shòu"}, "，", {w: "不可能", p: "bù kě néng"},
+                    {w: "变成", p: "biàn chéng"}, {w: "南郭先生", p: "nán guō xiān sheng"}, {w: "去", p: "qù"},
+                    {w: "说服", p: "shuō fú"}, {w: "国王", p: "guó wáng"}, "。"
                 ],
                 explanationEn: "Incorrect. Although it can be pronounced this way, it describes the king's feeling here, not an act of persuasion."
             },
             {
-                textStructure: [{w:"读",p:"dú"},{w:"作",p:"zuò"}," tuō，",{w:"意",p:"yì"},{w:"思",p:"si"},{w:"是",p:"shì"},{w:"解",p:"jiě"},{w:"脱",p:"tuō"},{w:"、",p:""},{w:"释",p:"shì"},{w:"放",p:"fàng"}],
+                textStructure: [{w: "读作", p: "dú zuò"}, " tuō，", {w: "意思是", p: "yì si shì"}, {w: "解脱", p: "jiě tuō"}, "、", {w: "释放", p: "shì fàng"}],
                 en: "Pronounced 'tuō', meaning to escape or release.",
                 correct: false,
                 explanationStructure: [
-                    {w:"错",p:"cuò"},{w:"误",p:"wù"},{w:"。",p:""},{w:"这",p:"zhè"},{w:"是",p:"shì"},
-                    {w:"通",p:"tōng"},"“",{w:"脱",p:"tuō"},"”",{w:"的",p:"de"},{w:"意",p:"yì"},
-                    {w:"思",p:"si"},{w:"，",p:""},{w:"完",p:"wán"},{w:"全",p:"quán"},{w:"不",p:"bù"},
-                    {w:"符",p:"fú"},{w:"合",p:"hé"},{w:"齐",p:"qí"},{w:"宣",p:"xuān"},{w:"王",p:"wáng"},
-                    {w:"听",p:"tīng"},{w:"乐",p:"yuè"},{w:"师",p:"shī"},{w:"加",p:"jiā"},{w:"入",p:"rù"},
-                    {w:"时",p:"shí"},{w:"的",p:"de"},{w:"心",p:"xīn"},{w:"里",p:"lǐ"},{w:"表",p:"biǎo"},
-                    {w:"现",p:"xiàn"},{w:"。",p:""}
+                    {w: "错误", p: "cuò wù"}, "。", {w: "这是", p: "zhè shì"},
+                    {w: "通", p: "tōng"}, "“", {w: "脱", p: "tuō"}, "”", {w: "的", p: "de"},
+                    {w: "意思", p: "yì si"}, "，", {w: "完全", p: "wán quán"},
+                    {w: "不符合", p: "bù fú hé"}, {w: "齐宣王", p: "qí xuān wáng"},
+                    {w: "听", p: "tīng"}, {w: "乐师", p: "yuè shī"}, {w: "加入", p: "jiā rù"},
+                    {w: "时", p: "shí"}, {w: "的", p: "de"}, {w: "心理", p: "xīn lǐ"},
+                    {w: "表现", p: "biǎo xiàn"}, "。"
                 ],
                 explanationEn: "Incorrect. This means to escape, which has nothing to do with the king's reaction to a new musician."
             }
@@ -146,229 +142,214 @@ const quizQuestions = [
     {
         id: 3,
         textStructure: [
-            {w:"根",p:"gēn"},{w:"据",p:"jù"},{w:"文",p:"wén"},{w:"章",p:"zhāng"},{w:"内",p:"nèi"},{w:"容",p:"róng"},{w:"，",p:""},
-            {w:"南",p:"nán"},{w:"郭",p:"guō"},{w:"先",p:"xiān"},{w:"生",p:"shēng"},{w:"在",p:"zài"},{w:"齐",p:"qí"},{w:"宣",p:"xuān"},
-            {w:"王",p:"wáng"},{w:"时",p:"shí"},{w:"期",p:"qī"},{w:"为",p:"wèi"},{w:"什",p:"shén"},{w:"么",p:"me"},
-            {w:"能",p:"néng"},{w:"够",p:"gòu"},{w:"一",p:"yī"},{w:"直",p:"zhí"},{w:"混",p:"hùn"},{w:"下",p:"xià"},
-            {w:"去",p:"qù"},{w:"不",p:"bù"},{w:"被",p:"bèi"},{w:"打",p:"dǎ"},{w:"穿",p:"chuān"},{w:"？",p:""}
+            {w: "根据", p: "gēn jù"}, {w: "文章", p: "wén zhāng"}, {w: "内容", p: "nèi róng"}, "，",
+            {w: "南郭先生", p: "nán guō xiān sheng"}, {w: "在", p: "zài"}, {w: "齐宣王", p: "qí xuān wáng"},
+            {w: "时期", p: "shí qī"}, {w: "为什么", p: "wèi shén me"}, {w: "能够", p: "néng gòu"},
+            {w: "一直", p: "yì zhí"}, {w: "混", p: "hùn"}, {w: "下去", p: "xià qù"},
+            {w: "不被", p: "bú bèi"}, {w: "打穿", p: "dǎ chuān"}, "？"
         ],
         en: "Why could Mr. Nanguo hide his lack of skill during King Xuan's time?",
         options: [
             {
-                textStructure: [{w:"稳",p:"wěn"},{w:"赢",p:"yíng"},{w:"！",p:""},{w:"因",p:"yīn"},{w:"为",p:"wéi"},{w:"他",p:"tā"},{w:"是",p:"shì"},{w:"国",p:"guó"},{w:"王",p:"wáng"},{w:"的",p:"de"},{w:"亲",p:"qīn"},{w:"戚",p:"qi"},{w:"，",p:""},{w:"守",p:"shǒu"},{w:"卫",p:"wèi"},{w:"不",p:"bù"},{w:"敢",p:"gǎn"},{w:"抓",p:"zhuā"},{w:"他",p:"tā"}],
+                textStructure: [{w: "稳赢", p: "wěn yíng"}, "！", {w: "因为", p: "yīn wèi"}, {w: "他是", p: "tā shì"}, {w: "国王", p: "guó wáng"}, {w: "的", p: "de"}, {w: "亲戚", p: "qīn qi"}, "，", {w: "守卫", p: "shǒu wèi"}, {w: "不敢", p: "bù gǎn"}, {w: "抓他", p: "zhuā tā"}],
                 en: "Because he was a relative of the king.",
                 correct: false,
                 explanationStructure: [
-                    {w:"错",p:"cuò"},{w:"误",p:"wù"},{w:"。",p:""},{w:"文",p:"wén"},{w:"中",p:"zhōng"},
-                    {w:"没",p:"méi"},{w:"有",p:"yǒu"},{w:"任",p:"rèn"},{w:"何",p:"hé"},{w:"内",p:"nèi"},
-                    {w:"容",p:"róng"},{w:"提",p:"tí"},{w:"及",p:"jí"},{w:"他",p:"tā"},{w:"是",p:"shì"},
-                    {w:"王",p:"wáng"},{w:"亲",p:"qīn"},{w:"国",p:"guó"},{w:"戚",p:"qī"},{w:"，",p:""},
-                    {w:"他",p:"tā"},{w:"只",p:"zhǐ"},{w:"是",p:"shì"},{w:"一",p:"yè"},{w:"个",p:"gè"},
-                    {w:"普",p:"pǔ"},{w:"通",p:"tōng"},{w:"的",p:"de"},{w:"无",p:"wú"},{w:"业",p:"yè"},
-                    {w:"游",p:"yóu"},{w:"民",p:"mín"},{w:"。",p:""}
+                    {w: "错误", p: "cuò wù"}, "。", {w: "文中", p: "wén zhōng"},
+                    {w: "没有", p: "méi yǒu"}, {w: "任何", p: "rèn hé"}, {w: "内容", p: "nèi róng"},
+                    {w: "提及", p: "tí jí"}, {w: "他是", p: "tā shì"}, {w: "王亲国戚", p: "wáng qīn guó qī"}, "，",
+                    {w: "他", p: "tā"}, {w: "只是", p: "zhǐ shì"}, {w: "一个", p: "yí gè"},
+                    {w: "普通", p: "pǔ tōng"}, {w: "的", p: "de"}, {w: "无业游民", p: "wú yè yóu mín"}, "。"
                 ],
-                en: "Incorrect. The story does not say he was related to the king. He was just a normal guy."
+                explanationEn: "Incorrect. The story does not say he was related to the king. He was just a normal guy."
             },
             {
-                textStructure: [{w:"因",p:"yīn"},{w:"为",p:"wéi"},{w:"齐",p:"qí"},{w:"宣",p:"xuān"},{w:"王",p:"wáng"},{w:"每",p:"měi"},{w:"次",p:"cì"},{w:"听",p:"tīng"},{w:"音",p:"yīn"},{w:"乐",p:"yuè"},{w:"都",p:"dōu"},{w:"喜",p:"xǐ"},{w:"欢",p:"huān"},{w:"三",p:"sān"},{w:"百",p:"bǎi"},{w:"人",p:"rén"},{w:"的",p:"de"},{w:"大",p:"dào"},{w:"合",p:"hé"},{w:"奏",p:"zòu"},{w:"，",p:""},{w:"他",p:"tā"},{w:"可",p:"kě"},{w:"以",p:"yǐ"},{w:"夹",p:"jiá"},{w:"在",p:"zài"},{w:"里",p:"lǐ"},{w:"面",p:"miàn"},{w:"装",p:"zhuāng"},{w:"模",p:"mú"},{w:"作",p:"zuò"},{w:"样",p:"yàng"}],
+                textStructure: [{w: "因为", p: "yīn wèi"}, {w: "齐宣王", p: "qí xuān wáng"}, {w: "每次", p: "měi cì"}, {w: "听音乐", p: "tīng yīn yuè"}, {w: "都", p: "dōu"}, {w: "喜欢", p: "xǐ huan"}, {w: "三百人", p: "sān bǎi rén"}, {w: "的", p: "de"}, {w: "大合奏", p: "dà hé zòu"}, "，", {w: "他可以", p: "tā kě yǐ"}, {w: "夹在", p: "jiā zài"}, {w: "里面", p: "lǐ miàn"}, {w: "装模作样", p: "zhuāng mú zuò yàng"}],
                 en: "Because King Xuan liked 300 people playing together, so he could pretend inside the big group.",
                 correct: true,
                 explanationStructure: [
-                    "“",{w:"必",p:"bì"},{w:"三",p:"sān"},{w:"百",p:"bǎi"},{w:"人",p:"rén"},"”",
-                    {w:"大",p:"dào"},{w:"合",p:"hé"},{w:"奏",p:"zòu"},{w:"是",p:"shì"},{w:"关",p:"guān"},
-                    {w:"键",p:"jiàn"},{w:"。",p:""},{w:"几",p:"jǐ"},{w:"百",p:"bǎi"},{w:"人",p:"rén"},
-                    {w:"一",p:"yī"},{w:"起",p:"qǐ"},{w:"吹",p:"chuī"},{w:"，",p:""},{w:"声",p:"shēng"},
-                    {w:"音",p:"yīn"},{w:"混",p:"hùn"},{w:"在",p:"zài"},{w:"一",p:"yī"},{w:"起",p:"qǐ"},
-                    {w:"，",p:""},{w:"南",p:"nán"},{w:"郭",p:"guō"},{w:"先",p:"xiān"},{w:"生",p:"shēng"},
-                    {w:"只",p:"zhǐ"},{w:"要",p:"yào"},{w:"假",p:"jiǎ"},{w:"装",p:"zhuāng"},{w:"做",p:"zuò"},
-                    {w:"动",p:"dòng"},{w:"作",p:"zuò"},{w:"，",p:""},{w:"国",p:"guó"},{w:"王",p:"wáng"},
-                    {w:"根",p:"gēn"},{w:"本",p:"běn"},{w:"听",p:"tīng"},{w:"不",p:"bù"},{w:"出",p:"chū"},
-                    {w:"来",p:"lái"},{w:"。",p:""}
+                    "“", {w: "必三百人", p: "bì sān bǎi rén"}, "”", {w: "大合奏", p: "dà hé zòu"},
+                    {w: "是", p: "shì"}, {w: "关键", p: "guān jiàn"}, "。", {w: "几百人", p: "jǐ bǎi rén"},
+                    {w: "一起", p: "yì qǐ"}, {w: "吹", p: "chuī"}, "，", {w: "声音", p: "shēng yīn"},
+                    {w: "混在", p: "hùn zài"}, {w: "一起", p: "yì qǐ"}, "，", {w: "南郭先生", p: "nán guō xiān sheng"},
+                    {w: "只要", p: "zhǐ yào"}, {w: "假装", p: "jiǎ zhuāng"}, {w: "做", p: "zuò"},
+                    {w: "动作", p: "dòng zuò"}, "，", {w: "国王", p: "guó wáng"},
+                    {w: "根本", p: "gēn běn"}, {w: "听不出来", p: "tīng bù chū lái"}, "。"
                 ],
-                en: "The group of 300 people was the reason. With so many players, he just needed to pretend to blow and nobody would notice."
+                explanationEn: "The group of 300 people was the reason. With so many players, he just needed to pretend to blow and nobody would notice."
             },
             {
-                textStructure: [{w:"因",p:"yīn"},{w:"为",p:"wéi"},{w:"他",p:"tā"},{w:"的",p:"de"},{w:"吹",p:"chuī"},{w:"竽",p:"yú"},{w:"技",p:"jì"},{w:"术",p:"shù"},{w:"其",p:"qí"},{w:"实",p:"shí"},{w:"非",p:"fēi"},{w:"常",p:"cháng"},{w:"好",p:"hǎo"},{w:"，",p:""},{w:"只",p:"zhǐ"},{w:"是",p:"shì"},{w:"后",p:"hòu"},{w:"来",p:"lái"},{w:"生",p:"shēng"},{w:"病",p:"bìng"},{w:"了",p:"le"}],
+                textStructure: [{w: "因为", p: "yīn wèi"}, {w: "他", p: "tā"}, {w: "的", p: "de"}, {w: "吹竽", p: "chuī yú"}, {w: "技术", p: "jì shù"}, {w: "其实", p: "qí shí"}, {w: "非常好", p: "fēi cháng hǎo"}, "，", {w: "只是", p: "zhǐ shì"}, {w: "后来", p: "hòu lái"}, {w: "生病", p: "shēng bìng"}, {w: "了", p: "le"}],
                 en: "Because he was actually very good but fell ill later.",
                 correct: false,
                 explanationStructure: [
-                    {w:"错",p:"cuò"},{w:"误",p:"wù"},{w:"。",p:""},{w:"成",p:"chéng"},{w:"语",p:"yǔ"},
-                    "“",{w:"滥",p:"làn"},{w:"竽",p:"yú"},{w:"充",p:"chōng"},{w:"数",p:"shù"},
-                    "”",{w:"的",p:"de"},{w:"核",p:"hé"},{w:"心",p:"xīn"},{w:"就",p:"jiù"},
-                    {w:"是",p:"shì"},{w:"指",p:"zhǐ"},{w:"他",p:"tā"},{w:"根",p:"gēn"},{w:"本",p:"běn"},
-                    {w:"没",p:"méi"},{w:"有",p:"yǒu"},{w:"真",p:"zhēn"},{w:"本",p:"běn"},{w:"事",p:"shì"},
-                    {w:"，",p:""},{w:"完",p:"wán"},{w:"全",p:"quán"},{w:"是",p:"shì"},{w:"假",p:"jiǎ"},
-                    {w:"装",p:"zhuāng"},{w:"会",p:"huì"},{w:"吹",p:"chuī"},{w:"。",p:""}
+                    {w: "错误", p: "cuò wù"}, "。", {w: "成语", p: "chéng yǔ"},
+                    "“", {w: "滥竽充数", p: "làn yú chōng shù"}, "”", {w: "的", p: "de"},
+                    {w: "核心", p: "hé xīn"}, {w: "就是", p: "jiù shì"}, {w: "指", p: "zhǐ"},
+                    {w: "他", p: "tā"}, {w: "根本", p: "gēn běn"}, {w: "没有", p: "méi yǒu"},
+                    {w: "真本事", p: "zhēn běn shi"}, "，", {w: "完全", p: "wán quán"},
+                    {w: "是", p: "shì"}, {w: "假装", p: "jiǎ zhuāng"}, {w: "会", p: "huì"},
+                    {w: "吹", p: "chuī"}, "。"
                 ],
-                en: "Incorrect. The idiom means he had no skill at all. He was just faking it from day one."
+                explanationEn: "Incorrect. The idiom means he had no skill at all. He was just faking it from day one."
             },
             {
-                textStructure: [{w:"因",p:"yīn"},{w:"为",p:"wéi"},{w:"其",p:"qí"},{w:"他",p:"tā"},{w:"乐",p:"yuè"},{w:"师",p:"shī"},{w:"都",p:"dō"},{w:"收",p:"shōu"},{w:"了",p:"le"},{w:"他",p:"tā"},{w:"的",p:"de"},{w:"钱",p:"qián"},{w:"，",p:""},{w:"主",p:"zhǔ"},{w:"动",p:"dòng"},{w:"帮",p:"bāng"},{w:"他",p:"tā"},{w:"打",p:"dǎ"},{w:"掩",p:"yǎn"},{w:"护",p:"hù"}],
+                textStructure: [{w: "因为", p: "yīn wèi"}, {w: "其他", p: "qí tā"}, {w: "乐师", p: "yuè shī"}, {w: "都", p: "dōu"}, {w: "收了", p: "shōu le"}, {w: "他", p: "tā"}, {w: "的", p: "de"}, {w: "钱", p: "qián"}, "，", {w: "主动", p: "zhǔ dòng"}, {w: "帮他", p: "bāng tā"}, {w: "打掩护", p: "dǎ yǎn hù"}],
                 en: "Because other players took his money to help him hide.",
                 correct: false,
                 explanationStructure: [
-                    {w:"错",p:"cuò"},{w:"误",p:"wù"},{w:"。",p:""},{w:"这",p:"zhè"},{w:"是",p:"shì"},
-                    {w:"现",p:"xiàn"},{w:"代",p:"dài"},{w:"职",p:"zhí"},{w:"场",p:"chǎng"},{w:"潜",p:"qián"},
-                    {w:"规",p:"guī"},{w:"则",p:"zé"},{w:"的",p:"de"},{w:"凭",p:"píng"},{w:"空",p:"kōng"},
-                    {w:"想",p:"xiǎng"},{w:"象",p:"xiàng"},{w:"，",p:""},{w:"古",p:"gǔ"},{w:"代",p:"dài"},
-                    {w:"文",p:"wén"},{w:"言",p:"yǐn"},{w:"文",p:"wén"},{w:"中",p:"zhōng"},{w:"完",p:"wán"},
-                    {w:"全",p:"quán"},{w:"没",p:"méi"},{w:"有",p:"yǒu"},{w:"这",p:"zhè"},{w:"种",p:"zhǒng"},
-                    {w:"利",p:"lì"},{w:"益",p:"yì"},{w:"勾",p:"gōu"},{w:"结",p:"jié"},{w:"。",p:""}
+                    {w: "错误", p: "cuò wù"}, "。", {w: "这是", p: "zhè shì"},
+                    {w: "现代", p: "xiàn dài"}, {w: "职场", p: "zhí chǎng"}, {w: "潜规则", p: "qián guī zé"},
+                    {w: "的", p: "de"}, {w: "凭空", p: "píng kōng"}, {w: "想象", p: "xiǎng xiàng"}, "，",
+                    {w: "古代", p: "gǔ dài"}, {w: "文章", p: "wén zhāng"}, {w: "中", p: "zhōng"},
+                    {w: "完全", p: "wán quán"}, {w: "没有", p: "méi yǒu"}, {w: "这种", p: "zhè zhǒng"},
+                    {w: "利益", p: "lì yì"}, {w: "勾结", p: "gōu jié"}, "。"
                 ],
-                en: "Incorrect. This is a wild modern guess. There is no money cheating or corruption mentioned in the text."
+                explanationEn: "Incorrect. This is a wild modern guess. There is no money cheating or corruption mentioned in the text."
             }
         ]
     },
     {
         id: 4,
         textStructure: [
-            {w:"齐",p:"qí"},{w:"湣",p:"mǐn"},{w:"王",p:"wáng"},{w:"继",p:"jì"},{w:"位",p:"wèi"},{w:"后",p:"hòu"},{w:"，",p:""},
-            {w:"南",p:"nán"},{w:"郭",p:"guō"},{w:"先",p:"xiān"},{w:"生",p:"shēng"},{w:"为",p:"wèi"},{w:"什",p:"shén"},{w:"么",p:"me"},
-            "“",{w:"逃",p:"táo"},"”",{w:"了",p:"le"},{w:"？",p:""},{w:"他",p:"tā"},{w:"面",p:"miàn"},
-            {w:"临",p:"(lín)"},{w:"的",p:"de"},{w:"真",p:"zhēn"},{w:"正",p:"zhèng"},{w:"危",p:"wēi"},{w:"机",p:"jī"},{w:"是",p:"shì"},{w:"？",p:""}
+            {w: "齐湣王", p: "qí mǐn wáng"}, {w: "继位", p: "jì wèi"}, {w: "后", p: "hòu"}, "，",
+            {w: "南郭先生", p: "nán guō xiān sheng"}, {w: "为什么", p: "wèi shén me"}, "“", {w: "逃", p: "táo"}, "”", {w: "了", p: "le"}, "？",
+            {w: "他", p: "tā"}, {w: "面临", p: "miàn lín"}, {w: "的", p: "de"},
+            {w: "真正", p: "zhēn zhèng"}, {w: "危机", p: "wēi jī"}, {w: "是", p: "shì"}, "？"
         ],
         en: "Why did Mr. Nanguo run away after King Min became the ruler?",
         options: [
             {
-                textStructure: [{w:"新",p:"xīn"},{w:"国",p:"guó"},{w:"王",p:"wáng"},{w:"不",p:"bù"},{w:"喜",p:"xǐ"},{w:"欢",p:"huān"},{w:"音",p:"yīn"},{w:"乐",p:"yuè"},{w:"，",p:""},{w:"要",p:"yào"},{w:"把",p:"bǎ"},{w:"所",p:"suǒ"},{w:"有",p:"yǒu"},{w:"乐",p:"yuè"},{w:"师",p:"shī"},{w:"全",p:"quán"},{w:"部",p:"bù"},{w:"关",p:"guān"},{w:"起",p:"qǐ"},{w:"来",p:"lái"}],
+                textStructure: [{w: "新国王", p: "xīn guó wáng"}, {w: "不喜欢", p: "bù xǐ huan"}, {w: "音乐", p: "yīn yuè"}, "，", {w: "要把", p: "yào bǎ"}, {w: "所有", p: "suǒ yǒu"}, {w: "乐师", p: "yuè shī"}, {w: "全部", p: "quán bù"}, {w: "关起来", p: "guān qǐ lái"}],
                 en: "The new king hated music and wanted to jail all players.",
                 correct: false,
                 explanationStructure: [
-                    {w:"错",p:"cuò"},{w:"误",p:"wù"},{w:"。",p:""},{w:"新",p:"xīn"},{w:"国",p:"guó"},
-                    {w:"王",p:"wáng"},{w:"同",p:"tóng"},{w:"样",p:"yàng"},{w:"喜",p:"xǐ"},{w:"欢",p:"huān"},
-                    {w:"听",p:"tīng"},{w:"竽",p:"yú"},{w:"，",p:""},{w:"只",p:"zhǐ"},{w:"是",p:"shì"},
-                    {w:"他",p:"tā"},{w:"听",p:"tīng"},{w:"音",p:"yīn"},{w:"乐",p:"yuè"},{w:"的",p:"de"},
-                    {w:"方",p:"fāng"},{w:"式",p:"shì"},{w:"改",p:"gǎi"},{w:"变",p:"biàn"},{w:"了",p:"le"},
-                    {w:"，",p:""},{w:"并",p:"bìng"},{w:"不",p:"bù"},{w:"是",p:"shì"},{w:"要",p:"yào"},
-                    {w:"抓",p:"zhuā"},{w:"人",p:"rén"},{w:"。",p:""}
+                    {w: "错误", p: "cuò wù"}, "。", {w: "新国王", p: "xīn guó wáng"},
+                    {w: "同样", p: "tóng yàng"}, {w: "喜欢", p: "xǐ huan"}, {w: "听竽", p: "tīng yú"}, "，",
+                    {w: "只是", p: "zhǐ shì"}, {w: "他", p: "tā"}, {w: "听音", p: "tīng yīn"},
+                    {w: "乐的", p: "yuè de"}, {w: "方式", p: "fāng shì"}, {w: "改变", p: "gǎi biàn"},
+                    {w: "了", p: "le"}, "，", {w: "并不是", p: "bú shì shì"}, {w: "要", p: "yào"},
+                    {w: "抓人", p: "zhuā rén"}, "。"
                 ],
-                en: "Incorrect. The new king also loved the music. He just wanted to listen to it in a different way."
+                explanationEn: "Incorrect. The new king also loved the music. He just wanted to listen to it in a different way."
             },
             {
-                textStructure: [{w:"齐",p:"qí"},{w:"湣",p:"mǐn"},{w:"王",p:"wáng"},{w:"好",p:"hào"},"“",{w:"一",p:"yī"},{w:"一",p:"yī"},{w:"听",p:"tīng"},{w:"之",p:"zhī"},"”，",{w:"每",p:"měi"},{w:"个",p:"gè"},{w:"人",p:"rén"},{w:"都",p:"dōu"},{w:"必",p:"bì"},{w:"须",p:"xū"},{w:"单",p:"dān"},{w:"独",p:"dú"},{w:"轮",p:"liú"},{w:"流",p:"liú"},{w:"听",p:"tīng"},{w:"独",p:"dú"},{w:"奏",p:"zòu"},{w:"，",p:""},{w:"他",p:"tā"},{w:"一",p:"yī"},{w:"吹",p:"chuī"},{w:"就",p:"jiù"},{w:"会",p:"huì"},{w:"当",p:"dāng"},{w:"场",p:"chǎng"},{w:"露",p:"lù"},{w:"馅",p:"xiàn"}],
+                textStructure: [{w: "齐湣王", p: "qí mǐn wáng"}, {w: "好", p: "hào"}, "“", {w: "一一听之", p: "yī yī tīng zhī"}, "”，", {w: "每个人", p: "měi gè rén"}, {w: "都必须", p: "dōu bì xū"}, {w: "单独", p: "dān dú"}, {w: "轮流", p: "lún liú"}, {w: "听独奏", p: "tīng dú zòu"}, "，", {w: "他一吹", p: "tā yì chuī"}, {w: "就会", p: "jiù huì"}, {w: "当场", p: "dāng chǎng"}, {w: "露馅", p: "lù xiàn"}],
                 en: "King Min wanted to listen to them one by one, and a solo performance would reveal his secret.",
                 correct: true,
                 explanationStructure: [
-                    {w:"齐",p:"qí"},{w:"湣",p:"mǐn"},{w:"王",p:"wáng"},{w:"喜",p:"xǐ"},{w:"欢",p:"huān"},
-                    "“",{w:"一",p:"yī"},{w:"一",p:"yī"},{w:"听",p:"tīng"},{w:"之",p:"zhī"},
-                    "”。",{w:"没",p:"méi"},{w:"有",p:"yǒu"},{w:"了",p:"le"},{w:"三",p:"sān"},
-                    {w:"百",p:"bǎi"},{w:"人",p:"rén"},{w:"的",p:"de"},{w:"掩",p:"yǎn"},{w:"护",p:"hù"},
-                    {w:"，",p:""},{w:"轮",p:"lún"},{w:"到",p:"dào"},{w:"他",p:"tā"},{w:"一",p:"yī"},
-                    {w:"个",p:"gè"},{w:"人",p:"rén"},{w:"单",p:"dān"},{w:"独",p:"dú"},{w:"吹",p:"chuī"},
-                    {w:"奏",p:"zòu"},{w:"时",p:"shí"},{w:"，",p:""},{w:"他",p:"tā"},{w:"不",p:"bù"},
-                    {w:"会",p:"huì"},{w:"吹",p:"chuī"},{w:"的",p:"de"},{w:"实",p:"shí"},{w:"事",p:"shì"},
-                    {w:"会",p:"huì"},{w:"立",p:"lì"},{w:"刻",p:"kè"},{w:"曝",p:"bào"},{w:"光",p:"guāng"},
-                    {w:"，",p:""},{w:"只",p:"zhǐ"},{w:"能",p:"néng"},{w:"逃",p:"táo"},{w:"跑",p:"pǎo"},
-                    {w:"。",p:""}
+                    {w: "齐湣王", p: "qí mǐn wáng"}, {w: "喜欢", p: "xǐ huan"}, "“", {w: "一一听之", p: "yī yī tīng zhī"},
+                    "”。", {w: "没有", p: "méi yǒu"}, {w: "了", p: "le"}, {w: "三百人", p: "sān bǎi rén"},
+                    {w: "的", p: "de"}, {w: "掩护", p: "yǎn hù"}, "，", {w: "轮到", p: "lún dào"},
+                    {w: "他", p: "tā"}, {w: "一个人", p: "yí gè rén"}, {w: "单独", p: "dān dú"},
+                    {w: "吹奏", p: "chuī zòu"}, {w: "时", p: "shí"}, "，", {w: "他", p: "tā"},
+                    {w: "不会", p: "bú huì"}, {w: "吹的", p: "chuī de"}, {w: "事实", p: "shì shí"},
+                    {w: "就会", p: "jiù huì"}, {w: "立刻", p: "lì kè"}, {w: "曝光", p: "bào guāng"}, "，",
+                    {w: "只能", p: "zhǐ néng"}, {w: "逃跑", p: "táo pǎo"}, "。"
                 ],
-                en: "King Min liked solo plays. Without the big group to hide him, his failure would be seen instantly, so he ran."
+                explanationEn: "King Min liked solo plays. Without the big group to hide him, his failure would be seen instantly, so he ran."
             },
             {
-                textStructure: [{w:"因",p:"yīn"},{w:"为",p:"wéi"},{w:"他",p:"tā"},{w:"发",p:"fā"},{w:"了",p:"le"},{w:"财",p:"cái"},{w:"，",p:""},{w:"准",p:"zhǔn"},{w:"备",p:"bèi"},{w:"告",p:"gào"},{w:"老",p:"lǎo"},{w:"还",p:"huán"},{w:"乡",p:"xiāng"},{w:"买",p:"mǎi"},{w:"大",p:"dà"},{w:"房",p:"fáng"},{w:"子",p:"zǐ"}],
+                textStructure: [{w: "因为", p: "yīn wèi"}, {w: "他", p: "tā"}, {w: "发了财", p: "fā le cái"}, "，", {w: "准备", p: "zhǔn bèi"}, {w: "告老还乡", p: "gào lǎo huán xiāng"}, {w: "买大房子", p: "mǎi dà fáng zi"}],
                 en: "Because he became rich and wanted to retire.",
                 correct: false,
                 explanationStructure: [
-                    {w:"错",p:"cuò"},{w:"误",p:"wù"},{w:"。",p:""},{w:"他",p:"tā"},{w:"是",p:"shì"},
-                    {w:"因",p:"yīn"},{w:"为",p:"wéi"},{w:"恐",p:"kǒng"},{w:"惧",p:"jù"},{w:"混",p:"hùn"},
-                    {w:"不",p:"bù"},{w:"下",p:"xià"},{w:"去",p:"qù"},{w:"、",p:""},{w:"害",p:"hài"},
-                    {w:"怕",p:"pà"},{w:"被",p:"bèi"},{w:"惩",p:"chéng"},{w:"罚",p:"fá"},{w:"才",p:"cái"},
-                    {w:"被",p:"bèi"},{w:"迫",p:"pò"},{w:"逃",p:"táo"},{w:"命",p:"mìng"},{w:"的",p:"de"},
-                    {w:"，",p:""},{w:"并",p:"bìng"},{w:"不",p:"bù"},{w:"是",p:"shì"},{w:"光",p:"guāng"},
-                    {w:"荣",p:"róng"},{w:"退",p:"xiū"},{w:"休",p:"xiū"},{w:"。",p:""}
+                    {w: "错误", p: "cuò wù"}, "。", {w: "他", p: "tā"},
+                    {w: "是因为", p: "shì yīn wèi"}, {w: "恐惧", p: "kǒng jù"}, {w: "混不下去", p: "hùn bú xià qù"},
+                    "、", {w: "害怕", p: "hài pà"}, {w: "被", p: "bèi"}, {w: "惩罚", p: "chéng fá"},
+                    {w: "才", p: "cái"}, {w: "被迫", p: "bèi pò"}, {w: "逃命", p: "táo mìng"},
+                    {w: "的", p: "de"}, "，", {w: "并不是", p: "bú shì shì"}, {w: "光荣", p: "guāng róng"},
+                    {w: "退休", p: "tuì xiū"}, "。"
                 ],
-                en: "Incorrect. He ran away because he was scared of being caught and punished, not because he was rich."
+                explanationEn: "Incorrect. He ran away because he was scared of being caught and punished, not because he was rich."
             },
             {
-                textStructure: [{w:"因",p:"yīn"},{w:"为",p:"wéi"},{w:"别",p:"bié"},{w:"的",p:"de"},{w:"乐",p:"yuè"},{w:"师",p:"shī"},{w:"嫉",p:"jí"},{w:"妒",p:"dù"},{w:"他",p:"tā"},{w:"的",p:"de"},{w:"带",p:"dài"},{w:"遇",p:"yù"},{w:"，",p:""},{w:"暗",p:"àn"},{w:"中",p:"zhōng"},{w:"联",p:"lián"},{w:"合",p:"hé"},{w:"起",p:"qǐ"},{w:"来",p:"lái"},{w:"排",p:"pái"},{w:"挤",p:"jǐ"},{w:"他",p:"tā"}],
+                textStructure: [{w: "因为", p: "yīn wèi"}, {w: "其他", p: "qí tā"}, {w: "乐师", p: "yuè shī"}, {w: "嫉妒", p: "jí dù"}, {w: "他", p: "tā"}, {w: "的", p: "de"}, {w: "待遇", p: "dài yù"}, "，", {w: "暗中", p: "àn zhōng"}, {w: "联合", p: "lián hé"}, {w: "起来", p: "qǐ lái"}, {w: "排挤他", p: "pái jǐ tā"}],
                 en: "Because other musicians were jealous and pushed him out.",
                 correct: false,
                 explanationStructure: [
-                    {w:"错",p:"cuò"},{w:"误",p:"wù"},{w:"。",p:""},{w:"排",p:"pái"},{w:"挤",p:"jǐ"},
-                    {w:"说",p:"shuō"},{w:"纯",p:"chún"},{w:"属",p:"shǔ"},{w:"主",p:"zhǔ"},{w:"观",p:"guān"},
-                    {w:"猜",p:"cāi"},{w:"测",p:"cè"},{w:"，",p:""},{w:"导",p:"dǎo"},{w:"致",p:"zhì"},
-                    {w:"他",p:"tā"},{w:"逃",p:"táo"},{w:"跑",p:"pǎo"},{w:"的",p:"de"},{w:"唯",p:"wéi"},
-                    {w:"一",p:"yī"},{w:"物",p:"wù"},{w:"理",p:"lǐ"},{w:"原",p:"yuán"},{w:"因",p:"yīn"},
-                    {w:"就",p:"jiù"},{w:"是",p:"shì"},{w:"新",p:"xīn"},{w:"国",p:"guó"},{w:"王",p:"wáng"},
-                    {w:"的",p:"de"},{w:"单",p:"dān"},{w:"独",p:"dú"},{w:"考",p:"kǎo"},{w:"核",p:"hé"},
-                    {w:"制",p:"zhì"},{w:"度",p:"dù"},{w:"。",p:""}
+                    {w: "错误", p: "cuò wù"}, "。", {w: "排挤", p: "pái jǐ"},
+                    {w: "说", p: "shuō"}, {w: "纯属", p: "chún shǔ"}, {w: "主观", p: "zhǔ guān"},
+                    {w: "猜测", p: "cāi cè"}, "，", {w: "导致", p: "dǎo zhì"}, {w: "他", p: "tā"},
+                    {w: "逃跑", p: "táo pǎo"}, {w: "的", p: "de"}, {w: "唯一", p: "wéi yī"},
+                    {w: "物理", p: "wù lǐ"}, {w: "原因", p: "yīn wèn"}, {w: "就是", p: "jiù shì"},
+                    {w: "新国王", p: "xīn guó wáng"}, {w: "的", p: "de"}, {w: "单独", p: "dān dú"},
+                    {w: "考核", p: "kǎo hé"}, {w: "制度", p: "zhì dù"}, "。"
                 ],
-                en: "Incorrect. This is a guess. The only real reason he ran away was the king's new rule of solo testing."
+                explanationEn: "Incorrect. This is a guess. The only real reason he ran away was the king's new rule of solo testing."
             }
         ]
     },
     {
         id: 5,
         textStructure: [
-            {w:"从",p:"cóng"},"“",{w:"廪",p:"lǐn"},{w:"食",p:"sì"},{w:"以",p:"yǐ"},{w:"数",p:"shù"},{w:"百",p:"bǎi"},{w:"人",p:"rén"},"”",
-            {w:"到",p:"dào"},"“",{w:"处",p:"chǔ"},{w:"士",p:"shì"},{w:"逃",p:"táo"},"”，",
-            {w:"这",p:"zhè"},{w:"个",p:"gè"},{w:"故",p:"gù"},{w:"事",p:"shì"},{w:"带",p:"dài"},{w:"给",p:"gěi"},
-            {w:"我",p:"wǒ"},{w:"们",p:"mén"},{w:"最",p:"zuì"},{w:"深",p:"shēn"},{w:"刻",p:"kè"},{w:"的",p:"de"},
-            {w:"道",p:"dào"},{w:"理",p:"lǐ"},{w:"是",p:"shì"},{w:"？"
+            {w: "从", p: "cóng"}, "“", {w: "廪食", p: "lǐn sì"}, {w: "以", p: "yǐ"}, {w: "数百人", p: "shù bǎi rén"}, "”",
+            {w: "到", p: "dào"}, "“", {w: "处士", p: "chǔ shì"}, {w: "逃", p: "táo"}, "”，",
+            {w: "这个", p: "zhè gè"}, {w: "寓言", p: "yù yán"}, {w: "故事", p: "gù shǐ"},
+            {w: "带给", p: "dài gěi"}, {w: "我们", p: "wǒ men"}, {w: "最", p: "zuì"},
+            {w: "深刻", p: "shēn kè"}, {w: "的", p: "de"}, {w: "道理", p: "dào lǐ"}, {w: "是", p: "shì"}, "？"
         ],
         en: "What is the most important lesson we can learn from this story?",
         options: [
             {
-                textStructure: [{w:"运",p:"yùn"},{w:"气",p:"qì"},{w:"才",p:"cái"},{w:"是",p:"shì"},{w:"最",p:"zhòng"},{w:"重",p:"zhòng"},{w:"要",p:"yào"},{w:"的",p:"de"},{w:"，",p:""},{w:"运",p:"yùn"},{w:"气",p:"qì"},{w:"好",p:"hǎo"},{w:"就",p:"jiù"},{w:"能",p:"néng"},{w:"一",p:"yī"},{w:"辈",p:"bèi"},{w:"子",p:"zǐ"},{w:"不",p:"bù"},{w:"工",p:"gōng"},{w:"作",p:"zuò"}],
+                textStructure: [{w: "运气", p: "yùn qi"}, {w: "才是", p: "cái shì"}, {w: "最", p: "zuì"}, {w: "重要", p: "zhòng yào"}, {w: "的", p: "de"}, "，", {w: "运气", p: "yùn qi"}, {w: "好", p: "hǎo"}, {w: "就能", p: "jiù néng"}, {w: "一辈子", p: "yí bèi zi"}, {w: "不工作", p: "bù gōng zuò"}],
                 en: "Luck is everything in life.",
                 correct: false,
                 explanationStructure: [
-                    {w:"错",p:"cuò"},{w:"误",p:"wù"},{w:"。",p:""},{w:"南",p:"nán"},{w:"郭",p:"guō"},
-                    {w:"先",p:"xiān"},{w:"生",p:"shēng"},{w:"最",p:"zuì"},{w:"后",p:"hòu"},{w:"的",p:"de"},
-                    {w:"逃",p:"táo"},{w:"跑",p:"pǎo"},{w:"恰",p:"qià"},{w:"恰",p:"qià"},{w:"说",p:"shuō"},
-                    {w:"明",p:"míng"},{w:"，",p:""},{w:"靠",p:"kào"},{w:"运",p:"yùn"},{w:"气",p:"qì"},
-                    {w:"和",p:"hé"},{w:"作",p:"zuò"},{w:"假",p:"jiǎ"},{w:"只",p:"zhǐ"},{w:"能",p:"néng"},
-                    {w:"混",p:"hùn"},{w:"一",p:"yī"},{w:"时",p:"shí"},{w:"，",p:""},{w:"绝",p:"jué"},
-                    {w:"对",p:"duì"},{w:"无",p:"wú"},{w:"法",p:"fǎ"},{w:"混",p:"hùn"},{w:"一",p:"yī"},
-                    {w:"辈",p:"bèi"},{w:"子",p:"zǐ"},{w:"。",p:""}
+                    {w: "错误", p: "cuò wù"}, "。", {w: "南郭先生", p: "nán guō xiān sheng"},
+                    {w: "最后", p: "zuì hòu"}, {w: "的", p: "de"}, {w: "逃跑", p: "táo pǎo"},
+                    {w: "恰恰", p: "qià qià"}, {w: "说明", p: "shuō míng"}, "，", {w: "靠", p: "kào"},
+                    {w: "运气", p: "yùn qi"}, {w: "和", p: "hé"}, {w: "作假", p: "zuò jiǎ"},
+                    {w: "只能", p: "zhǐ néng"}, {w: "混", p: "hùn"}, {w: "一时", p: "yì shí"}, "，",
+                    {w: "绝对", p: "jué duì"}, {w: "无法", p: "wú fǎ"}, {w: "混", p: "hùn"},
+                    {w: "一辈子", p: "yí bèi zi"}, "。"
                 ],
-                en: "Incorrect. Mr. Nanguo's escape proves that cheating only works for a short time, not forever."
+                explanationEn: "Incorrect. Mr. Nanguo's escape proves that cheating only works for a short time, not forever."
             },
             {
-                textStructure: [{w:"做",p:"zuò"},{w:"人",p:"rén"},{w:"必",p:"bì"},{w:"须",p:"xū"},{w:"要",p:"yào"},{w:"有",p:"yǒu"},{w:"真",p:"zhēn"},{w:"cái",p:"cái"},{w:"实",p:"shí"},{w:"学",p:"xué"},{w:"，",p:""},{w:"光",p:"guāng"},{w:"靠",p:"kào"},{w:"装",p:"zhuāng"},{w:"模",p:"mú"},{w:"作",p:"zuò"},{w:"样",p:"yàng"},{w:"和",p:"hé"},{w:"偷",p:"tōu"},{w:"懒",p:"lǎn"},{w:"投",p:"tóu"},{w:"机",p:"jī"},{w:"，",p:""},{w:"最",p:"zuì"},{w:"后",p:"hòu"},{w:"一",p:"yī"},{w:"定",p:"dìng"},{w:"会",p:"huì"},{w:"原",p:"yán"},{w:"形",p:"xíng"},{w:"毕",p:"bì"},{w:"露",p:"lù"}],
+                textStructure: [{w: "做人", p: "zuò rén"}, {w: "必须", p: "bì xū"}, {w: "要有", p: "yào yǒu"}, {w: "真才实学", p: "zhēn cái shí xué"}, "，", {w: "光靠", p: "guāng kào"}, {w: "装模作样", p: "zhuāng mú zuò yàng"}, {w: "和", p: "hé"}, {w: "偷懒", p: "tōu lǎn"}, {w: "投机", p: "tóu jī"}, "，", {w: "最后", p: "zuì hòu"}, {w: "一定会", p: "yí dìng huì"}, {w: "原形毕露", p: "yuán xíng bì lù"}],
                 en: "We must have real skills. Faking it and being lazy will always fail in the end.",
                 correct: true,
                 explanationStructure: [
-                    {w:"真",p:"zhēn"},{w:"正",p:"zhèng"},{w:"稳",p:"wěn"},{w:"固",p:"gù"},{w:"的",p:"de"},
-                    {w:"成",p:"chéng"},{w:"果",p:"guǒ"},{w:"必",p:"bì"},{w:"须",p:"xū"},{w:"靠",p:"kào"},
-                    {w:"实",p:"shí"},{w:"力",p:"lì"},{w:"。",p:""},{w:"没",p:"méi"},{w:"有",p:"yǒu"},
-                    {w:"真",p:"zhēn"},{w:"本",p:"běn"},{w:"事",p:"shì"},{w:"，",p:""},{w:"一",p:"yī"},
-                    {w:"旦",p:"dàn"},{w:"面",p:"miàn"},{w:"对",p:"duì"},{w:"真",p:"zhēn"},{w:"正",p:"zhèng"},
-                    {w:"的",p:"de"},{w:"单",p:"dān"},{w:"独",p:"dú"},{w:"考",p:"kǎo"},{w:"核",p:"hé"},
-                    {w:"，",p:""},{w:"谎",p:"huǎng"},{w:"言",p:"yán"},{w:"在",p:"zài"},{w:"实",p:"shí"},
-                    {w:"事",p:"shì"},{w:"面",p:"miàn"},{w:"前",p:"qián"},{w:"就",p:"jiù"},{w:"会",p:"huì"},
-                    {w:"立",p:"lì"},{w:"刻",p:"kè"},{w:"碎",p:"suì"},{w:"裂",p:"liè"},{w:"。",p:""}
+                    {w: "真正", p: "zhēn zhèng"}, {w: "稳固", p: "wěn gù"}, {w: "的", p: "de"},
+                    {w: "成果", p: "chéng guǒ"}, {w: "必须", p: "bì xū"}, {w: "靠", p: "kào"},
+                    {w: "实力", p: "shí lì"}, "。", {w: "没有", p: "méi yǒu"}, {w: "真本事", p: "zhēn běn shi"},
+                    "，", {w: "一旦", p: "yí dàn"}, {w: "面对", p: "miàn duì"}, {w: "真正", p: "zhēn zhèng"},
+                    {w: "的", p: "de"}, {w: "单独", p: "dān dú"}, {w: "考核", p: "kǎo hé"}, "，",
+                    {w: "谎言", p: "huǎng yán"}, {w: "在", p: "zài"}, {w: "事实", p: "shì shí"},
+                    {w: "面前", p: "miàn qián"}, {w: "就会", p: "jiù huì"}, {w: "立刻", p: "lì kè"},
+                    {w: "碎裂", p: "suì liè"}, "。"
                 ],
-                en: "Real success comes from real skills. Without ability, you will always fail when a real test comes."
+                explanationEn: "Real success comes from real skills. Without ability, you will always fail when a real test comes."
             },
             {
-                textStructure: [{w:"乐",p:"yuè"},{w:"器",p:"qì"},{w:"太",p:"tài"},{w:"难",p:"nán"},{w:"学",p:"xué"},{w:"了",p:"le"},{w:"，",p:""},{w:"我",p:"wǒ"},{w:"们",p:"mén"},{w:"应",p:"yīng"},{w:"该",p:"gāi"},{w:"选",p:"xuǎn"},{w:"择",p:"zé"},{w:"更",p:"gèng"},{w:"简",p:"jiǎn"},{w:"单",p:"dān"},{w:"的",p:"de"},{w:"科",p:"kē"},{w:"目",p:"mù"},{w:"来",p:"lái"},{w:"读",p:"dú"}],
+                textStructure: [{w: "乐器", p: "yuè qì"}, {w: "太难", p: "tài nán"}, {w: "学了", p: "xué le"}, "，", {w: "我们", p: "wǒ men"}, {w: "应该", p: "yīng gāi"}, {w: "选择", p: "xuǎn zé"}, {w: "更", p: "gèng"}, {w: "简单", p: "jiǎn dān"}, {w: "的", p: "de"}, {w: "科目", p: "kē mù"}, {w: "来读", p: "lái dú"}],
                 en: "Learning musical instruments is too hard.",
                 correct: false,
                 explanationStructure: [
-                    {w:"错",p:"cuò"},{w:"误",p:"wù"},{w:"。",p:""},{w:"寓",p:"yù"},{w:"言",p:"yán"},
-                    {w:"借",p:"jiè"},{w:"吹",p:"chuī"},{w:"竽",p:"yú"},{w:"来",p:"lái"},{w:"讽",p:"fěng"},
-                    {w:"刺",p:"cì"},{w:"社",p:"shè"},{w:"会",p:"huì"},{w:"现",p:"xiàn"},{w:"象",p:"xiàng"},
-                    {w:"，",p:""},{w:"而",p:"ér"},{w:"不",p:"bù"},{w:"是",p:"shì"},{w:"讨",p:"tǎo"},
-                    {w:"论",p:"lùn"},{w:"学",p:"xué"},{w:"乐",p:"yuè"},{w:"器",p:"qì"},{w:"的",p:"de"},
-                    {w:"难",p:"nán"},{w:"易",p:"yì"},{w:"程",p:"chéng"},{w:"度",p:"dù"},{w:"。",p:""}
+                    {w: "错误", p: "cuò wù"}, "。", {w: "寓言", p: "yù yán"},
+                    {w: "借", p: "jiè"}, {w: "吹竽", p: "chuī yú"}, {w: "来", p: "lái"},
+                    {w: "讽刺", p: "fěng cì"}, {w: "社会", p: "shè huì"}, {w: "现象", p: "xiàn xiàng"}, "，",
+                    {w: "而不是", p: "ér bú shì shì"}, {w: "讨论", p: "tǎo lùn"}, {w: "学", p: "xué"},
+                    {w: "乐器", p: "yuè qì"}, {w: "的", p: "de"}, {w: "难易", p: "nán yì"},
+                    {w: "程度", p: "chéng dù"}, "。"
                 ],
-                en: "Incorrect. The story uses music to teach a life lesson, it is not talking about how hard it is to play an instrument."
+                explanationEn: "Incorrect. The story uses music to teach a life lesson, it is not talking about how hard it is to play an instrument."
             },
             {
-                textStructure: [{w:"当",p:"dāng"},{w:"老",p:"lǎo"},{w:"板",p:"bǎn"},{w:"换",p:"huàn"},{w:"人",p:"rén"},{w:"的",p:"de"},{w:"时",p:"shí"},{w:"候",p:"hou"},{w:"，",p:""},{w:"我",p:"wǒ"},{w:"们",p:"mén"},{w:"应",p:"yīng"},{w:"该",p:"gāi"},{w:"提",p:"tí"},{w:"早",p:"zǎo"},{w:"去",p:"qù"},{w:"和",p:"hé"},{w:"新",p:"xīn"},{w:"老",p:"lǎo"},{w:"板",p:"bǎn"},{w:"搞",p:"gǎo"},{w:"好",p:"hǎo"},{w:"关",p:"guān"},{w:"系",p:"xì"}],
+                textStructure: [{w: "当", p: "dāng"}, {w: "老板", p: "lǎo bǎn"}, {w: "换人", p: "huàn rén"}, {w: "的", p: "de"}, {w: "时候", p: "shí hou"}, "，", {w: "我们", p: "wǒ men"}, {w: "应该", p: "yīng gāi"}, {w: "提早", p: "tí zǎo"}, {w: "去和", p: "qù hé"}, {w: "新老板", p: "xīn lǎo bǎn"}, {w: "搞好", p: "gǎo hǎo"}, {w: "关系", p: "guān xi"}],
                 en: "We should try to please the new boss quickly.",
                 correct: false,
                 explanationStructure: [
-                    {w:"错",p:"cuò"},{w:"误",p:"wù"},{w:"。",p:""},{w:"搞",p:"gǎo"},{w:"好",p:"hǎo"},
-                    {w:"关",p:"guān"},{w:"系",p:"xì"},{w:"也",p:"yě"},{w:"无",p:"wú"},{w:"法",p:"fǎ"},
-                    {w:"弥",p:"mí"},{w:"补",p:"bǔ"},"“",{w:"完",p:"wán"},{w:"全",p:"quán"},
-                    {w:"不",p:"bù"},{w:"会",p:"huì"},{w:"吹",p:"chuī"},"”",{w:"的",p:"de"},
-                    {w:"硬",p:"yìng"},{w:"伤",p:"shāng"},{w:"，",p:""},{w:"实",p:"shí"},{w:"力",p:"lì"},
-                    {w:"的",p:"de"},{w:"缺",p:"quē"},{w:"失",p:"shī"},{w:"才",p:"cái"},{w:"是",p:"shì"},
-                    {w:"不",p:"bù"},{w:"可",p:"kě"},{w:"逾",p:"yú"},{w:"越",p:"yuè"},{w:"的",p:"de"},
-                    {w:"红",p:"hóng"},{w:"沟",p:"gōu"},{w:"。",p:""}
+                    {w: "错误", p: "cuò wù"}, "。", {w: "搞好", p: "gǎo hǎo"},
+                    {w: "关系", p: "guān xi"}, {w: "也", p: "yě"}, {w: "无法", p: "wú fǎ"},
+                    {w: "弥补", p: "mí bǔ"}, "“", {w: "完全", p: "wán quán"}, {w: "不会", p: "bú huì"},
+                    {w: "吹", p: "chuī"}, "”", {w: "的", p: "de"}, {w: "硬伤", p: "yìng shāng"}, "，",
+                    {w: "实力", p: "shí lì"}, {w: "的", p: "de"}, {w: "缺失", p: "quē shī"},
+                    {w: "才是", p: "cái shì"}, {w: "不可", p: "bù kě"}, {w: "逾越", p: "yú yuè"},
+                    {w: "的", p: "de"}, {w: "红沟", p: "hóng gōu"}, "。"
                 ],
-                en: "Incorrect. Pleasing the boss cannot fix a total lack of skill. Real ability is what truly matters."
+                explanationEn: "Incorrect. Pleasing the boss cannot fix a total lack of skill. Real ability is what truly matters."
             }
         ]
     }
