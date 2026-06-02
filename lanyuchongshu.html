@@ -56,9 +56,9 @@
 </div>
 
 <div id="debug-checker-panel" style="display: none; max-width: 850px; margin: 50px auto 20px auto; padding: 25px; background: #fffbeb; border: 2px dashed #f59e0b; border-radius: 12px; font-family: system-ui, sans-serif; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
-    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #fde68a; padding-bottom: 12px; margin-bottom: 15px;">
-        <h3 style="color: #b45309; margin: 0; display: flex; align-items: center; gap: 8px;">🛠️ 高级词组分块数据可视化测试面板</h3>
-        <p style="font-size: 12px; color: #92400e; margin: 0;">当前数据已通过高级词组块死绑定验证，零错位红利通车中！</p>
+    <div style="border-bottom: 2px solid #fde68a; padding-bottom: 12px; margin-bottom: 15px;">
+        <h3 style="color: #b45309; margin: 0; display: flex; align-items: center; gap: 8px;">🛠️ 全场景独立格子排查面板 (全五题+全版块全量覆盖)</h3>
+        <p style="font-size: 13px; color: #78350f; margin: 5px 0 0 0; line-height: 1.5;">💡 提示：此面板已打通五个数据包。请在此直观核对拼音。若发现错位或多音字错误，请对照标题与题号，回 GitHub 手动精准修改对应 JS 文件即可！</p>
     </div>
     <div id="debug-grid-container"></div>
 </div>
@@ -84,7 +84,7 @@
         return html;
     }
 
-    // 经典文本长串兜底拆解引擎（带核心安全熔断）
+    // 经典文本长串兜底拆解引擎（兼容古文原文和传统课文）
     function alignText(zh, py) {
         if (!zh || typeof zh !== 'string') return '';
         const tokens = zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→0-9\.…\/]|[\s\u3000]/g) || [];
@@ -132,34 +132,81 @@
         return arr;
     }
 
-    // 🛠️ 老师后台白话编辑工作台
+    // 🛠️ 终极全覆盖老师后台排查面板
     function renderDebugGrid() {
         const container = document.getElementById('debug-grid-container');
-        if (!container || typeof translationData === 'undefined') return;
+        if (!container) return;
         
         let html = '';
-        translationData.forEach((item, docIdx) => {
-            html += `<div style="margin: 15px 0 8px 0; font-weight: bold; color: #475569; font-size: 14px;">📋 翻译段落 ${docIdx + 1} 实时词组排查区：</div>`;
-            html += `<div style="display: flex; flex-wrap: wrap; gap: 8px; background: #ffffff; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">`;
+        
+        // 内部辅助渲染函数：将块格式格式化为统一的可视化格子
+        function buildGridBlock(titleLabel, dataArray) {
+            let sectionHtml = `<div style="margin: 18px 0 6px 0; font-weight: bold; color: #475569; font-size: 14px; border-left: 4px solid #f59e0b; padding-left: 8px;">${titleLabel}</div>`;
+            sectionHtml += `<div style="display: flex; flex-wrap: wrap; gap: 6px; background: #ffffff; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 10px;">`;
             
-            if (Array.isArray(item.zhStructure)) {
-                item.zhStructure.forEach((part) => {
+            if (Array.isArray(dataArray)) {
+                dataArray.forEach(part => {
                     if (typeof part === 'object' && part.w) {
-                        html += `
-                            <div style="display: inline-flex; flex-direction: column; align-items: center; border: 1px solid #cbd5e1; background: #f1f5f9; padding: 4px 8px; border-radius: 4px;">
-                                <span style="font-size: 10px; color: #2563eb; font-weight: bold; margin-bottom: 2px;">${part.p}</span>
-                                <span style="font-size: 15px; font-weight: bold; color: #1e293b;">${part.w}</span>
+                        sectionHtml += `
+                            <div style="display: inline-flex; flex-direction: column; align-items: center; border: 1px solid #cbd5e1; background: #f1f5f9; padding: 3px 6px; border-radius: 4px;">
+                                <span style="font-size: 10px; color: #2563eb; font-weight: bold; margin-bottom: 2px;">${part.p || '无音'}</span>
+                                <span style="font-size: 14px; font-weight: bold; color: #1e293b;">${part.w}</span>
                             </div>`;
                     } else {
-                        html += `
-                            <div style="display: inline-flex; align-items: center; padding: 4px; border: 1px dashed #cbd5e1; background: #f8fafc; border-radius: 4px; color: #94a3b8; font-size: 14px;">
-                                ${part === ' ' ? '␣' : part}
+                        sectionHtml += `
+                            <div style="display: inline-flex; align-items: center; padding: 3px 5px; border: 1px dashed #cbd5e1; background: #f8fafc; border-radius: 4px; color: #94a3b8; font-size: 13px; font-weight: bold;">
+                                ${part === ' ' ? '空格' : part}
                             </div>`;
                     }
                 });
+            } else {
+                sectionHtml += `<span style="color:#94a3b8; font-size:12px;">(传统字符串长句，不经过独立格子渲染机制)</span>`;
             }
-            html += `</div>`;
-        });
+            sectionHtml += `</div>`;
+            return sectionHtml;
+        }
+
+        // 1️⃣ 扫描并导出 古文原文版块 (poemData)
+        if (typeof poemData !== 'undefined') {
+            let rawPoemParts = [];
+            poemData.forEach(w => { if(w.punc) { rawPoemParts.push(w.text); } else { rawPoemParts.push({w: w.text, p: w.py}); } });
+            html += buildGridBlock("📖 古文原文 实时格子排查：", rawPoemParts);
+        }
+
+        // 2️⃣ 扫描并导出 白话翻译版块 (translationData)
+        if (typeof translationData !== 'undefined') {
+            translationData.forEach((item, docIdx) => {
+                html += buildGridBlock(`📋 白话翻译 · 段落 ${docIdx + 1}：`, item.zhStructure);
+            });
+        }
+
+        // 3️⃣ 扫描并导出 客观选择题版块 (quizQuestions - 5题完整覆盖)
+        if (typeof originalQuizQuestions !== 'undefined' && originalQuizQuestions.length > 0) {
+            originalQuizQuestions.forEach((q, qIdx) => {
+                html += buildGridBlock(`🎯 客观题 Q${q.id} 【题干】`, q.textStructure);
+                if (Array.isArray(q.options)) {
+                    q.options.forEach((opt, optIdx) => {
+                        const letters = ['A', 'B', 'C', 'D'];
+                        html += buildGridBlock(`&emsp; 🔹 选项 ${letters[optIdx]} 内容`, opt.textStructure);
+                        html += buildGridBlock(`&emsp; &emsp; 💬 选项 ${letters[optIdx]} 底部解析`, opt.explanationStructure);
+                    });
+                }
+            });
+        }
+
+        // 4️⃣ 扫描并导出 简答特训题版块 (shortQData - 5题完整覆盖)
+        if (typeof shortQData !== 'undefined') {
+            shortQData.forEach((item, sIdx) => {
+                html += buildGridBlock(`✍️ 简答题 ${item.id} 【题干】`, item.qZhStructure);
+                if (Array.isArray(item.sZhStructure)) {
+                    item.sZhStructure.forEach((step, stepIdx) => {
+                        html += buildGridBlock(`&emsp; 💡 答题思路 · 步骤 ${stepIdx + 1}`, step);
+                    });
+                }
+                html += buildGridBlock(`&emsp; 🎓 标准参考答案`, item.aZhStructure);
+            });
+        }
+
         container.innerHTML = html;
     }
 
@@ -350,19 +397,21 @@
         });
     }
 
-    // 🎯 核心生命周期：率先激活交互，再安全防务渲染
+    // 🎯 核心生命周期
     window.onload = function() {
-        // 第一顺位：立刻赋予页面按钮生命力，绝对防点不动
+        // 第一顺位：率先激活交互
         initInteractions(); 
         
         if (typeof quizQuestions !== 'undefined') { originalQuizQuestions = JSON.parse(JSON.stringify(quizQuestions)); }
         
-        // 第二顺位：安全防务渲染数据
+        // 第二顺位：渲染数据
         renderPoem(); 
         renderTranslation(); 
         renderAnalysis(); 
         renderShortQ(); 
         renderQuizCards(); 
+        
+        // 第三顺位：全数据格子化采集（让排查面板支持所有部分）
         renderDebugGrid();
 
         document.addEventListener('keydown', function(e) {
