@@ -66,7 +66,6 @@
 <script>
     let originalQuizQuestions = [];
 
-    // 🎯【高阶词组块死绑定引擎】：100% 优雅解析词组结构
     function renderGridData(dataArray) {
         if (!dataArray || !Array.isArray(dataArray)) return '';
         let html = '';
@@ -84,7 +83,6 @@
         return html;
     }
 
-    // 经典文本长串兜底拆解引擎（兼容古文原文和传统课文）
     function alignText(zh, py) {
         if (!zh || typeof zh !== 'string') return '';
         const tokens = zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→0-9\.…\/]|[\s\u3000]/g) || [];
@@ -122,7 +120,6 @@
         return html;
     }
 
-    // 🎯 基础洗牌算法工具函数
     function shuffleArray(arr) {
         if (!arr || !Array.isArray(arr)) return [];
         for (let i = arr.length - 1; i > 0; i--) {
@@ -132,14 +129,12 @@
         return arr;
     }
 
-    // 🛠️ 终极全覆盖老师后台排查面板
     function renderDebugGrid() {
         const container = document.getElementById('debug-grid-container');
         if (!container) return;
         
         let html = '';
         
-        // 内部辅助渲染函数：将块格式格式化为统一的可视化格子
         function buildGridBlock(titleLabel, dataArray) {
             let sectionHtml = `<div style="margin: 18px 0 6px 0; font-weight: bold; color: #475569; font-size: 14px; border-left: 4px solid #f59e0b; padding-left: 8px;">${titleLabel}</div>`;
             sectionHtml += `<div style="display: flex; flex-wrap: wrap; gap: 6px; background: #ffffff; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 10px;">`;
@@ -160,30 +155,27 @@
                     }
                 });
             } else {
-                sectionHtml += `<span style="color:#94a3b8; font-size:12px;">(传统字符串长句，不经过独立格子渲染机制)</span>`;
+                sectionHtml += `<span style="color:#94a3b8; font-size:12px;">(传统字符串长句)</span>`;
             }
             sectionHtml += `</div>`;
             return sectionHtml;
         }
 
-        // 1️⃣ 扫描并导出 古文原文版块 (poemData)
         if (typeof poemData !== 'undefined') {
             let rawPoemParts = [];
             poemData.forEach(w => { if(w.punc) { rawPoemParts.push(w.text); } else { rawPoemParts.push({w: w.text, p: w.py}); } });
             html += buildGridBlock("📖 古文原文 实时格子排查：", rawPoemParts);
         }
 
-        // 2️⃣ 扫描并导出 白话翻译版块 (translationData)
         if (typeof translationData !== 'undefined') {
             translationData.forEach((item, docIdx) => {
                 html += buildGridBlock(`📋 白话翻译 · 段落 ${docIdx + 1}：`, item.zhStructure);
             });
         }
 
-        // 3️⃣ 扫描并导出 客观选择题版块 (quizQuestions - 5题完整覆盖)
         if (typeof originalQuizQuestions !== 'undefined' && originalQuizQuestions.length > 0) {
-            originalQuizQuestions.forEach((q, qIdx) => {
-                html += buildGridBlock(`🎯 客观题 Q${q.id} 【题干】`, q.textStructure);
+            originalQuizQuestions.forEach((q) => {
+                html += buildGridBlock("🎯 客观题 Q" + q.id + " 【题干】", q.textStructure);
                 if (Array.isArray(q.options)) {
                     q.options.forEach((opt, optIdx) => {
                         const letters = ['A', 'B', 'C', 'D'];
@@ -194,10 +186,9 @@
             });
         }
 
-        // 4️⃣ 扫描并导出 简答特训题版块 (shortQData - 5题完整覆盖)
         if (typeof shortQData !== 'undefined') {
-            shortQData.forEach((item, sIdx) => {
-                html += buildGridBlock(`✍️ 简答题 ${item.id} 【题干】`, item.qZhStructure);
+            shortQData.forEach((item) => {
+                html += buildGridBlock("✍️ 简答题 " + item.id + " 【题干】", item.qZhStructure);
                 if (Array.isArray(item.sZhStructure)) {
                     item.sZhStructure.forEach((step, stepIdx) => {
                         html += buildGridBlock(`&emsp; 💡 答题思路 · 步骤 ${stepIdx + 1}`, step);
@@ -330,34 +321,43 @@
                     if (isCorrect) {
                         this.classList.add('correct');
                         fbDiv.className = 'feedback success';
-                        fbDiv.innerHTML = `<div class="fb-line"><span class="fb-label success-txt">✅ 回答正确！</span></div><div class="fb-line"><span class="fb-label">📖 正确解析：</span><span class="fb-content">${correctExpHtml}</span></div><div class="fb-en">💬 Correct Explanation: ${optData ? optData.explanationEn : ''}</div>`;
+                        fbDiv.innerHTML = `
+                            <div class="fb-line"><span class="fb-label success-txt">✅ 回报正确！</span></div>
+                            <div class="fb-line"><span class="fb-label">📖 正确解析：</span><span class="fb-content">${correctExpHtml}</span></div>
+                            <div class="fb-en">💬 Correct Explanation: ${optData ? (optData.explanationEn || '') : ''}</div>`;
                     } else {
                         this.classList.add('wrong');
                         fbDiv.className = 'feedback error';
                         fbDiv.innerHTML = `
                             <div class="fb-line"><span class="fb-label error-txt">❌ 回答错误。正确答案是：</span><span class="fb-content-main" style="display:inline-flex; align-items:center;">${letters[correctOptId]} ${correctOptData ? (correctOptData.text || '') : ''}</span></div>
-                            <div class="fb-en">💬 Correct Answer: ${correctOptData ? correctOptData.en : ''}</div>
+                            <div class="fb-en">💬 Correct Answer: ${correctOptData ? (correctOptData.en || '') : ''}</div>
                             <div class="fb-line" style="margin-top: 8px;"><span class="fb-label">📖 你选择的选项解析：</span><span class="fb-content">${wrongExpHtml}</span></div>
-                            <div class="fb-en">💬 Your Choice Analysis: ${optData ? optData.explanationEn : ''}</div>
+                            <div class="fb-en">💬 Your Choice Analysis: ${optData ? (optData.explanationEn || '') : ''}</div>
                             <div class="fb-line" style="margin-top: 8px;"><span class="fb-label">📖 正确选项解析：</span><span class="fb-content">${correctExpHtml}</span></div>
-                            <div class="fb-en">💬 Correct Option Analysis: ${correctOptData ? correctOptData.explanationEn : ''}</div>`;
+                            <div class="fb-en">💬 Correct Option Analysis: ${correctOptData ? (correctOptData.explanationEn || '') : ''}</div>`;
                     }
                 });
             });
         });
     }
 
+    // 🛠️【核心修正版】：为生成的每一个生词外壳装配上 class="word" 和对应的数据标签，确保点击事件能 100% 捕获
     function renderPoem() {
         const container = document.getElementById('dynamic-poem-container');
         if (!container || typeof poemData === 'undefined') return;
         let html = '<div class="poem-paragraph">&emsp;&emsp;'; 
         poemData.forEach(w => {
-            if(w.punc) { html += `<span class="punctuation">${w.text.trim()}</span>`; } else {
-                let examClass = w.exam ? ' word exam-focus' : ' word'; let examAttr = w.exam ? ' data-exam="true"' : '';
+            if(w.punc) { 
+                html += `<span class="punctuation">${w.text.trim()}</span>`; 
+            } else {
+                // 🔴 注入核心标记字段：为普通生词配上 .word，为重点词汇追加 .exam-focus 样式
+                let examClass = w.exam ? 'word exam-focus' : 'word'; 
+                let examAttr = w.exam ? ' data-exam="true"' : '';
                 html += `<span class="${examClass}" data-text="${w.text.trim()}" data-pinyin="${w.py}" data-zh="${w.zh}" data-en="${w.en}"${examAttr}>${alignText(w.text, w.py)}</span>`;
             }
         });
-        html += '</div>'; container.innerHTML = html;
+        html += '</div>'; 
+        container.innerHTML = html;
     }
 
     function initInteractions() {
@@ -370,6 +370,7 @@
         if (pinyinToggle) pinyinToggle.addEventListener('change', function() { if (this.checked) document.body.classList.remove('hide-pinyin'); else document.body.classList.add('hide-pinyin'); });
         if (enToggle) enToggle.addEventListener('change', function() { if (this.checked) document.body.classList.remove('hide-english'); else document.body.classList.add('hide-english'); });
         
+        // 🎯 这里的点击事件现在可以精准捕获到由 renderPoem() 生成的所有 .word 元素了！
         const words = document.querySelectorAll('.word'); const tooltip = document.getElementById('tooltip'); const dispWord = document.getElementById('disp-word'); const dispPinyin = document.getElementById('disp-pinyin'); const dispZh = document.getElementById('disp-zh'); const dispEn = document.getElementById('disp-en'); const examTag = document.getElementById('exam-tag');
         words.forEach(word => {
             word.addEventListener('click', function(e) {
@@ -397,22 +398,22 @@
         });
     }
 
+    function toggleAnswer(btn) { const answerBox = btn.nextElementSibling; if (answerBox.style.display === 'block') { answerBox.style.display = 'none'; btn.innerHTML = '📖 点击查看标准答案'; } else { answerBox.style.display = 'block'; btn.innerHTML = '📖 收起答案'; } }
+
     // 🎯 核心生命周期
     window.onload = function() {
-        // 第一顺位：率先激活交互
-        initInteractions(); 
-        
         if (typeof quizQuestions !== 'undefined') { originalQuizQuestions = JSON.parse(JSON.stringify(quizQuestions)); }
         
-        // 第二顺位：渲染数据
+        // 🔴 先渲染出古文 HTML 格子节点
         renderPoem(); 
         renderTranslation(); 
         renderAnalysis(); 
         renderShortQ(); 
         renderQuizCards(); 
-        
-        // 第三顺位：全数据格子化采集（让排查面板支持所有部分）
         renderDebugGrid();
+        
+        // 🔴 节点渲染完毕后，最后执行交互绑定，确保抓取到所有生词块
+        initInteractions(); 
 
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && (e.key === 'm' || e.key === 'M')) {
