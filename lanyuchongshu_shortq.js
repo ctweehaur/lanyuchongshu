@@ -64,7 +64,7 @@ const shortQData = [
         ],
         sPy: [
             "fǎn sī zǔ yuán fēn gōng zài xué xiào zuò xiǎo zǔ bào gào shí qiān wàn bù néng xué nán guō chǔ shì jì shēng zài bié rén de láo dòng chéng guǒ shàng hùn fēn shù",
-            "zǒng jié hé xīn shí lì yīn wèi xiǎo zǔ hùn fēn zhǐ néng jiǎo xìng guò guān yī shí dào了 zhēn zhèng miàn duì mó nǐ kǎo tǒng kǎo huò zhě dà xué bì yè miàn duì dān dú miàn shì shí méi yǒu zhēn caí shí xué de rén jué duì huì miàn lín xiàng nán guō chǔ shì yī yàng láng bèi táo pǎo de xià chǎng"
+            "zǒng jié hé xīn shí lì yīn wèi xiǎo zǔ hùn fēn zhǐ néng jiǎo xìng guò guān yī shí dào le zhēn zhèng miàn duì mó nǐ kǎo tǒng kǎo huò zhě dà xué bì yè miàn duì dān dú miàn shì shí méi yǒu zhēn caí shí xué de rén jué duì huì miàn lín xiàng nán guō chǔ shì yī yàng láng bèi táo pǎo de xià chǎng"
         ],
         sEn: "Step 1: Reflect on team contribution: when doing school group projects, we must never act like Mr. Nanguo, being a free rider and taking marks for free.<br>Step 2: Understand core ability: group cheating only works for a short time. When facing real SPM exams or solo job interviews, people without skill will fail miserably.",
         aZh: "警示我们在学校做小组报告或未来工作时，绝不能当不付出的“混子”（Free Rider）。虽然靠团队大合奏可以混得一时利益，但真正大考或遇到独立任务时，没有实力的人终会暴露并付出惨痛代价。",
