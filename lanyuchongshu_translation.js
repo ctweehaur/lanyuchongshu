@@ -1,4 +1,3 @@
-// 💾 经词组块重构后的纯净白话翻译数据包
 const translationData = [
     {
         zhStructure: [
