@@ -58,18 +58,18 @@
 <script>
     let originalQuizQuestions = [];
 
-    // 【终极重构注音引擎】：加入连续英文字母单词整体打包合并逻辑，防止拆散错位
+    // 【终极重构注音引擎】：加入连续英文字母单词整体打包合并与空格精准切分逻辑，防止拆散错位
     function alignText(zh, py) {
         if (!zh) return '';
-        // 核心升级：将原本的单字拆分，改为使用正则切分。把汉字、标点、以及“连续的英文字母单词”分别切成数组
-        const tokens = zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→\s0-9\.…\/]/g) || [];
+        // 核心升级：将正则中加入对连续英文/拼音以及各类空格的统一切分捕获
+        const tokens = zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→0-9\.…\/]|[\s\u3000]/g) || [];
         const pys = py ? py.trim().split(/\s+/) : [];
         let pIdx = 0;
         let html = '';
         
         for (let t of tokens) {
-            // 如果是标点符号，或者是“一整串连续的英文字母”，直接原样输出，头顶不吃拼音
-            if (/[，。？！：“”‘’（）《》、\-\:；—\(\)→\s0-9\.…\/a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]/.test(t)) {
+            // 如果是标点符号、纯英文连续单词或格空间空字符，直接原样输出，头顶不吃拼音
+            if (/[，。？！：“”‘’（）《》、\-\:；—\(\)→\s0-9\.…\/a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ\u3000]/.test(t)) {
                 html += `<span class="punctuation">${t}</span>`;
             } else {
                 // 如果是汉字，才正常匹配拼音
@@ -81,17 +81,17 @@
         return html;
     }
 
-    // 同步升级带有前缀的选项渲染函数，保证题号和英文整体不被切碎
+    // 同步升级带有前缀的选项渲染函数，保证题号、英文、空格整体不被切碎
     function alignTextWithPrefix(prefix, zh, py) {
         if (!zh) return '';
-        const tokens = zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→\s0-9\.…\/]/g) || [];
+        const tokens = zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→0-9\.…\/]|[\s\u3000]/g) || [];
         const pys = py ? py.trim().split(/\s+/) : [];
         let html = '';
         html += `<span class="char-box" style="margin-right: 8px !important;"><span class="py-text">&nbsp;</span><span class="zh-text" style="font-weight: bold; color: #1e293b;">${prefix}</span></span>`;
         let pIdx = 0;
         
         for (let t of tokens) {
-            if (/[Epic，。？！：“”‘’（）《》、\-\:；—\(\)→\s0-9\.…\/a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]/.test(t)) {
+            if (/[Epic，。？！：“”‘’（）《》、\-\:；—\(\)→\s0-9\.…\/a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ\u3000]/.test(t)) {
                 html += `<span class="punctuation">${t}</span>`;
             } else {
                 const p = pys[pIdx] || '';
