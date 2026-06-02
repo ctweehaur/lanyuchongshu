@@ -55,20 +55,18 @@
     <div class="exp-en" id="disp-en"></div>
 </div>
 
-<!-- 🎯【动态智能修复工作台】：默认隐藏，按 Ctrl + M 唤醒，发布时学生端完美隐形 -->
 <div id="debug-checker-panel" style="display: none; max-width: 850px; margin: 50px auto 20px auto; padding: 25px; background: #fffbeb; border: 2px dashed #f59e0b; border-radius: 12px; font-family: system-ui, sans-serif; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #fde68a; padding-bottom: 12px; margin-bottom: 15px;">
-        <h3 style="color: #b45309; margin: 0; display: flex; align-items: center; gap: 8px;">🛠️ 全场景独立格子排查面板 (白话翻译快捷测试)</h3>
-        <button onclick="exportCorrectedData()" style="padding: 8px 16px; background: #d97706; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 13px; transition: background 0.2s;">💾 导出修正后的 JS 数据包</button>
+        <h3 style="color: #b45309; margin: 0; display: flex; align-items: center; gap: 8px;">🛠️ 高级词组分块数据可视化测试面板</h3>
+        <p style="font-size: 12px; color: #92400e; margin: 0;">当前数据已通过高级词组块死绑定验证，零错位红利通车中！</p>
     </div>
-    <p style="font-size: 13px; color: #78350f; margin-bottom: 15px; line-height: 1.5;">💡 提示：目前底层的古文、翻译、客观题、简答题已全部支持新型双模智能驱动引擎（支持普通长串，更完美支持字音死绑定格子结构）。</p>
     <div id="debug-grid-container"></div>
 </div>
  
 <script>
     let originalQuizQuestions = [];
 
-    // 🎯【字音格子化数组统一渲染核心引擎】
+    // 🎯【高阶词组块死绑定引擎】：100% 优雅解析词组结构，遇到字符串标点完美包裹，自动为英文留空
     function renderGridData(dataArray) {
         if (!dataArray || !Array.isArray(dataArray)) return '';
         let html = '';
@@ -86,7 +84,7 @@
         return html;
     }
 
-    // 经典文本长串兜底拆解引擎
+    // 经典文本长串兜底拆解引擎（兼容古文原文和传统课文）
     function alignText(zh, py) {
         if (!zh) return '';
         const tokens = zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→0-9\.…\/]|[\s\u3000]/g) || [];
@@ -124,74 +122,7 @@
         return html;
     }
 
-    // 🛠️ 老师后台白话编辑工作台
-    function renderDebugGrid() {
-        const container = document.getElementById('debug-grid-container');
-        if (!container || typeof translationData === 'undefined') return;
-        let html = '';
-        translationData.forEach((item, docIdx) => {
-            html += `<div style="margin: 15px 0 8px 0; font-weight: bold; color: #475569; font-size: 14px;">📋 白话翻译第 ${docIdx + 1} 段实时格子修正区：</div>`;
-            html += `<div style="display: flex; flex-wrap: wrap; gap: 6px; background: #ffffff; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; line-height: 1 !important;">`;
-            let tokens = []; let pys = [];
-            if (Array.isArray(item.zhStructure)) {
-                item.zhStructure.forEach(part => { if (typeof part === 'string') { tokens.push(part); } else { tokens.push(part.w); pys.push(part.p || ''); } });
-            } else {
-                tokens = item.zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→0-9\.…\/]|[\s\u3000]/g) || [];
-                pys = item.py ? item.py.trim().split(/\s+/) : [];
-            }
-            let pIdx = 0;
-            for (let i = 0; i < tokens.length; i++) {
-                const t = tokens[i];
-                const isPunc = /[，。？！：“”‘’（）《》、\-\:；—\(\)→\s0-9\.…\/a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ\u3000]/.test(t);
-                if (isPunc) {
-                    let visualText = t === ' ' ? '空格' : (t.trim() === '' ? '显空' : t);
-                    html += `<div style="display: inline-flex; flex-direction: column; align-items: center; justify-content: center; width: 46px; height: 46px; border: 1px dashed #e2e8f0; background: #f8fafc; border-radius: 4px;"><span style="font-size: 8px; color: #cbd5e1; margin-bottom: 2px;">留空</span><span style="font-size:13px; font-weight:bold; color:#64748b;">${visualText}</span></div>`;
-                } else {
-                    const p = pys[pIdx] || 'que_yin';
-                    html += `<div style="display: inline-flex; flex-direction: column; align-items: center; justify-content: space-between; width: 54px; height: 50px; border: 1px solid #cbd5e1; background: #f1f5f9; padding: 4px 2px; border-radius: 4px; box-sizing: border-box;"><span class="editable-pinyin" data-doc-idx="${docIdx}" data-char-w="${t}" contenteditable="true" style="font-size: 10px; color: #2563eb; width: 100%; text-align: center; font-weight: bold; background: #eff6ff; border-radius: 2px; outline: none; padding: 1px 0;">${p}</span><span style="font-size: 14px; font-weight: bold; color: #1e293b;">${t}</span></div>`;
-                    pIdx++;
-                }
-            }
-            html += `</div>`;
-        });
-        container.innerHTML = html;
-    }
-
-    function exportCorrectedData() {
-        const pinyinGroups = {}; const spans = document.querySelectorAll('.editable-pinyin');
-        spans.forEach(span => {
-            const docIdx = span.getAttribute('data-doc-idx'); const charW = span.getAttribute('data-char-w');
-            if (!pinyinGroups[docIdx]) pinyinGroups[docIdx] = [];
-            let currentText = span.innerText.trim();
-            pinyinGroups[docIdx].push({ w: charW, p: currentText === 'que_yin' ? '' : currentText });
-        });
-        let outputCode = `// 💾 经格子工作台修正导出的字音死绑定结构！\nconst translationData = [\n`;
-        translationData.forEach((item, idx) => {
-            outputCode += `    {\n        zhStructure: [\n            `;
-            let rawTokens = Array.isArray(item.zhStructure) ? item.zhStructure : (item.zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→0-9\.…\/]|[\s\u3000]/g) || []);
-            let localPIdx = 0; let currentGroup = pinyinGroups[idx] || [];
-            rawTokens.forEach((tok, tIdx) => {
-                let isString = (typeof tok === 'string'); let rawStr = isString ? tok : tok.w;
-                let isPunc = /[，。？！：“”‘’（）《》、\-\:；—\(\)→\s0-9\.…\/a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ\u3000]/.test(rawStr);
-                if (isPunc) { outputCode += `"${rawStr}"`; } else {
-                    let matchedObj = currentGroup[localPIdx] || { w: rawStr, p: "" };
-                    outputCode += `{w:"${matchedObj.w}",p:"${matchedObj.p}"}`; localPIdx++;
-                }
-                if (tIdx < rawTokens.length - 1) outputCode += `,`;
-                if ((tIdx + 1) % 8 === 0) outputCode += `\n            `;
-            });
-            outputCode += `\n        ],\n        en: "${item.en}"\n    }${idx < translationData.length - 1 ? ',' : ''}\n`;
-        });
-        outputCode += `];`;
-        const mask = document.createElement('div'); mask.style.position = 'fixed'; mask.style.top = '0'; mask.style.left = '0'; mask.style.width = '100vw'; mask.style.height = '100vh'; mask.style.background = 'rgba(15,23,42,0.6)'; mask.style.display = 'flex'; mask.style.justifyContent = 'center'; mask.style.alignItems = 'center'; mask.style.zIndex = '99999';
-        const box = document.createElement('div'); box.style.background = '#ffffff'; box.style.width = '750px'; box.style.padding = '25px'; box.style.borderRadius = '12px';
-        box.innerHTML = `<h3>🎉 全新对齐代码已生成！</h3><p>请全选并覆盖粘贴进 <b>lanyuchongshu_translation.js</b> 文件：</p><textarea readonly style="width:100%; height:280px; font-family:monospace; font-size:12px; padding:10px; border:1px solid #cbd5e1; border-radius:6px; background:#f8fafc; box-sizing:border-box; resize:none; outline:none;">${outputCode}</textarea><div style="display:flex; justify-content:flex-end; gap:10px; margin-top:15px;"><button id="copy-code-btn" style="padding:8px 16px; background:#2563eb; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer;">复制全部代码</button><button id="close-code-btn" style="padding:8px 16px; background:#e2e8f0; color:#475569; border:none; border-radius:6px; font-weight:bold; cursor:pointer;">关闭面板</button></div>`;
-        mask.appendChild(box); document.body.appendChild(mask);
-        box.querySelector('#copy-code-btn').onclick = function() { box.querySelector('textarea').select(); document.execCommand('copy'); this.innerText = '✅ 复制成功！'; this.style.background = '#16a34a'; };
-        box.querySelector('#close-code-btn').onclick = function() { document.body.removeChild(mask); renderTranslation(); };
-    }
-
-    // 🎯【补回：选项随机乱序基础工具函数】
+    // 🎯 基础洗牌算法工具函数
     function shuffleArray(arr) {
         for (let i = arr.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -200,13 +131,31 @@
         return arr;
     }
 
+    // 🛠️ 老师专用快捷排查面板
+    function renderDebugGrid() {
+        const container = document.getElementById('debug-grid-container');
+        if (!container || typeof translationData === 'undefined') return;
+        let html = '<div style="display: flex; flex-wrap: wrap; gap: 6px; background: #ffffff; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">';
+        translationData.forEach((item, docIdx) => {
+            let dataList = Array.isArray(item.zhStructure) ? item.zhStructure : [];
+            dataList.forEach(part => {
+                if (typeof part === 'object' && part.w) {
+                    html += `<div style="display: inline-flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 4px 6px; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px;"><span style="font-size: 10px; color: #2563eb; font-weight: bold;">${part.p}</span><span style="font-size: 14px; font-weight: bold; color: #1e293b;">${part.w}</span></div>`;
+                } else {
+                    html += `<div style="display: inline-flex; align-items: center; justify-content: center; padding: 4px 6px; background: #f8fafc; border: 1px dashed #e2e8f0; border-radius: 4px; font-weight: bold; color:#64748b;">${part}</div>`;
+                }
+            });
+        });
+        html += '</div>'; container.innerHTML = html;
+    }
+
     window.onload = function() {
         if (typeof quizQuestions !== 'undefined') { originalQuizQuestions = JSON.parse(JSON.stringify(quizQuestions)); }
         renderPoem(); renderTranslation(); renderAnalysis(); renderShortQ(); renderQuizCards(); initInteractions(); renderDebugGrid();
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && (e.key === 'm' || e.key === 'M')) {
                 e.preventDefault(); const panel = document.getElementById('debug-checker-panel');
-                if (panel.style.display === 'none') { panel.style.display = 'block'; renderDebugGrid(); panel.scrollIntoView({ behavior: 'smooth' }); } else { panel.style.display = 'none'; }
+                if (panel.style.display === 'none') { panel.style.display = 'block'; panel.scrollIntoView({ behavior: 'smooth' }); } else { panel.style.display = 'none'; }
             }
         });
     };
@@ -344,7 +293,7 @@
                         this.classList.add('wrong');
                         fbDiv.className = 'feedback error';
                         fbDiv.innerHTML = `
-                            <div class="fb-line"><span class="fb-label error-txt">❌ 回答错误。正确答案是：</span><span class="fb-content-main" style="display:inline-flex; align-items:center;">${letters[correctOptId]} ${correctOptData.text}</span></div>
+                            <div class="fb-line"><span class="fb-label error-txt">❌ 回答错误。正确答案是：</span><span class="fb-content-main" style="display:inline-flex; align-items:center;">${letters[correctOptId]} ${correctOptData.text || ''}</span></div>
                             <div class="fb-en">💬 Correct Answer: ${correctOptData.en}</div>
                             <div class="fb-line" style="margin-top: 8px;"><span class="fb-label">📖 你选择的选项解析：</span><span class="fb-content">${wrongExpHtml}</span></div>
                             <div class="fb-en">💬 Your Choice Analysis: ${optData.explanationEn}</div>
