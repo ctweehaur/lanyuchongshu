@@ -55,20 +55,20 @@
     <div class="exp-en" id="disp-en"></div>
 </div>
 
-<!-- 🎯【动态智能修复工作台】：默认彻底隐藏，发布给学生毫无痕迹，按 Ctrl + M 即可唤醒 -->
+<!-- 🎯【动态智能修复工作台】：默认隐藏，按 Ctrl + M 唤醒，发布时学生端完美隐形 -->
 <div id="debug-checker-panel" style="display: none; max-width: 850px; margin: 50px auto 20px auto; padding: 25px; background: #fffbeb; border: 2px dashed #f59e0b; border-radius: 12px; font-family: system-ui, sans-serif; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #fde68a; padding-bottom: 12px; margin-bottom: 15px;">
-        <h3 style="color: #b45309; margin: 0; display: flex; align-items: center; gap: 8px;">🛠️ 可视化拼音实时修正与代码生成工作台 (开发测试专用)</h3>
+        <h3 style="color: #b45309; margin: 0; display: flex; align-items: center; gap: 8px;">🛠️ 全场景独立格子排查面板 (白话翻译快捷测试)</h3>
         <button onclick="exportCorrectedData()" style="padding: 8px 16px; background: #d97706; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 13px; transition: background 0.2s;">💾 导出修正后的 JS 数据包</button>
     </div>
-    <p style="font-size: 13px; color: #78350f; margin-bottom: 15px; line-height: 1.5;">💡 <b>使用指南</b>：直接点击蓝色格子中的<b>拼音文字</b>可以进行修改！修改完后点击右上方“<b>导出修正后的 JS 数据包</b>”按钮，即可一键获得完美的修复代码！</p>
+    <p style="font-size: 13px; color: #78350f; margin-bottom: 15px; line-height: 1.5;">💡 提示：目前底层的古文、翻译、客观题、简答题已全部支持新型双模智能驱动引擎（支持普通长串，更完美支持字音死绑定格子结构）。</p>
     <div id="debug-grid-container"></div>
 </div>
  
 <script>
     let originalQuizQuestions = [];
 
-    // 🎯 字音格子化绑定生成引擎
+    // 🎯【字音格子化数组统一渲染核心引擎】
     function renderGridData(dataArray) {
         if (!dataArray || !Array.isArray(dataArray)) return '';
         let html = '';
@@ -86,7 +86,7 @@
         return html;
     }
 
-    // 经典兜底注音引擎
+    // 经典文本长串兜底拆解引擎
     function alignText(zh, py) {
         if (!zh) return '';
         const tokens = zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→0-9\.…\/]|[\s\u3000]/g) || [];
@@ -124,52 +124,31 @@
         return html;
     }
 
-    // 🛠️ 后台全网格双击可修改渲染逻辑
+    // 🛠️ 老师后台白话编辑工作台
     function renderDebugGrid() {
         const container = document.getElementById('debug-grid-container');
         if (!container || typeof translationData === 'undefined') return;
-        
         let html = '';
         translationData.forEach((item, docIdx) => {
             html += `<div style="margin: 15px 0 8px 0; font-weight: bold; color: #475569; font-size: 14px;">📋 白话翻译第 ${docIdx + 1} 段实时格子修正区：</div>`;
             html += `<div style="display: flex; flex-wrap: wrap; gap: 6px; background: #ffffff; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; line-height: 1 !important;">`;
-            
-            // 兼容性识别：如果用户用了数组结构，提取汉字展现；如果没用，按正常逻辑解析
-            let tokens = [];
-            let pys = [];
+            let tokens = []; let pys = [];
             if (Array.isArray(item.zhStructure)) {
-                item.zhStructure.forEach(part => {
-                    if (typeof part === 'string') {
-                        tokens.push(part);
-                    } else {
-                        tokens.push(part.w);
-                        pys.push(part.p || '');
-                    }
-                });
+                item.zhStructure.forEach(part => { if (typeof part === 'string') { tokens.push(part); } else { tokens.push(part.w); pys.push(part.p || ''); } });
             } else {
                 tokens = item.zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→0-9\.…\/]|[\s\u3000]/g) || [];
                 pys = item.py ? item.py.trim().split(/\s+/) : [];
             }
-            
             let pIdx = 0;
             for (let i = 0; i < tokens.length; i++) {
                 const t = tokens[i];
                 const isPunc = /[，。？！：“”‘’（）《》、\-\:；—\(\)→\s0-9\.…\/a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ\u3000]/.test(t);
-                
                 if (isPunc) {
                     let visualText = t === ' ' ? '空格' : (t.trim() === '' ? '显空' : t);
-                    html += `
-                        <div style="display: inline-flex; flex-direction: column; align-items: center; justify-content: center; width: 46px; height: 46px; border: 1px dashed #e2e8f0; background: #f8fafc; border-radius: 4px;">
-                            <span style="font-size: 8px; color: #cbd5e1; margin-bottom: 2px;">留空</span>
-                            <span style="font-size:13px; font-weight:bold; color:#64748b;">${visualText}</span>
-                        </div>`;
+                    html += `<div style="display: inline-flex; flex-direction: column; align-items: center; justify-content: center; width: 46px; height: 46px; border: 1px dashed #e2e8f0; background: #f8fafc; border-radius: 4px;"><span style="font-size: 8px; color: #cbd5e1; margin-bottom: 2px;">留空</span><span style="font-size:13px; font-weight:bold; color:#64748b;">${visualText}</span></div>`;
                 } else {
                     const p = pys[pIdx] || 'que_yin';
-                    html += `
-                        <div style="display: inline-flex; flex-direction: column; align-items: center; justify-content: space-between; width: 54px; height: 50px; border: 1px solid #cbd5e1; background: #f1f5f9; padding: 4px 2px; border-radius: 4px; box-sizing: border-box;">
-                            <span class="editable-pinyin" data-doc-idx="${docIdx}" data-char-w="${t}" contenteditable="true" style="font-size: 10px; color: #2563eb; width: 100%; text-align: center; font-weight: bold; background: #eff6ff; border-radius: 2px; outline: none; padding: 1px 0;">${p}</span>
-                            <span style="font-size: 14px; font-weight: bold; color: #1e293b;">${t}</span>
-                        </div>`;
+                    html += `<div style="display: inline-flex; flex-direction: column; align-items: center; justify-content: space-between; width: 54px; height: 50px; border: 1px solid #cbd5e1; background: #f1f5f9; padding: 4px 2px; border-radius: 4px; box-sizing: border-box;"><span class="editable-pinyin" data-doc-idx="${docIdx}" data-char-w="${t}" contenteditable="true" style="font-size: 10px; color: #2563eb; width: 100%; text-align: center; font-weight: bold; background: #eff6ff; border-radius: 2px; outline: none; padding: 1px 0;">${p}</span><span style="font-size: 14px; font-weight: bold; color: #1e293b;">${t}</span></div>`;
                     pIdx++;
                 }
             }
@@ -178,123 +157,47 @@
         container.innerHTML = html;
     }
 
-    // 💾 工作台一键高保真导出修复逻辑
     function exportCorrectedData() {
-        const pinyinGroups = {};
-        const spans = document.querySelectorAll('.editable-pinyin');
-        
+        const pinyinGroups = {}; const spans = document.querySelectorAll('.editable-pinyin');
         spans.forEach(span => {
-            const docIdx = span.getAttribute('data-doc-idx');
-            const charW = span.getAttribute('data-char-w');
+            const docIdx = span.getAttribute('data-doc-idx'); const charW = span.getAttribute('data-char-w');
             if (!pinyinGroups[docIdx]) pinyinGroups[docIdx] = [];
             let currentText = span.innerText.trim();
             pinyinGroups[docIdx].push({ w: charW, p: currentText === 'que_yin' ? '' : currentText });
         });
-
-        let outputCode = `// 💾 经格子工作台修正导出的神级字音死绑定结构！\nconst translationData = [\n`;
+        let outputCode = `// 💾 经格子工作台修正导出的字音死绑定结构！\nconst translationData = [\n`;
         translationData.forEach((item, idx) => {
             outputCode += `    {\n        zhStructure: [\n            `;
-            
-            // 重新按原来的标点位置和汉字组合完美恢复生成
-            let rawTokens = [];
-            if(Array.isArray(item.zhStructure)){
-                rawTokens = item.zhStructure;
-            } else {
-                rawTokens = item.zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→0-9\.…\/]|[\s\u3000]/g) || [];
-            }
-
-            let localPIdx = 0;
-            let currentGroup = pinyinGroups[idx] || [];
-            
+            let rawTokens = Array.isArray(item.zhStructure) ? item.zhStructure : (item.zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→0-9\.…\/]|[\s\u3000]/g) || []);
+            let localPIdx = 0; let currentGroup = pinyinGroups[idx] || [];
             rawTokens.forEach((tok, tIdx) => {
-                let isString = (typeof tok === 'string');
-                let rawStr = isString ? tok : tok.w;
+                let isString = (typeof tok === 'string'); let rawStr = isString ? tok : tok.w;
                 let isPunc = /[，。？！：“”‘’（）《》、\-\:；—\(\)→\s0-9\.…\/a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ\u3000]/.test(rawStr);
-                
-                if (isPunc) {
-                    outputCode += `"${rawStr}"`;
-                } else {
+                if (isPunc) { outputCode += `"${rawStr}"`; } else {
                     let matchedObj = currentGroup[localPIdx] || { w: rawStr, p: "" };
-                    outputCode += `{w:"${matchedObj.w}",p:"${matchedObj.p}"}`;
-                    localPIdx++;
+                    outputCode += `{w:"${matchedObj.w}",p:"${matchedObj.p}"}`; localPIdx++;
                 }
                 if (tIdx < rawTokens.length - 1) outputCode += `,`;
                 if ((tIdx + 1) % 8 === 0) outputCode += `\n            `;
             });
-            
-            outputCode += `\n        ],\n`;
-            outputCode += `        en: "${item.en}"\n`;
-            outputCode += `    }${idx < translationData.length - 1 ? ',' : ''}\n`;
+            outputCode += `\n        ],\n        en: "${item.en}"\n    }${idx < translationData.length - 1 ? ',' : ''}\n`;
         });
         outputCode += `];`;
-
-        const mask = document.createElement('div');
-        mask.style.position = 'fixed'; mask.style.top = '0'; mask.style.left = '0'; mask.style.width = '100vw'; mask.style.height = '100vh';
-        mask.style.background = 'rgba(15,23,42,0.6)'; mask.style.display = 'flex'; mask.style.justifyContent = 'center'; mask.style.alignItems = 'center'; mask.style.zIndex = '99999';
-        
-        const box = document.createElement('div');
-        box.style.background = '#ffffff'; box.style.width = '750px'; box.style.padding = '25px'; box.style.borderRadius = '12px';
-        box.innerHTML = `
-            <h3 style="margin-top:0; color:#1e293b;">🎉 全新 1:1 绝对防错对齐结构已生成！</h3>
-            <p style="font-size:13px; color:#64748b;">请点击下方按钮复制，全面覆盖你的 <b>lanyuchongshu_translation.js</b> 文件：</p>
-            <textarea readonly style="width:100%; height:280px; font-family:monospace; font-size:12px; padding:10px; border:1px solid #cbd5e1; border-radius:6px; background:#f8fafc; box-sizing:border-box; resize:none; outline:none;">${outputCode}</textarea>
-            <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:15px;">
-                <button id="copy-code-btn" style="padding:8px 16px; background:#2563eb; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer;">复制全部代码</button>
-                <button id="close-code-btn" style="padding:8px 16px; background:#e2e8f0; color:#475569; border:none; border-radius:6px; font-weight:bold; cursor:pointer;">关闭面板</button>
-            </div>
-        `;
-        mask.appendChild(box);
-        document.body.appendChild(mask);
-
-        box.querySelector('#copy-code-btn').onclick = function() {
-            box.querySelector('textarea').select();
-            document.execCommand('copy');
-            this.innerText = '✅ 复制成功！';
-            this.style.background = '#16a34a';
-            setTimeout(() => { this.innerText = '复制全部代码'; this.style.background = '#2563eb'; }, 2000);
-        };
-        box.querySelector('#close-code-btn').onclick = function() {
-            document.body.removeChild(mask);
-            // 重新解析前台数据渲染
-            let updateGroup = {};
-            document.querySelectorAll('.editable-pinyin').forEach(span => {
-                let dIdx = span.getAttribute('data-doc-idx');
-                let cW = span.getAttribute('data-char-w');
-                let cP = span.innerText.trim();
-                if(!updateGroup[dIdx]) updateGroup[dIdx] = [];
-                updateGroup[dIdx].push({w: cW, p: cP === 'que_yin' ? '' : cP});
-            });
-            translationData.forEach((item, idx) => {
-                if(updateGroup[idx]) item.zhStructure = updateGroup[idx];
-            });
-            renderTranslation();
-        };
+        const mask = document.createElement('div'); mask.style.position = 'fixed'; mask.style.top = '0'; mask.style.left = '0'; mask.style.width = '100vw'; mask.style.height = '100vh'; mask.style.background = 'rgba(15,23,42,0.6)'; mask.style.display = 'flex'; mask.style.justifyContent = 'center'; mask.style.alignItems = 'center'; mask.style.zIndex = '99999';
+        const box = document.createElement('div'); box.style.background = '#ffffff'; box.style.width = '750px'; box.style.padding = '25px'; box.style.borderRadius = '12px';
+        box.innerHTML = `<h3>🎉 全新对齐代码已生成！</h3><p>请全选并覆盖粘贴进 <b>lanyuchongshu_translation.js</b> 文件：</p><textarea readonly style="width:100%; height:280px; font-family:monospace; font-size:12px; padding:10px; border:1px solid #cbd5e1; border-radius:6px; background:#f8fafc; box-sizing:border-box; resize:none; outline:none;">${outputCode}</textarea><div style="display:flex; justify-content:flex-end; gap:10px; margin-top:15px;"><button id="copy-code-btn" style="padding:8px 16px; background:#2563eb; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer;">复制全部代码</button><button id="close-code-btn" style="padding:8px 16px; background:#e2e8f0; color:#475569; border:none; border-radius:6px; font-weight:bold; cursor:pointer;">关闭面板</button></div>`;
+        mask.appendChild(box); document.body.appendChild(mask);
+        box.querySelector('#copy-code-btn').onclick = function() { box.querySelector('textarea').select(); document.execCommand('copy'); this.innerText = '✅ 复制成功！'; this.style.background = '#16a34a'; };
+        box.querySelector('#close-code-btn').onclick = function() { document.body.removeChild(mask); renderTranslation(); };
     }
 
     window.onload = function() {
-        if (typeof quizQuestions !== 'undefined') {
-            originalQuizQuestions = JSON.parse(JSON.stringify(quizQuestions));
-        }
-        renderPoem();
-        renderTranslation();
-        renderAnalysis();
-        renderShortQ();
-        renderQuizCards(); 
-        initInteractions();
-        renderDebugGrid();
-
-        // ⌨️ 【Ctrl + M 快捷键暗号唤醒】：学生看完全没痕迹，老师一敲暗号秒现形
+        if (typeof quizQuestions !== 'undefined') { originalQuizQuestions = JSON.parse(JSON.stringify(quizQuestions)); }
+        renderPoem(); renderTranslation(); renderAnalysis(); renderShortQ(); renderQuizCards(); initInteractions(); renderDebugGrid();
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && (e.key === 'm' || e.key === 'M')) {
-                e.preventDefault();
-                const panel = document.getElementById('debug-checker-panel');
-                if (panel.style.display === 'none') {
-                    panel.style.display = 'block';
-                    renderDebugGrid(); // 强行拉取刷新
-                    panel.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                    panel.style.display = 'none';
-                }
+                e.preventDefault(); const panel = document.getElementById('debug-checker-panel');
+                if (panel.style.display === 'none') { panel.style.display = 'block'; renderDebugGrid(); panel.scrollIntoView({ behavior: 'smooth' }); } else { panel.style.display = 'none'; }
             }
         });
     };
@@ -303,16 +206,12 @@
         const container = document.getElementById('dynamic-poem-container');
         let html = '<div class="poem-paragraph">&emsp;&emsp;'; 
         poemData.forEach(w => {
-            if(w.punc) {
-                html += `<span class="punctuation">${w.text.trim()}</span>`;
-            } else {
-                let examClass = w.exam ? ' word exam-focus' : ' word';
-                let examAttr = w.exam ? ' data-exam="true"' : '';
+            if(w.punc) { html += `<span class="punctuation">${w.text.trim()}</span>`; } else {
+                let examClass = w.exam ? ' word exam-focus' : ' word'; let examAttr = w.exam ? ' data-exam="true"' : '';
                 html += `<span class="${examClass}" data-text="${w.text.trim()}" data-pinyin="${w.py}" data-zh="${w.zh}" data-en="${w.en}"${examAttr}>${alignText(w.text, w.py)}</span>`;
             }
         });
-        html += '</div>';
-        container.innerHTML = html;
+        html += '</div>'; container.innerHTML = html;
     }
 
     function renderTranslation() {
@@ -321,11 +220,7 @@
         translationData.forEach((item, index) => {
             if(index > 0) html += '<div class="trans-divider"></div>';
             let zhContent = Array.isArray(item.zhStructure) ? renderGridData(item.zhStructure) : alignText(item.zh, item.py);
-            html += `
-                <div class="trans-text-line">
-                    <div class="trans-zh">${zhContent}</div>
-                    <div class="trans-en">${item.en}</div>
-                </div>`;
+            html += `<div class="trans-text-line"><div class="trans-zh">${zhContent}</div><div class="trans-en">${item.en}</div></div>`;
         });
         container.innerHTML = html;
     }
@@ -334,41 +229,42 @@
         const container = document.getElementById('analysis-content');
         let html = '';
         analysisData.forEach(item => {
-            html += `
-                <div class="analysis-card">
-                    <div class="ana-title-group">
-                        <h4 class="ana-header">${alignText(item.header, item.headerPy)}</h4>
-                        <div class="ana-en">${item.en}</div>
-                    </div>
-                    <div class="ana-text-group">
-                        <p class="ana-zh">${alignText(item.textZh, item.textPy)}</p>
-                        <div class="ana-en">${item.textEn}</div>
-                    </div>
-                </div>`;
+            html += `<div class="analysis-card"><div class="ana-title-group"><h4 class="ana-header">${alignText(item.header, item.headerPy)}</h4><div class="ana-en">${item.en}</div></div><div class="ana-text-group"><p class="ana-zh">${alignText(item.textZh, item.textPy)}</p><div class="ana-en">${item.textEn}</div></div></div>`;
         });
         container.innerHTML = html;
     }
 
+    // 🎯【简答题引擎终极双模重构】：完美支持纯文本长句或新型字音格子化数组（sZhStructure / aZhStructure）
     function renderShortQ() {
         const container = document.getElementById('shortq-content');
         if (!container) return;
         let html = '';
         shortQData.forEach(item => {
             let strategyZhHtml = '';
-            item.sZh.forEach((lineText, lineIdx) => {
-                if(lineIdx > 0) strategyZhHtml += '<br>';
-                const linePy = item.sPy && item.sPy[lineIdx] ? item.sPy[lineIdx] : '';
-                strategyZhHtml += `<span class="strategy-step-line">${alignText(lineText, linePy)}</span>`;
-            });
+            
+            // 智能化重构答题思路区域：支持对象格子数组，或向后兼容普通文本
+            if (Array.isArray(item.sZhStructure)) {
+                item.sZhStructure.forEach((stepArray, lineIdx) => {
+                    if(lineIdx > 0) strategyZhHtml += '<br>';
+                    strategyZhHtml += `<span class="strategy-step-line">${renderGridData(stepArray)}</span>`;
+                });
+            } else {
+                item.sZh.forEach((lineText, lineIdx) => {
+                    if(lineIdx > 0) strategyZhHtml += '<br>';
+                    const linePy = item.sPy && item.sPy[lineIdx] ? item.sPy[lineIdx] : '';
+                    strategyZhHtml += `<span class="strategy-step-line">${alignText(lineText, linePy)}</span>`;
+                });
+            }
+
+            // 智能化重构参考答案区域：同样支持单字格子数组
+            let answerZhContent = Array.isArray(item.aZhStructure) ? renderGridData(item.aZhStructure) : alignText(item.aZh, item.aPy);
 
             html += `
                 <div class="sa-card">
                     <div class="sa-q-header">
-                        <div class="sa-q-num-box">
-                            <span class="sa-q-num">${item.id}</span>
-                        </div>
+                        <div class="sa-q-num-box"><span class="sa-q-num">${item.id}</span></div>
                         <div class="q-text-group">
-                            <h4 class="q-zh">${alignText(item.qZh, item.qPy)}</h4>
+                            <h4 class="q-zh">${Array.isArray(item.qZhStructure) ? renderGridData(item.qZhStructure) : alignText(item.qZh, item.qPy)}</h4>
                         </div>
                     </div>
                     <div class="q-en">${item.qEn}</div>
@@ -381,7 +277,7 @@
                     <div class="sa-answer-box">
                         <div class="sa-model-answer">
                             <div class="sa-badge">标准答案</div>
-                            <div class="sa-zh">${alignText(item.aZh, item.aPy)}</div>
+                            <div class="sa-zh">${answerZhContent}</div>
                             <div class="sa-en">${item.aEn}</div>
                         </div>
                     </div>
@@ -389,94 +285,70 @@
         });
         container.innerHTML = html;
     }
-
-    function shuffleArray(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-    }
     
+    // 🎯【客观选择题引擎终极双模重构】：题干、选项、解析100%全域兼容格子数组
     function renderQuizCards() {
         const container = document.getElementById('quiz-dynamic-container');
         if (!container || originalQuizQuestions.length === 0) return;
         container.innerHTML = '';
-        
         const currentQuestions = JSON.parse(JSON.stringify(originalQuizQuestions));
+        
         currentQuestions.forEach(q => {
             shuffleArray(q.options); 
             const card = document.createElement('div');
-            card.className = 'quiz-card';
-            card.setAttribute('data-qid', q.id);
-            let optionsHtml = '';
-            const letters = ['A.', 'B.', 'C.', 'D.'];
+            card.className = 'quiz-card'; card.setAttribute('data-qid', q.id);
+            let optionsHtml = ''; const letters = ['A.', 'B.', 'C.', 'D.'];
             
             q.options.forEach((opt, idx) => {
                 const optLetter = letters[idx];
+                // 选项文字智能识别
+                let optZhContent = Array.isArray(opt.textStructure) ? renderGridData(opt.textStructure) : alignText(opt.text, opt.py);
+                
                 optionsHtml += `
-                    <button class="option-btn" data-correct="${opt.correct}" data-explanation-correct="${opt.correct ? opt.explanation : ''}" data-explanation-correct-py="${opt.correct ? opt.explanationPy : ''}" data-explanation-correct-en="${opt.correct ? opt.explanationEn : ''}" data-explanation-wrong="${!opt.correct ? opt.explanation : ''}" data-explanation-wrong-py="${!opt.correct ? opt.explanationPy : ''}" data-explanation-wrong-en="${!opt.correct ? opt.explanationEn : ''}" data-opt-text="${opt.text}" data-opt-py="${opt.py}" data-opt-en="${opt.en}">
+                    <button class="option-btn" data-correct="${opt.correct}" data-opt-id="${idx}">
                         <div class="opt-zh">
-                            ${alignTextWithPrefix(optLetter, opt.text, opt.py)}
+                            <span class="char-box" style="margin-right: 8px !important;"><span class="py-text">&nbsp;</span><span class="zh-text" style="font-weight: bold; color: #1e293b;">${optLetter}</span></span>${optZhContent}
                         </div>
-                        <div class="quiz-option-en">
-                            ${opt.en}
-                        </div>
+                        <div class="quiz-option-en">${opt.en}</div>
                     </button>`;
             });
             
-            card.innerHTML = `
-                <div class="question-header">
-                    <div class="q-zh-wrapper">
-                        ${alignTextWithPrefix(q.id + '.', q.text, q.py)}
-                    </div>
-                    <div class="q-en">
-                        ${q.en}
-                    </div>
-                </div>
-                <div class="options-area">${optionsHtml}</div>
-                <div class="feedback"></div>`;
+            let qTitleContent = Array.isArray(q.textStructure) ? renderGridData(q.textStructure) : alignText(q.text, q.py);
+            card.innerHTML = `<div class="question-header"><div class="q-zh-wrapper"><span class="char-box" style="margin-right: 8px !important;"><span class="py-text">&nbsp;</span><span class="zh-text" style="font-weight: bold; color: #1e293b;">${q.id}.</span></span>${qTitleContent}</div><div class="q-en">${q.en}</div></div><div class="options-area">${optionsHtml}</div><div class="feedback"></div>`;
             container.appendChild(card);
             
-            const optsDiv = card.querySelector('.options-area');
-            const btns = optsDiv.querySelectorAll('.option-btn');
-            const fbDiv = card.querySelector('.feedback');
+            const optsDiv = card.querySelector('.options-area'); const btns = optsDiv.querySelectorAll('.option-btn'); const fbDiv = card.querySelector('.feedback');
             btns.forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     if (this.disabled) return;
+                    const optId = parseInt(this.getAttribute('data-opt-id'));
+                    const optData = q.options[optId]; // 拿回乱序后的真实指针
                     const isCorrect = this.getAttribute('data-correct') === 'true';
                     const correctBtn = Array.from(btns).find(b => b.getAttribute('data-correct') === 'true');
-                    const correctOptText = correctBtn ? correctBtn.getAttribute('data-opt-text') : '正确选项';
+                    const correctOptId = parseInt(correctBtn.getAttribute('data-opt-id'));
+                    const correctOptData = q.options[correctOptId];
                     
                     btns.forEach(b => b.disabled = true);
+                    
+                    // 智能渲染底部解析卡片（支持格子数组，防止错位）
+                    let wrongExpHtml = Array.isArray(optData.explanationStructure) ? renderGridData(optData.explanationStructure) : alignText(optData.explanation, optData.explanationPy);
+                    let correctExpHtml = Array.isArray(correctOptData.explanationStructure) ? renderGridData(correctOptData.explanationStructure) : alignText(correctOptData.explanation, correctOptData.explanationPy);
+                    let correctTextHtml = Array.isArray(correctOptData.textStructure) ? renderGridData(correctOptData.textStructure) : alignText(correctOptData.text, correctOptData.py);
+
                     if (isCorrect) {
                         this.classList.add('correct');
-                        const explanation = this.getAttribute('data-explanation-correct');
-                        const explanationPy = this.getAttribute('data-explanation-correct-py');
-                        const explanationEn = this.getAttribute('data-explanation-correct-en');
                         fbDiv.className = 'feedback success';
-                        fbDiv.innerHTML = `
-                            <div class="fb-line"><span class="fb-label success-txt">✅ 回答正确！</span></div>
-                            <div class="fb-line"><span class="fb-label">📖 正确解析：</span><span class="fb-content">${alignText(explanation, explanationPy)}</span></div>
-                            <div class="fb-en">💬 Correct Explanation: ${explanationEn}</div>`;
+                        fbDiv.innerHTML = `<div class="fb-line"><span class="fb-label success-txt">✅ 回答正确！</span></div><div class="fb-line"><span class="fb-label">📖 正确解析：</span><span class="fb-content">${correctExpHtml}</span></div><div class="fb-en">💬 Correct Explanation: ${optData.explanationEn}</div>`;
                     } else {
                         this.classList.add('wrong');
-                        const wrongExp = this.getAttribute('data-explanation-wrong');
-                        const wrongExpPy = this.getAttribute('data-explanation-wrong-py');
-                        const wrongExpEn = this.getAttribute('data-explanation-wrong-en');
-                        
-                        const correctExp = correctBtn ? correctBtn.getAttribute('data-explanation-correct') : "";
-                        const correctExpPy = correctBtn ? correctBtn.getAttribute('data-explanation-correct-py') : "";
-                        const correctExpEn = correctBtn ? correctBtn.getAttribute('data-explanation-correct-en') : "";
-                        
                         fbDiv.className = 'feedback error';
                         fbDiv.innerHTML = `
-                            <div class="fb-line"><span class="fb-label error-txt">❌ 回答错误。正确答案是：</span><span class="fb-content-main">${correctOptText}</span></div>
-                            <div class="fb-en">💬 Correct Answer: ${correctBtn ? correctBtn.getAttribute('data-opt-en') : ''}</div>
-                            <div class="fb-line" style="margin-top: 8px;"><span class="fb-label">📖 你选择的选项 analysis：</span><span class="fb-content">${alignText(wrongExp, wrongExpPy)}</span></div>
-                            <div class="fb-en">💬 Your Choice Analysis: ${wrongExpEn}</div>
-                            <div class="fb-line" style="margin-top: 8px;"><span class="fb-label">📖 正确选项解析：</span><span class="fb-content">${alignText(correctExp, correctExpPy)}</span></div>
-                            <div class="fb-en">💬 Correct Option Analysis: ${correctExpEn}</div>`;
+                            <div class="fb-line"><span class="fb-label error-txt">❌ 回答错误。正确答案是：</span><span class="fb-content-main" style="display:inline-flex; align-items:center;">${letters[correctOptId]} ${correctOptData.text}</span></div>
+                            <div class="fb-en">💬 Correct Answer: ${correctOptData.en}</div>
+                            <div class="fb-line" style="margin-top: 8px;"><span class="fb-label">📖 你选择的选项解析：</span><span class="fb-content">${wrongExpHtml}</span></div>
+                            <div class="fb-en">💬 Your Choice Analysis: ${optData.explanationEn}</div>
+                            <div class="fb-line" style="margin-top: 8px;"><span class="fb-label">📖 正确选项解析：</span><span class="fb-content">${correctExpHtml}</span></div>
+                            <div class="fb-en">💬 Correct Option Analysis: ${correctOptData.explanationEn}</div>`;
                     }
                 });
             });
@@ -484,113 +356,37 @@
     }
 
     function initInteractions() {
-        const translationHeader = document.getElementById('translationHeader');
-        const translationContent = document.getElementById('translationContent');
-        const toggleIcon = document.getElementById('toggleIcon');
-        translationHeader.addEventListener('click', function() {
-            if (translationContent.classList.contains('show')) {
-                translationContent.classList.remove('show');
-                toggleIcon.textContent = '▶';
-            } else {
-                translationContent.classList.add('show');
-                toggleIcon.textContent = '▼';
-            }
-        });
-        
-        const pinyinToggle = document.getElementById('pinyin-toggle');
-        const enToggle = document.getElementById('en-toggle');
-        
+        const translationHeader = document.getElementById('translationHeader'); const translationContent = document.getElementById('translationContent'); const toggleIcon = document.getElementById('toggleIcon');
+        translationHeader.addEventListener('click', function() { if (translationContent.classList.contains('show')) { translationContent.classList.remove('show'); toggleIcon.textContent = '▶'; } else { translationContent.classList.add('show'); toggleIcon.textContent = '▼'; } });
+        const pinyinToggle = document.getElementById('pinyin-toggle'); const enToggle = document.getElementById('en-toggle');
         document.body.classList.add('hide-pinyin', 'hide-english');
-        pinyinToggle.addEventListener('change', function() { 
-            if (this.checked) document.body.classList.remove('hide-pinyin'); 
-            else document.body.classList.add('hide-pinyin'); 
-        });
-        enToggle.addEventListener('change', function() { 
-            if (this.checked) document.body.classList.remove('hide-english'); 
-            else document.body.classList.add('hide-english'); 
-        });
-
-        const words = document.querySelectorAll('.word');
-        const tooltip = document.getElementById('tooltip');
-        const dispWord = document.getElementById('disp-word');
-        const dispPinyin = document.getElementById('disp-pinyin');
-        const dispZh = document.getElementById('disp-zh');
-        const dispEn = document.getElementById('disp-en');
-        const examTag = document.getElementById('exam-tag');
-        
+        pinyinToggle.addEventListener('change', function() { if (this.checked) document.body.classList.remove('hide-pinyin'); else document.body.classList.add('hide-pinyin'); });
+        enToggle.addEventListener('change', function() { if (this.checked) document.body.classList.remove('hide-english'); else document.body.classList.add('hide-english'); });
+        const words = document.querySelectorAll('.word'); const tooltip = document.getElementById('tooltip'); const dispWord = document.getElementById('disp-word'); const dispPinyin = document.getElementById('disp-pinyin'); const dispZh = document.getElementById('disp-zh'); const dispEn = document.getElementById('disp-en'); const examTag = document.getElementById('exam-tag');
         words.forEach(word => {
             word.addEventListener('click', function(e) {
-                e.stopPropagation();
-                words.forEach(w => w.classList.remove('active'));
-                this.classList.add('active');
-                
-                dispWord.innerText = this.getAttribute('data-text');
-                dispPinyin.innerText = this.getAttribute('data-pinyin');
-                dispZh.innerHTML = `<strong>解析：</strong> ${this.getAttribute('data-zh')}`;
-                dispEn.innerText = this.getAttribute('data-en');
-                examTag.style.display = (this.getAttribute('data-exam') === 'true') ? 'inline-block' : 'none';
-                
-                tooltip.style.display = 'block';
-                const rect = this.getBoundingClientRect();
-                tooltip.style.top = `${rect.top + window.scrollY - tooltip.offsetHeight - 20}px`;
-                tooltip.style.left = `${rect.left + window.scrollX + rect.width/2}px`;
-                setTimeout(() => tooltip.classList.add('show'), 10);
+                e.stopPropagation(); words.forEach(w => w.classList.remove('active')); this.classList.add('active');
+                dispWord.innerText = this.getAttribute('data-text'); dispPinyin.innerText = this.getAttribute('data-pinyin'); dispZh.innerHTML = `<strong>解析：</strong> ${this.getAttribute('data-zh')}`; dispEn.innerText = this.getAttribute('data-en'); examTag.style.display = (this.getAttribute('data-exam') === 'true') ? 'inline-block' : 'none';
+                tooltip.style.display = 'block'; const rect = this.getBoundingClientRect(); tooltip.style.top = `${rect.top + window.scrollY - tooltip.offsetHeight - 20}px`; tooltip.style.left = `${rect.left + window.scrollX + rect.width/2}px`; setTimeout(() => tooltip.classList.add('show'), 10);
             });
         });
-        
-        document.addEventListener('click', function(e) {
-            if (!tooltip.contains(e.target) && !e.target.closest('.word')) {
-                tooltip.classList.remove('show');
-                words.forEach(w => w.classList.remove('active'));
-                setTimeout(() => { if (!tooltip.classList.contains('show')) tooltip.style.display = 'none'; }, 300);
-            }
-        });
-
+        document.addEventListener('click', function(e) { if (!tooltip.contains(e.target) && !e.target.closest('.word')) { tooltip.classList.remove('show'); words.forEach(w => w.classList.remove('active')); setTimeout(() => { if (!tooltip.classList.contains('show')) tooltip.style.display = 'none'; }, 300); } });
         const panels = [
             { btnId: 'toggle-analysis-btn', contentId: 'analysis-content', defaultHTML: '<span class="btn-icon">📜</span> 展开全诗赏析', defaultBg: 'linear-gradient(135deg, #10b981, #059669)' },
             { btnId: 'toggle-quiz-btn', contentId: 'quiz-content', defaultHTML: '<span class="btn-icon">🎯</span> 客观题自测', defaultBg: 'linear-gradient(135deg, #3b82f6, #2563eb)' },
             { btnId: 'toggle-shortq-btn', contentId: 'shortq-content', defaultHTML: '<span class="btn-icon">✍️</span> 简答题特训', defaultBg: 'linear-gradient(135deg, #8b5cf6, #6d28d9)' }
         ];
-        
         panels.forEach(panel => {
             const btn = document.getElementById(panel.btnId);
             btn.addEventListener('click', function() {
-                const content = document.getElementById(panel.contentId);
-                const isOpen = content.style.display === 'block';
-                
-                panels.forEach(p => {
-                    document.getElementById(p.contentId).style.display = 'none';
-                    const pb = document.getElementById(p.btnId);
-                    pb.innerHTML = p.defaultHTML;
-                    pb.style.background = p.defaultBg;
-                });
-                
-                if (!isOpen) { 
-                    content.style.display = 'block'; 
-                    btn.innerHTML = '<span class="btn-icon">⬆️</span> 收起当前面板并重置题目'; 
-                    btn.style.background = '#64748b';
-                    if (panel.btnId === 'toggle-quiz-btn') {
-                        renderQuizCards();
-                    }
-                } else {
-                    if (panel.btnId === 'toggle-quiz-btn') {
-                        renderQuizCards();
-                    }
-                }
+                const content = document.getElementById(panel.contentId); const isOpen = content.style.display === 'block';
+                panels.forEach(p => { document.getElementById(p.contentId).style.display = 'none'; const pb = document.getElementById(p.btnId); pb.innerHTML = p.defaultHTML; pb.style.background = p.defaultBg; });
+                if (!isOpen) { content.style.display = 'block'; btn.innerHTML = '<span class="btn-icon">⬆️</span> 收起当前面板并重置题目'; btn.style.background = '#64748b'; if (panel.btnId === 'toggle-quiz-btn') { renderQuizCards(); } } else { if (panel.btnId === 'toggle-quiz-btn') { renderQuizCards(); } }
             });
         });
     }
 
-    function toggleAnswer(btn) {
-        const answerBox = btn.nextElementSibling;
-        if (answerBox.style.display === 'block') {
-            answerBox.style.display = 'none';
-            btn.innerHTML = '📖 点击查看标准答案';
-        } else {
-            answerBox.style.display = 'block';
-            btn.innerHTML = '📖 收起答案';
-        }
-    }
+    function toggleAnswer(btn) { const answerBox = btn.nextElementSibling; if (answerBox.style.display === 'block') { answerBox.style.display = 'none'; btn.innerHTML = '📖 点击查看标准答案'; } else { answerBox.style.display = 'block'; btn.innerHTML = '📖 收起答案'; } }
 </script>
 </body>
 </html>
