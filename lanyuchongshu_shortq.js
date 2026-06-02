@@ -55,7 +55,7 @@ const shortQData = [
     },
     {
         id: "Q4",
-        qZh: "结合大马中学生平常在学校面对的各种“小组报告（Group Project）”，这篇故事给你带来了什么学习警示？",
+        qZh: "结合大马中学生平常在学校面对的各种“小组报告”，这篇故事给你带来了什么学习警示？",
         qPy: "jié hé dà mǎ zhōng xué shēng píng cháng zài xué xiào miàn duì de gè zhǒng xiǎo zǔ bào gào gù shì gěi nǐ dài lái le shén me xué xí jǐng shì",
         qEn: "Connecting to group projects in Malaysian schools, what warning does this story give about studying and teamwork?",
         sZh: [
