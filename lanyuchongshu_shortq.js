@@ -1,92 +1,195 @@
 const shortQData = [
     {
         id: "Q1",
-        qZh: "在齐宣王统治时期，南郭先生完全不会吹竽，为什么能够拿到和别人一样丰厚的粮食待遇（廪食）？",
-        qPy: "zài qí xuān wáng tǒng zhì shí qī nán guō chǔ shì wán quán bú huì chuī yú wèi shén me néng gòu ná dào gēn bié rén yī yàng fēng hòu de lǐn sì dài yù",
-        qEn: "During King Xuan's time, why could Mr. Nanguo get good meals and pay when he could not play at all?",
-        sZh: [
-            "1. 找出齐宣王听音乐的怪癖特征和关键人数：必三百人。",
-            "2. 详细解释：因为齐宣王喜欢听大合奏，几百人在一起吹，南郭先生混在人堆里装模作样，声音被别人掩盖，国王根本发现不了。"
+        qZhStructure: [
+            {w: "齐湣王", p: "qí mǐn wáng"}, {w: "继位", p: "jì wèi"}, {w: "后", p: "hòu"}, "，",
+            {w: "南郭先生", p: "nán guō xiān sheng"}, {w: "面临", p: "miàn lín"}, {w: "的", p: "de"},
+            {w: "真正", p: "zhēn zhèng"}, {w: "危机", p: "wēi jī"}, {w: "是", p: "shì"},
+            {w: "什么", p: "shén me"}, "？"
         ],
-        sPy: [
-            "zhǎo chū qí xuān wáng tīng yīn lè de guài pǐ tè zhēng hé guān jiàn rén shù bì sān bǎi rén",
-            "xiáng xì jiě shì yīn wèi qí xuān wáng xǐ huān tīng dà hé zòu jǐ bǎi rén zài yī qǐ chuī nán guō chǔ shì hùn zài rén duī lǐ zhuāng mó zuò yàng shēng yīn bèi bié rén yǎn gài guó wáng gēn běn fā xiàn bù liǎo"
+        qEn: "What was the real crisis Mr. Nanguo faced after King Min took the throne?",
+        sZhStructure: [
+            [
+                {w: "第一步", p: "dì yī bù"}, "：", {w: "锁定", p: "suǒ dìng"},
+                {w: "新国王", p: "xīn guó wáng"}, {w: "齐湣王", p: "qí mǐn wáng"},
+                {w: "的", p: "de"}, {w: "考核", p: "kǎo hé"}, {w: "制度", p: "zhì dù"}, " (一一听之)。"
+            ],
+            [
+                {w: "第二步", p: "dì èr bù"}, "：", {w: "对比", p: "duì bǐ"},
+                {w: "齐宣王", p: "qí xuān wáng"}, {w: "时期", p: "shí qī"},
+                {w: "的", p: "de"}, {w: "大合奏", p: "dà hé zòu"}, {w: "掩护", p: "yǎn hù"}, "，",
+                {w: "指出", p: "zhǐ chū"}, {w: "独奏", p: "dú zòu"}, {w: "会", p: "huì"},
+                {w: "让", p: "ràng"}, {w: "假本事", p: "jiǎ běn shi"}, {w: "当场", p: "dāng chǎng"},
+                {w: "露馅", p: "lù xiàn"}, "。"
+            ]
         ],
-        sEn: "Step 1: Point out King Xuan's preference: he always wanted 300 people to play together.<br>Step 2: Explain that because it was a big group, he could just pretend to move his mouth, and the sound of others covered him up.",
-        aZh: "因为齐宣王听吹竽时喜欢有三百人的大型合奏。南郭先生正是利用了这个管理漏洞，天天夹在庞大的乐队里面装模作样地假装吹奏，从而白白骗取了国家发给的丰厚待遇。",
-        aPy: "yīn wèi qí xuān wáng tīng chuī yú shí xǐ huān yǒu sān bǎi rén de dà xíng hé zòu nán guō chǔ shì zhèng充 shì lì yòng le zhè gè guǎn lǐ lòu dòng tiān tiān jiá zài páng dà de yuè duì lǐ miàn zhuāng mó zuò yàng de jiǎ zhuāng chuī zòu cóng ér bái bái piàn qǔ le guó jiā fā gěi de fēng hòu dài yù",
-        aEn: "Because King Xuan liked a giant group of 300 people playing together. Mr. Nanguo used this loophole to blend into the big band and pretend to play, so he got rich rewards for free."
+        sEn: "Step 1: Point out King Min's solo testing rule. Step 2: Compare it with King Xuan's big orchestra and show why a solo play cracks his secret.",
+        aZhStructure: [
+            {w: "齐湣王", p: "qí mǐn wáng"}, {w: "喜欢", p: "xǐ huan"}, {w: "听", p: "tīng"},
+            {w: "独奏", p: "dú zòu"}, "（", {w: "一一听之", p: "yī yī tīng zhī"}, "），",
+            {w: "南郭先生", p: "nán guō xiān sheng"}, {w: "因为", p: "yīn wèi"},
+            {w: "完全", p: "wán quán"}, {w: "不会", p: "bú huì"}, {w: "吹竽", p: "chuī yú"}, "，",
+            {w: "一旦", p: "yí dàn"}, {w: "轮流", p: "lún liú"}, {w: "到", p: "dào"},
+            {w: "他", p: "tā"}, {w: "单独", p: "dān dú"}, {w: "演奏", p: "yǎn zòu"},
+            {w: "就会", p: "jiù huì"}, {w: "立刻", p: "lì kè"}, {w: "原形毕露", p: "yuán xíng bì lù"}, "，",
+            {w: "这是", p: "zhè shì"}, {w: "他", p: "tā"}, {w: "面临", p: "miàn lín"},
+            {w: "的", p: "de"}, {w: "致命", p: "zhì mìng"}, {w: "危机", p: "wēi jī"}, "。"
+        ],
+        aEn: "King Min loved solo performances. Since Mr. Nanguo could not play the instrument at all, a single solo play would expose his fraud immediately. This was his fatal crisis."
     },
     {
         id: "Q2",
-        qZh: "齐湣王继位后，听音乐的习惯做出了什么关键改变？这个改变如何直接戳中了南郭先生的死穴？",
-        qPy: "qí mǐn wáng jì wèi hòu tīng yīn lè de xí guàn zuò chū le shén me guān jiàn gǎi biàn zhè gè gǎi biàn rú hé zhí jiē chuō zhòng le nán guō chǔ shì de sǐ xué",
-        qEn: "What change did King Min make after taking over? How did this change hurt Mr. Nanguo's secret?",
-        sZh: [
-            "1. 锁定齐湣王听音乐的四个核心字：好一一听之。",
-            "2. 详细分析：齐湣王改变制度，要求乐师们单独一个接一个吹给他听。这就让南郭先生失去了人堆的掩护，轮到他一个人独奏时会立刻穿帮。"
+        qZhStructure: [
+            {w: "成语", p: "chéng yǔ"}, "“", {w: "滥竽充数", p: "làn yú chōng shù"}, "”",
+            {w: "在", p: "zài"}, {w: "现代", p: "xiàn dài"}, {w: "生活", p: "shēng huó"},
+            {w: "中", p: "zhōng"}, {w: "常用", p: "cháng yòng"}, {w: "来", p: "lái"},
+            {w: "比喻", p: "bǐ yù"}, {w: "什么", p: "shén me"}, {w: "样", p: "yàng"},
+            {w: "的", p: "de"}, {w: "人", p: "rén"}, {w: "或", p: "huò"},
+            {w: "现象", p: "xiàn xiàng"}, "？"
         ],
-        sPy: [
-            "suǒ dìng qí mǐn wáng tīng yīn lè de sì gè hé xīn zì hào yī yī tīng zhī",
-            "xiáng xì fēn xī qí mǐn wáng gǎi biàn zhè dù yào qiú yuè shī mén dān dú yī gè jiē yī gè chuī gěi tā tīng zhè jiù ràng nán guō chǔ shì shī qù le rén duī de yǎn hù lún dào tā yī gè rén dú zòu shí huì lì kè chuān bāng"
+        qEn: "What does the idiom 'Lan Yu Chong Shu' describe or imply in modern life?",
+        sZhStructure: [
+            [
+                {w: "第一步", p: "dì yī bù"}, "：", {w: "从", p: "cóng"}, "“",
+                {w: "没有", p: "méi yǒu"}, {w: "真才实学", p: "zhēn cái shí xué"},
+                "”", {w: "的", p: "de"}, {w: "个人", p: "gè rén"}, {w: "角度", p: "jiǎo dù"},
+                {w: "来", p: "lái"}, {w: "表述", p: "biǎo shù"}, {w: "含义", p: "hán yì"}, "。"
+            ],
+            [
+                {w: "第二步", p: "dì èr bù"}, "：", {w: "从", p: "cóng"}, "“",
+                {w: "以次充好", p: "yǐ cì chōng hǎo"}, "”", {w: "的", p: "de"},
+                {w: "社会", p: "shè huì"}, {w: "物品", p: "wù pǐn"}, {w: "现象", p: "xiàn xiàng"},
+                {w: "来", p: "lái"}, {w: "补充", p: "bǔ chōng"}, {w: "说明", p: "shuō míng"}, "。"
+            ]
         ],
-        sEn: "Step 1: Focus on King Min's new rule: 'hào yī yī tīng zhī' (liked to listen to them one by one).<br>Step 2: Analyze that solo testing removed the big group cover. When it was his turn to play alone, his lack of skill would show instantly.",
-        aZh: "齐湣王继位后，改变了过去听合奏的习惯，喜欢让乐师们一个接一个地单独吹奏（一一听之）。这切断了南郭先生滥竽充数的可能，因为单独测试时他的真实技术会瞬间暴露无遗。",
-        aPy: "qí mǐn wáng jì wèi hòu gǎi biàn le guò qù tīng hé zòu de xí guàn xǐ huān ràng yuè shī mén yī gè jiē yī gè dì dān dú chuī zòu yī yī tīng zhī zhè qiē duàn le nán guō chǔ shì làn yú chōng shù de kě néng yīn wèi dān dú cè shì shí tā de zhēn shí jì shù huì shùn jiān bào lù wú yí",
-        aEn: "King Min changed the rule. He liked to listen to the players solo, one by one. This ruined Mr. Nanguo's trick because his zero skill would be discovered during the individual test."
+        sEn: "Step 1: Explain it from the personal side (people without real skills). Step 2: Explain it from the product/social side (bad items faking as good ones).",
+        aZhStructure: [
+            {w: "常用", p: "cháng yòng"}, {w: "来", p: "lái"}, {w: "比喻", p: "bǐ yù"},
+            {w: "没有", p: "méi yǒu"}, {w: "真才实学", p: "zhēn cái shí xué"},
+            {w: "的", p: "de"}, {w: "人", p: "rén"}, {w: "混", p: "hùn"},
+            {w: "在", p: "zài"}, {w: "行家", p: "háng jiā"}, {w: "里面", p: "lǐ miàn"},
+            {w: "充数", p: "chōng shù"}, "；", {w: "也", p: "yě"},
+            {w: "常用", p: "cháng yòng"}, {w: "来", p: "lái"}, {w: "比喻", p: "bǐ yù"},
+            {w: "以次充好", p: "yǐ cì chōng hǎo"}, {w: "的", p: "de"},
+            {w: "劣质", p: "liè zhì"}, {w: "产品", p: "chǎn pǐn"}, {w: "或", p: "huò"},
+            {w: "不好", p: "bù hǎo"}, {w: "的", p: "de"}, {w: "事物", p: "shì wù"}, "。"
+        ],
+        aEn: "It is used to describe someone who lacks real ability faking inside a group of experts, or poor-quality products mixed with good ones."
     },
     {
         id: "Q3",
-        qZh: "南郭先生最后不得不选择“逃跑”的结局，给我们带来了什么深刻的管理学反思？",
-        qPy: "nán guō chǔ shì zuì hòu bù dé bù xuǎn zé táo pǎo de jié jú gěi wǒ men dài lái le shén me shēn kè de guǎn lǐ xué fǎn sī",
-        qEn: "Mr. Nanguo had to run away in the end. What lesson does this bring to managers or school leaders?",
-        sZh: [
-            "1. 批判“大合奏（大统包）”容易导致人浮于事、偷懒推诿的职场漏洞。",
-            "2. 肯定“独奏单独考核”在公司或学校管理中的必要性：管理必须责任到人，通过公平、透明的个人表现评估，才能真正激发团队动力，清退没有能力的混子。"
+        qZhStructure: [
+            {w: "齐宣王", p: "qí xuān wáng"}, {w: "对", p: "duì"}, {w: "乐队", p: "yuè duì"},
+            {w: "的", p: "de"}, {w: "管理", p: "guǎn lǐ"}, {w: "存在", p: "cún zài"},
+            {w: "什么", p: "shén me"}, {w: "漏洞", p: "lòu dòng"}, "机制，",
+            {w: "才", p: "cái"}, {w: "让", p: "ràng"}, {w: "南郭先生", p: "nán guō xiān sheng"},
+            {w: "有机可乘", p: "yǒu jī kě chéng"}, "？"
         ],
-        sPy: [
-            "pī pàn dà hé zòu dà tǒng bāo róng yì dǎo zhì rén fú yú shì tōu lǎn tuī wěi de zhí chǎng lòu dòng",
-            "kěn dìng dú zòu dān dú kǎo hé zài gōng sī huò xué xiào guǎn lǐ zhōng de bì yào xìng guǎn lǐ bì xū zé rèn dào rén tōng guò gōng píng tàng míng de gè rén biǎo xiàn píng gū cái néng zhēn zhèng jī fā tuán duì dòng lì qīng tuì méi yǒu néng lǐ de hùn zǐ"
+        qEn: "What loophole in King Xuan's management allowed Mr. Nanguo to cheat successfully?",
+        sZhStructure: [
+            [
+                {w: "第一步", p: "dì yī bù"}, "：", {w: "抓住", p: "zhuā zhù"},
+                {w: "大合奏", p: "dà hé zòu"}, "“", {w: "必三百人", p: "bì sān bǎi rén"},
+                "”", {w: "的", p: "de"}, {w: "粗放", p: "cū fàng"},
+                {w: "考核", p: "kǎo hé"}, {w: "方式", p: "fāng shì"}, "。"
+            ],
+            [
+                {w: "第二步", p: "dì èr bù"}, "：", {w: "指出", p: "zhǐ chū"},
+                {w: "缺乏", p: "quē fá"}, {w: "单独", p: "dān dú"}, {w: "把关", p: "bǎ guān"},
+                {w: "和", p: "hé"}, {w: "入队", p: "rù duì"}, {w: "技术", p: "jì shù"},
+                {w: "复核", p: "fù hé"}, {w: "的", p: "de"}, {w: "制度", p: "zhì dù"}, "。"
+            ]
         ],
-        sEn: "Step 1: Critique the 'group work' model which can easily hide lazy workers and cause poor efficiency.<br>Step 2: Highlight the need for solo performance reviews: leaders must hold each person responsible and use clear tests to find and keep real talents.",
-        aZh: "说明团队管理中必须建立明确的个人考核制度。如果一味采用模糊的大合奏管理，就会给偷懒的人提供温床；只有像齐湣王那样责任到人、单独考核，才能高效甄别并留住真正的人才。",
-        aPy: "shuō míng tuán duì guǎn lǐ zhōng bì xū jiàn lì míng què de gè rén kǎo hé zhì dù rú guǒ yī wèi cǎi yòng mó hú de dà hé zòu guǎn lǐ jiù huì gěi tōu lǎn de rén tí gōng wēn chuáng zhǐ... xiàng qí mǐn wáng nà yàng zé rèn dào rén dān dú kǎo hé cái néng gāo xiào zhēn bié bìng liú zhù zhēn zhèng de rén cái",
-        aEn: "It shows that managers must test each person's work directly. Relying only on large group work creates a hiding place for lazy people; individual testing is the best way to see real skills."
+        sEn: "Step 1: Point out his rough testing style of the 300-people group play. Step 2: Note the lack of individual checks or auditions.",
+        aZhStructure: [
+            {w: "齐宣王", p: "qí xuān wáng"}, {w: "管理", p: "guǎn lǐ"}, {w: "上", p: "shàng"},
+            {w: "的", p: "de"}, {w: "漏洞", p: "lòu dòng"}, {w: "在于", p: "zài yú"},
+            {w: "他", p: "tā"}, {w: "只", p: "zhǐ"}, {w: "重视", p: "zhòng shì"},
+            {w: "宏大", p: "hóng dà"}, {w: "的", p: "de"}, {w: "合奏", p: "dà hé zòu"},
+            {w: "场面", p: "chǎng miàn"}, "，", {w: "却", p: "què"},
+            {w: "没有", p: "méi yǒu"}, {w: "对", p: "duì"}, {w: "乐师", p: "yuè shī"},
+            {w: "进行", p: "jìn xíng"}, {w: "个人", p: "gè rén"}, {w: "技术", p: "jì shù"},
+            {w: "的", p: "de"}, {w: "单独", p: "dān dú"}, {w: "考核", p: "kǎo hé"},
+            "，“", {w: "大锅饭", p: "dà guō fàn"}, "”", {w: "的", p: "de"},
+            {w: "体制", p: "tǐ zhì"}, {w: "让", p: "ràng"}, {w: "滥竽充数", p: "làn yú chōng shù"},
+            {w: "变得", p: "biàn de"}, {w: "极其", p: "jí qí"}, {w: "容易", p: "róng yì"}, "。"
+        ],
+        aEn: "King Xuan only cared about the grand group play but never did solo skill audits. This relaxed system made faking in the group super easy."
     },
     {
         id: "Q4",
-        qZh: "结合大马中学生平常在学校面对的各种“小组报告”，这篇故事给你带来了什么学习警示？",
-        qPy: "jié hé dà mǎ zhōng xué shēng píng cháng zài xué xiào miàn duì de gè zhǒng xiǎo zǔ bào zhè piān gào gù shì gěi nǐ dài lái le shén me xué xí jǐng shì",
-        qEn: "Connecting to group projects in Malaysian schools, what warning does this story give about studying and teamwork?",
-        sZh: [
-            "1. 反思组员分工：在学校做小组报告时，千万不能学南郭先生，寄生在别人的劳动成果上混分数（Free Rider）。",
-            "2. 总结核心实力：因为小组混分只能侥幸过关一时，到了真正面对模拟考、SPM 统考或者大学毕业面对单独面试时，没有真才实学的人绝对会面临像南郭先生一样狼狈逃跑的下场。"
+        qZhStructure: [
+            {w: "对比", p: "duì bǐ"}, {w: "齐宣王", p: "qí xuān wáng"}, {w: "和", p: "hé"},
+            {w: "齐湣王", p: "qí mǐn wáng"}, "，", {w: "两人", p: "liǎng rén"},
+            {w: "听竽", p: "tīng yú"}, {w: "的", p: "de"}, {w: "方式", p: "fāng shì"},
+            {w: "有何", p: "yǒu hé"}, {w: "本质", p: "běn zhì"}, {w: "不同", p: "bù tóng"}, "？"
         ],
-        sPy: [
-            "fǎn sī zǔ yuán fēn gōng zài xué xiào zuò xiǎo zǔ bào gào shí qiān wàn bù néng xué nán guō chǔ shì jì shēng zài bié rén de láo dòng chéng guǒ shàng hùn fēn shù",
-            "zǒng jié hé xīn shí lì yīn wèi xiǎo zǔ hùn fēn zhǐ néng jiǎo xìng guò guān yī shí dào le zhēn zhèng miàn duì mó nǐ kǎo tǒng kǎo huò zhě dà xué bì yè miàn duì dān dú miàn shì shí méi yǒu zhēn caí shí xué de rén jué duì huì miàn lín xiàng nán guō chǔ shì yī yàng láng bèi táo pǎo de xià chǎng"
+        qEn: "What is the key difference between King Xuan and King Min's way of listening to music?",
+        sZhStructure: [
+            [
+                {w: "第一步", p: "dì yī bù"}, "：", {w: "概括", p: "gài kuò"},
+                {w: "宣王", p: "xuān wáng"}, {w: "好", p: "hào"}, "“",
+                {w: "合奏", p: "hé zòu"}, "”，", {w: "喜欢", p: "xǐ huan"},
+                {w: "大排场", p: "dà pái chǎng"}, "。"
+            ],
+            [
+                {w: "第二步", p: "dì èr bù"}, "：", {w: "概括", p: "gài kuò"},
+                {w: "湣王", p: "mǐn wáng"}, {w: "好", p: "hào"}, "“",
+                {w: "独奏", p: "dú zòu"}, "”，", {w: "注重", p: "zhù zhòng"},
+                {w: "个人", p: "gè rén"}, {w: "真正", p: "zhēn zhèng"},
+                {w: "能力", p: "néng lì"}, "。"
+            ]
         ],
-        sEn: "Step 1: Reflect on team contribution: when doing school group projects, we must never act like Mr. Nanguo, being a free rider and taking marks for free.<br>Step 2: Understand core ability: group cheating only works for a short time. When facing real SPM exams or solo job interviews, people without skill will fail miserably.",
-        aZh: "警示我们在学校做小组报告或未来工作时，绝不能当不付出的“混子”（Free Rider）。虽然靠团队大合奏可以混得一时利益，但真正大考或遇到独立任务时，没有实力的人终会暴露并付出惨痛代价。",
-        aPy: "jǐng shì wǒ men zài xué xiào zuò xiǎo zǔ bào gào huò wèi lái gōng zuò shí jué bù néng dāng bú fù chū de hùn zǐ suī rán kào tuán duì dà hé zòu kě yǐ hùn dé yī shí lì yì dàn zhēn zhèng dà kǎo huò yù dào dú lì rèn wù shí méi yǒu shí lì de rén zhōng huì bào lù bìng fù chū cǎn tòng dài yù",
-        aEn: "It warns us never to be a 'free rider' in school projects or future careers. Blending into a group to steal credit might work for a moment, but you will pay a painful price when a solo test arrives."
+        sEn: "Step 1: Note King Xuan preferred collective play and grand scenes. Step 2: Note King Min preferred solo performance and personal skills.",
+        aZhStructure: [
+            {w: "齐宣王", p: "qí xuān wáng"}, {w: "爱听", p: "ài tīng"}, {w: "大合奏", p: "dà hé zòu"},
+            "（", {w: "必三百人", p: "bì sān bǎi rén"}, "），", {w: "讲究", p: "jiǎng jiu"},
+            {w: "排场", p: "pái chǎng"}, {w: "与", p: "yǔ"}, {w: "气势", p: "qì shì"},
+            "；", {w: "而", p: "ér"}, {w: "齐湣王", p: "qí mǐn wáng"},
+            {w: "喜欢", p: "xǐ huan"}, {w: "听", p: "tīng"}, {w: "独奏", p: "dú zòu"},
+            "（", {w: "一一听之", p: "yī yī tīng zhī"}, "），", {w: "追求", p: "zhuī qiú"},
+            {w: "精准", p: "jīng zhǔn"}, {w: "和", p: "hé"}, {w: "乐师", p: "yuè shī"},
+            {w: "的", p: "de"}, {w: "真实", p: "zhēn shí"}, {w: "水平", p: "shuǐ píng"}, "。"
+        ],
+        aEn: "King Xuan enjoyed 300-people group plays for power and grandeur. King Min liked single solos, focusing on real quality and accurate skills."
     },
     {
         id: "Q5",
-        qZh: "“南郭处士逃”这个无奈的选择，对于我们平常培养个人能力和处事态度有什么深刻的学习启示？",
-        qPy: "nán guō chǔ shì táo zhè gè wú nài de xuǎn zé duì yú wǒ men píng cháng péi yǎng gè rén néng lǐ hé chǔ shì tài dù yǒu shén me shēn kè de xué xí qǐ shì",
-        qEn: "What important lesson does Mr. Nanguo's escape teach us about our own learning habits and life attitude?",
-        sZh: [
-            "1. 揭示做人做学问的基本态度：启示我们做人必须诚实、脚踏实地，绝对不能抱有投机取巧或蒙混过关的侥幸心理。",
-            "2. 总结实力才是唯一的硬道理：只有在平时认认真真地学到属于自己的真才实学，把基础打牢固，在面对生活、工作或考试的任何严格考核时，才能坦然面对，立于不败之地。"
+        qZhStructure: [
+            {w: "这个", p: "zhè gè"}, {w: "寓言", p: "yù yán"}, {w: "故事", p: "gù shì"},
+            {w: "告诉", p: "gào su"}, {w: "我们", p: "wǒ men"}, {w: "在", p: "zài"},
+            {w: "学习", p: "xué xí"}, {w: "上", p: "shàng"}, {w: "应该", p: "yīng gāi"},
+            {w: "保持", p: "báo chí"}, {w: "什么", p: "shén me"}, {w: "样", p: "yàng"},
+            {w: "的", p: "de"}, {w: "态度", p: "tài dù"}, "？"
         ],
-        sPy: [
-            "jiē shì zuò rén zuò xué wèn de jī běn tài dù qǐ shì wǒ men zuò rén bì xū chéng shí jiǎo tà shí dì jué duì bù néng bào yǒu tóu jī qǔ qiǎo huò méng hùn guò guān de jiǎo xìng xīn lǐ",
-            "zǒng jié shí lì cái shì wéi yī de yìng dào lǐ zhǐ yǒu zài píng shí rèn rèn zhēn zhēn de xué dào shǔ yú zì jǐ de zhēn cái shí xué bǎ jī chǔ dǎ láo gù zài miàn duì shēng huó gōng zuò huò kǎo shì de rèn hé yán gé kǎo hé shí cái néng tǎn rán miàn duì lì yú bú bài zhī dì"
+        qEn: "What attitude should we hold toward learning according to this fable?",
+        sZhStructure: [
+            [
+                {w: "第一步", p: "dì yī bù"}, "：", {w: "提出", p: "tí chū"},
+                "“", {w: "脚踏实地", p: "jiǎo tà shí dì"}, "”，", {w: "不能", p: "bù néng"},
+                {w: "弄虚作假", p: "nòng xū zuò jiǎ"}, "。"
+            ],
+            [
+                {w: "第二步", p: "dì èr bù"}, "：", {w: "强调", p: "qiáng diào"},
+                {w: "虚假", p: "xū jiǎ"}, {w: "的", p: "de"}, {w: "成绩", p: "chéng jī"},
+                {w: "瞒不了", p: "mán bù liǎo"}, {w: "长久", p: "cháng jiǔ"}, "，",
+                {w: "终会", p: "zhōng huì"}, {w: "面对", p: "miàn duì"},
+                {w: "真实", p: "zhēn shí"}, {w: "测验", p: "cè yàn"}, "。"
+            ]
         ],
-        sEn: "Step 1: Understand the right learning attitude: it teaches us to be honest and work hard. We should never try to trick or cheat our way through life.<br>Step 2: Know that real skill is the only true strength: only by learning well and building a strong foundation can we stand firm and confident when a real test comes.",
-        aZh: "启示我们做人做事必须诚实、脚踏实地，不能投机取巧。没有真才实学而靠弄虚作假，不仅骗不了别人一辈子，最后在真正的实力考核面前更会落得原形毕露、狼狈逃跑的下场。",
-        aPy: "qǐ shì wǒ men zuò rén zuò shì bì xū chéng shí jiǎo tà shí dì bù néng tóu jī qǔ qiǎo méi yǒu zhēn cái shí xué ér kào nòng xū zuò jiǎ bù jǐn piàn bù liǎo bié rén yī bèi zǐ zuì hòu zài zhēn zhèng de shí lì kǎo hé miàn qián gèng huì luò dé yuán xíng bì lù láng bèi táo pǎo de xià chǎng",
-        aEn: "It teaches us to be honest and keep our feet on the ground. Cheating and faking without real skills can never last forever. In the end, you will lose your cover and run away in shame when tested."
+        sEn: "Step 1: Point out we must be honest and solid, avoiding fraud. Step 2: Stress that fake scores cannot last and will fail in real tests.",
+        aZhStructure: [
+            {w: "学习", p: "xué xí"}, {w: "必须", p: "bì xū"}, {w: "脚踏实地", p: "jiǎo tà shí dì"},
+            "、", {w: "有", p: "yǒu"}, {w: "真才实学", p: "zhēn cái shí xué"}, "，",
+            {w: "绝对", p: "jué duì"}, {w: "不能", p: "bù néng"}, {w: "弄虚作假", p: "nòng xū zuò jiǎ"},
+            {w: "或", p: "huò"}, {w: "滥竽充数", p: "làn yú chōng shù"}, "；",
+            {w: "因为", p: "yīn wèi"}, {w: "一时", p: "yì shí"}, {w: "的", p: "de"},
+            {w: "侥幸", p: "jiǎo xìng"}, {w: "和", p: "hé"}, {w: "伪装", p: "wěi zhuāng"},
+            {w: "终究", p: "zhōng jiū"}, {w: "经不起", p: "jīng bu qǐ"},
+            {w: "真实", p: "zhēn shí"}, {w: "考验", p: "kǎo yàn"}, "，",
+            {w: "最后", p: "zuì hòu"}, {w: "只能", p: "zhǐ néng"},
+            {w: "自食其果", p: "zì shí qí guǒ"}, "。"
+        ],
+        aEn: "Learning requires honesty and real mastery. Fake achievements cannot survive true exams; cheating only leads to self-defeat."
     }
 ];
