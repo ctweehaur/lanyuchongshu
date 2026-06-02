@@ -58,46 +58,49 @@
 <script>
     let originalQuizQuestions = [];
 
-    // 【终极重构注音引擎】：加入最全的标点与特殊符号过滤（破折号、箭头、引号、括号），让它们自动不消耗拼音！
-  function alignText(zh, py) {
-    if (!zh) return '';
-    const chars = zh.trim().split('');
-    const pys = py ? py.trim().split(/\s+/) : [];
-    let pIdx = 0;
-    let html = '';
-    for (let c of chars) {
-        // 【核心精准修复】：正则表达式末尾新增 \/，让半角斜杠自动判定为标点，绝不吞噬和位移拼音！
-        if (/[，。？！：“”‘’（）《》、\-\:；—\(\)→\s0-9\.…\/]/.test(c)) {
-            html += `<span class="punctuation">${c}</span>`;
-        } else {
-            const p = pys[pIdx] || '';
-            html += `<span class="char-box"><span class="py-text">${p}</span><span class="zh-text">${c}</span></span>`;
-            pIdx++;
+    // 【终极重构注音引擎】：加入连续英文字母单词整体打包合并逻辑，防止拆散错位
+    function alignText(zh, py) {
+        if (!zh) return '';
+        // 核心升级：将原本的单字拆分，改为使用正则切分。把汉字、标点、以及“连续的英文字母单词”分别切成数组
+        const tokens = zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→\s0-9\.…\/]/g) || [];
+        const pys = py ? py.trim().split(/\s+/) : [];
+        let pIdx = 0;
+        let html = '';
+        
+        for (let t of tokens) {
+            // 如果是标点符号，或者是“一整串连续的英文字母”，直接原样输出，头顶不吃拼音
+            if (/[，。？！：“”‘’（）《》、\-\:；—\(\)→\s0-9\.…\/a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]/.test(t)) {
+                html += `<span class="punctuation">${t}</span>`;
+            } else {
+                // 如果是汉字，才正常匹配拼音
+                const p = pys[pIdx] || '';
+                html += `<span class="char-box"><span class="py-text">${p}</span><span class="zh-text">${t}</span></span>`;
+                pIdx++;
+            }
         }
+        return html;
     }
-    return html;
-}
 
-// 同样把这个也一起改掉，确保万无一失
-function alignTextWithPrefix(prefix, zh, py) {
-    if (!zh) return '';
-    const chars = zh.trim().split('');
-    const pys = py ? py.trim().split(/\s+/) : [];
-    let html = '';
-    html += `<span class="char-box" style="margin-right: 8px !important;"><span class="py-text">&nbsp;</span><span class="zh-text" style="font-weight: bold; color: #1e293b;">${prefix}</span></span>`;
-    let pIdx = 0;
-    for (let c of chars) {
-        // 【核心精准修复】：同步追加 \/ 拦截机制
-        if (/[Epic，。？！：“”‘’（）《》、\-\:；—\(\)→\s0-9\.…\/]/.test(c)) {
-            html += `<span class="punctuation">${c}</span>`;
-        } else {
-            const p = pys[pIdx] || '';
-            html += `<span class="char-box"><span class="py-text">${p}</span><span class="zh-text">${c}</span></span>`;
-            pIdx++;
+    // 同步升级带有前缀的选项渲染函数，保证题号和英文整体不被切碎
+    function alignTextWithPrefix(prefix, zh, py) {
+        if (!zh) return '';
+        const tokens = zh.match(/[a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]+|[\u4e00-\u9fa5]|[，。？！：“”‘’（）《》、\-\:；—\(\)→\s0-9\.…\/]/g) || [];
+        const pys = py ? py.trim().split(/\s+/) : [];
+        let html = '';
+        html += `<span class="char-box" style="margin-right: 8px !important;"><span class="py-text">&nbsp;</span><span class="zh-text" style="font-weight: bold; color: #1e293b;">${prefix}</span></span>`;
+        let pIdx = 0;
+        
+        for (let t of tokens) {
+            if (/[Epic，。？！：“”‘’（）《》、\-\:；—\(\)→\s0-9\.…\/a-zA-Zāáǎàēéěèīíǐìōóǒòūúǔùüǖǘǚǜ]/.test(t)) {
+                html += `<span class="punctuation">${t}</span>`;
+            } else {
+                const p = pys[pIdx] || '';
+                html += `<span class="char-box"><span class="py-text">${p}</span><span class="zh-text">${t}</span></span>`;
+                pIdx++;
+            }
         }
+        return html;
     }
-    return html;
-}
 
     window.onload = function() {
         if (typeof quizQuestions !== 'undefined') {
